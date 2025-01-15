@@ -20,7 +20,7 @@
     
     
       
-        <title>Week2 - Mysite</title>
+        <title>Week2 - Homepage</title>
       
     
     
@@ -84,7 +84,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Mysite" class="md-header__button md-logo" aria-label="Mysite" data-md-component="logo">
+    <a href="../../.." title="Homepage" class="md-header__button md-logo" aria-label="Homepage" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -98,7 +98,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Mysite
+            Homepage
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -179,13 +179,13 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Mysite" class="md-nav__button md-logo" aria-label="Mysite" data-md-component="logo">
+    <a href="../../.." title="Homepage" class="md-nav__button md-logo" aria-label="Homepage" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Mysite
+    Homepage
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -447,6 +447,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#geometric-illustration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometric Illustration
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -587,6 +596,15 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#geometric-illustration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Geometric Illustration
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -610,23 +628,24 @@
   <h1>Week2</h1>
 
 <h2 id="a-useful-technique">A Useful Technique</h2>
-<p>Recall that the oracle predictor is given by </p>
+<p>Recall that the oracle predictor is given by</p>
 <div class="arithmatex">\[
 E(y|x) = \int_{\mathcal{Y}} y\cdot p(y|x) \,\mathrm{d}y,
 \]</div>
-<p>which is a function of <span class="arithmatex">\(x\)</span>, denoted as <span class="arithmatex">\(f^*(x)\)</span>. </p>
+<p>which is a function of <span class="arithmatex">\(x\)</span>, denoted as <span class="arithmatex">\(f^*(x)\)</span>.</p>
 <h3 id="key-property">Key Property</h3>
 <p>We will prove the following equation</p>
 <div class="arithmatex">\[
-E_(x,y)\left(g(x)\cdot E(y|x)\right) = E_{(x,y)}\left(g(x)\cdot y\right),  
+E_{(x,y)}\left(g(x)\cdot E(y|x)\right) = E_{(x,y)}\left(g(x)\cdot y\right),
 \]</div>
-<p class="annotate">which holds for all functions <span class="arithmatex">\(g\)</span> where <span class="arithmatex">\(Var\left(g(x)\right)&lt;+\infty\)</span>(1).</p>
+<p class="annotate">which holds for all functions <span class="arithmatex">\(g\)</span> where <span class="arithmatex">\(Var\left(g(x)\right)&lt;+\infty\)</span>(1). Specifically, when taking <span class="arithmatex">\(g(x)\equiv 1\)</span>, we obtain the <em>law of total expectation,</em> i.e. <span class="arithmatex">\(E\left(y\right) = E\left(E(y|x)\right)\)</span>(2).</p>
 <ol>
-<li>This a technical assumption which is usually satisfied in practical problems. </li>
+<li>This a technical assumption which is usually satisfied in practical problems.</li>
+<li>One special case states that if <span class="arithmatex">\(\left\{A_i\right\}\)</span> is a finite or countable partition of the sample space, then <span class="arithmatex">\(E(X)=\sum_i E\left(X | A_i\right) \cdot Pr\left(A_i\right)\)</span>. </li>
 </ol>
 <p>Obviously, it is equivalent to</p>
 <div class="arithmatex">\[
-E_{(x,y)}\left(g(x)\left(y-E(y|x)\right)\right) = 0, 
+E_{(x,y)}\left(g(x)\left(y-E(y|x)\right)\right) = 0,
 \]</div>
 <p>which is an orthogonality property.</p>
 <h3 id="proof">Proof</h3>
@@ -640,7 +659,7 @@ E_(x,y)\left(g(x)\cdot E(y|x)\right)
 &amp;= E_{(x,y)}\left(g(x)\cdot y\right),
 \end{aligned}
 \]</div>
-<p>where the last equation is from <span class="arithmatex">\(p(y|x) p(x) = p(x,y)\)</span>.  </p>
+<p>where the last equation is from <span class="arithmatex">\(p(y|x) p(x) = p(x,y)\)</span>.</p>
 <h3 id="reprove-the-oracle-predictor">Reprove the Oracle Predictor</h3>
 <p>Let us show again that <span class="arithmatex">\(E(y|x)\)</span> is the oracle predictor under the squared error loss:</p>
 <div class="arithmatex">\[
@@ -653,8 +672,10 @@ R(f,P)
 &amp;= {\color{green} E_{(x,y)}\left(\left(f(x)-E(y|x)\right)^2\right)} + {\color{blue} E_{(x,y)}\left(\left(E(y|x)-y\right)^2\right)},
 \end{aligned}
 \]</div>
-<p>where the last equation is from the equivalent form of the key property regarding the above <span class="arithmatex">\(\color{red}{\text{red}}\)</span> term as a function of <span class="arithmatex">\(x\)</span>.<br />
-Note that both the <span class="arithmatex">\(\color{green}{\text{green}}\)</span> and <span class="arithmatex">\(\color{blue}{\text{blue}}\)</span> term are non-negative, and the <span class="arithmatex">\(\color{blue}{\text{blue}}\)</span> term is independent of <span class="arithmatex">\(f\)</span>. Therefore, to minimize <span class="arithmatex">\(R(f,P)\)</span>, it is sufficient to minimize the <span class="arithmatex">\(\color{green}{\text{green}}\)</span> term, and the minimizer <span class="arithmatex">\(f^*(x) = E(y|x)\)</span>. </p>
+<p>where the last equation is from the equivalent form of the key property regarding the above <span class="arithmatex">\(\color{red}{\text{red}}\)</span> term as a function of <span class="arithmatex">\(x\)</span>.
+Note that both the <span class="arithmatex">\(\color{green}{\text{green}}\)</span> and <span class="arithmatex">\(\color{blue}{\text{blue}}\)</span> term are non-negative, and the <span class="arithmatex">\(\color{blue}{\text{blue}}\)</span> term is independent of <span class="arithmatex">\(f\)</span>. Therefore, to minimize <span class="arithmatex">\(R(f,P)\)</span>, it is sufficient to minimize the <span class="arithmatex">\(\color{green}{\text{green}}\)</span> term, and the minimizer <span class="arithmatex">\(f^*(x) = E(y|x)\)</span>.</p>
+<h3 id="geometric-illustration">Geometric Illustration</h3>
+<p>Pythogorean Theorem of <span class="arithmatex">\(R(f,P)\)</span>:</p>
 
 
 
