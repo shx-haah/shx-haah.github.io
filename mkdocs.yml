@@ -1,4 +1,4 @@
-site_name: Mysite
+site_name: Homepage
 nav:
   - Home: index.md
   - About: about.md
