@@ -1,5 +1,7 @@
-# Welcome to My Homepage
+# Welcome to My Homepage!
 
-## My name is Sang, Haoxin (Hollis). I'm glad to share my thoughts with you. Hope we can both learn from each other. 
+## My name is Haoxin Sang (Hollis).
 
-BTW, my content is written in English and, sometimes, Chinese. Still in the process of learning to write good English articles.
+I'm excited to share my journey as a PhD student in CS at the University of Alberta. Welcome to my blog!
+
+My content is written in English and, occasionally, in Chinese. I'm still learning to write good English articles, but I'm happy to exchange ideas in either language. Here, you'll find insights into my research, experiences as an international student, and reflections on various topics in Computer Science.
