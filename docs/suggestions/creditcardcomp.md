@@ -1,10 +1,8 @@
 # Credit Card Comparison
 
-[here](https://github.com/shx-haah/homepage/blob/gh-pages/pdfs/02-CreditCardAdvice.pdf)
 
+<embed src="https://shx-haah.github.io/docs/suggestions/02-CreditCardAdvice.pdf" type="application/pdf"/>
 
-![PDF Here](02-CreditCardAdvice.pdf){ type=application/pdf style="min-height:25vh;width:100%" }
-
-
+<embed src="https://shx-haah.github.io/pdfs/02-CreditCardAdvice.pdf" type="application/pdf"/>
 
 
