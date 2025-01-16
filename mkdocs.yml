@@ -8,7 +8,7 @@ nav:
         - Week1: notes/lecture_notes/stat541_week1.md
         - Week2: notes/lecture_notes/stat541_week2.md
     - Python: notes/naming_conventions.md 
-    - Useful Suggestions: suggestions/creditcardcomp.md
+    - Suggestions/Tricks/Skills: suggestions/creditcardcomp.md
 
 theme: 
   name: material
