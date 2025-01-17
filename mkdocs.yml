@@ -7,6 +7,10 @@ nav:
         - Week1: notes/lecture_notes/stat541_week1.md
         - Week2: notes/lecture_notes/stat541_week2.md
     - Python: notes/naming_conventions.md 
+    - Comparison Theorems in Riemann Geometry: 
+      - Preliminaries to Comparison Theorems: notes/comparison_thm/preliminaries.md
+      - Comparison Theorem: notes/comparison_thm/comp_thm.md
+      - Comparison Theorems and Application: notes/comparison_thm/comp_thm_app.md
   - Suggestions/Tricks/Skills: 
     - Compare Credit Cards: suggestions/creditcardcomp.md
     - Acrobat 自动添加书签: suggestions/acrobatbookmark.md
