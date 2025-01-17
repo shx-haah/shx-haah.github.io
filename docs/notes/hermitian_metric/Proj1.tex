@@ -1,0 +1,673 @@
+%!TEX program = Xelatex
+\documentclass{ctexart}
+
+\usepackage{amsmath, amssymb, amsthm, titlesec}
+\usepackage[skins, breakable, theorems]{tcolorbox}
+\usepackage{xparse, ocgx2, hyperref}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+
+\def\Id{\,\mathrm{d}} % 积分中的正体d
+\newcommand{\norm}[1]{\left\|#1\right\|} % 范数
+
+% [number within=section/...]{}{<display name>}{<style>}{<lebal>(cite as "Thm:...")}
+\newtcbtheorem[]{tcbdefinition}{Definition}{fonttitle = \bfseries}{Def}
+\newtcbtheorem[]{tcbtheorem}{Theorem}{fonttitle = \bfseries}{Thm}
+\newtcbtheorem[]{tcbproposition}{Proposition}{fonttitle = \bfseries}{Pro}
+\newtcbtheorem[]{tcblemma}{Lemma}{fonttitle = \bfseries}{Lem}
+\newtcbtheorem[]{tcbcorollary}{Corollary}{fonttitle = \bfseries}{Cor}
+\NewDocumentEnvironment{definition}{ O{} O{} } % two optional arguments
+  {\tcbdefinition{#1}{#2}}
+  {\endtcbdefinition}
+\NewDocumentEnvironment{theorem}{ O{} O{} }
+  {\tcbtheorem{#1}{#2}}
+  {\endtcbtheorem}
+\NewDocumentEnvironment{proposition}{ O{} O{} }
+  {\tcbproposition{#1}{#2}}
+  {\endtcbproposition}
+\NewDocumentEnvironment{lemma}{ O{} O{} }
+  {\tcblemma{#1}{#2}}
+  {\endtcblemma}
+\NewDocumentEnvironment{corollary}{ O{} O{} }
+  {\tcbcorollary{#1}{#2}}
+  {\endtcbcorollary}
+\makeatletter
+\newcommand\tcb@cnt@tcbdefinitionautorefname{Definition}
+\newcommand\tcb@cnt@tcbtheoremautorefname{Theorem}
+\newcommand\tcb@cnt@tcbpropositionautorefname{Proposition}
+\newcommand\tcb@cnt@tcblemmaautorefname{Lemma}
+\newcommand\tcb@cnt@tcbcorollaryautorefname{Collory} 
+\makeatother
+
+\title{Note 1: Hermitian metric}
+\date{} % 显示日期
+
+\renewcommand\refname{Reference}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+In this note, we introuduce the definition of Hermitian structure together with some related konwledge, and most are about linear algebra.
+Reference of this note is \cite{Huybrechts2005} and \cite{Kobayashi1996}. 
+
+Let $X$ be a complex manifold. We denote the induced almost complex structure by $I$. 
+\begin{definition}[Hermitian structure]
+    A Riemannian metric $g$ on $X$ is an Hermitian structure on $X$ if for any point $x \in X$ the scalar product $g_{x}$ on $T_{x} X$ is compatible with the almost complex structure $I_{x}$. 
+    The induced real $(1,1)$-form $\omega:=g(I(\ ),(\ ))$ is called the fundamental form.
+\end{definition}
+
+To figure out what the above means, we shall explain each term in detail. 
+
+\subsection*{The almost complex structure on vector spaces}
+
+First, we focus on the linear algebraic part, discussing the almost complex structure and the corresponding 
+fundamental form on vector spaces. 
+
+Let $V$ be a finite-dimensional real vector space.
+\begin{definition}[Almost complex structure]
+    An endomorphism $I: V \rightarrow V$ with $I^{2}=-$ id is called an almost complex structure on $V$.
+\end{definition}
+Clearly, if $I$ is an almost complex structure then $I \in \operatorname{GL}(V)$. 
+
+If V is the real vector space underlying a complex vector space (a complex vector space but regarded as real vector space, and denoted by $(V,i)$ when we mention it as a complex vector space) 
+then $v \mapsto i \cdot v$ defines an almost complex structure $I$ on $V$ (here $V$ refers to the real vector space). The converse holds true as well:
+\begin{lemma}
+    Let $V$ be real $n$-dimensional vector space and an almost complex structure $I$ is defined as above. Then,
+
+    1. The dimension $n$ is an even integer.
+
+    2. Via $I$, the real vector space $V$ can be made into a complex vector space such that the multiplication by complex numbers extends the multiplication by reals.
+
+    3. With respect to the complex vector space structure on $V$ obtained in 2, $I: V \rightarrow V$ is a complex linear map.
+\end{lemma}
+
+\begin{proof}[Proof]
+    1. Since $I^{2}(v)=-v,\  \forall v \in V ,\  I$ does not have any real eigenvalues (if $I(v)=\lambda v, v \neq 0 \Rightarrow I^{2}(v)=\lambda^{2} v=-v \Rightarrow \lambda^{2}=-1$).
+    If $n$ is odd the characteristic polynomial of $I$ has odd degree therefore at least one real eigenvalue.
+
+    Or easily, one can consider the determination of the equation $I^2=-1$.
+
+    2. The $\mathbb{C}$-module structure (a vector space on field $\mathbb{P}$ is a $\mathbb{P}$-module) on $V$ is defined by $(a+i b) \cdot v=a \cdot v+b \cdot I(v)$, where $a, b \in \mathbb{R}$. 
+    It is enough to verify: 
+    \begin{itemize}
+        \item $1\cdot v=v,\ \forall v\in V$, 
+        \item $(\alpha_1+\alpha_2)v=\alpha_1 v+\alpha_2 v,\ \forall \alpha_1,\alpha_2\in \mathbb{C},\ v\in V$, 
+        \item $\alpha(v_1+v_2)=\alpha v_1+ \alpha v_2,\ \forall \alpha\in \mathbb{C},\ v_1,v_2\in V$, 
+        \item $(\alpha_1 \alpha_2)v=\alpha_1(\alpha_2v),\ \forall \alpha_1,\alpha_2\in \mathbb{C},\ v\in V$. 
+    \end{itemize}
+    By the $\mathbb{R}$-linearity of $I$, one can easily knows the first three. Together with the assumption $I^{2}=-$ id yield $((a+i b)(c+i d)) \cdot v=(a+i b)((c+i d) \cdot v)$ and 
+    in particular $i(i \cdot v)=-v$.
+
+    3. Verify that $I(\alpha v)=\alpha I(v),\ \forall \alpha\in \mathbb{C},\ v\in V.$
+\end{proof}
+
+Thus, almost complex structures and complex structures are equivalent notions for vector spaces, and the complex dimension of V is $\frac{n}{2}$ ($v$ and $I(v)$ are not $\mathbb{R}$-linearly dependent but
+$\mathbb{C}$-linearly dependent). From now on, we will always assume the real dimension of $V$ is $2n$. 
+\begin{corollary}
+  Any almost complex structure on $V$ induces a natural orientation on $V$. 
+\end{corollary}
+\begin{proof}[Proof]
+  Using the lemma, the assertion reduces to the statement that the real vector space $\mathbb{C}^n$ admits a natural orientation. 
+  We may assume $n = 1$ and use the orientation given by the basis $(1, i)$. 
+\end{proof}
+
+Here we are about to discuss the almost complex structure on the complexification of a real vector space $V$, which will help us in the manifold situation. 
+
+One can define the complexification of $V$ by taking the tensor product of $V$ with the complex numbers (thought of as a 2-dimensional vector space over the reals):
+$$
+V_{\mathbb{C}}=V \otimes_{\mathbb{R}} \mathbb{C}
+$$
+The subscript $\mathbb{R}$ on the tensor product indicates that the tensor product is taken over the real numbers (since $V$ is a real vector space this is the only sensible option anyway, 
+so the subscript can safely be omitted). As it stands, $V_{\mathbb{C}}$ is only a real vector space. However, we can make $V_{\mathbb{C}}$ into a complex vector space 
+by defining complex multiplication and conjugation as follows: $\forall v \in V ,\ \alpha, \beta \in \mathbb{C}$, 
+$$
+\alpha(v \otimes \beta)=v \otimes(\alpha \beta)\quad\text{and}\quad  \overline{v \otimes \alpha}=v \otimes \overline{\alpha}. 
+$$
+Thus, the real vector space $V$ is naturally contained in the complex vector space $V_{\mathbb{C}}$ via the map $v \mapsto v \otimes 1$. 
+
+Suppose that $V$ is endowed with an almost complex structure $I$, and we will also denote by $I$ its $\mathbb{C}$-linear extension to an endomorphism $V_{\mathbb{C}} \rightarrow V_{\mathbb{C}}$, 
+given by $I\otimes \operatorname{id}_\mathbb{C}$. Clearly, the only eigenvalues of $I$ on $V_{\mathbb{C}}$ are $\pm i$. Then the $\pm i$ eigenspaces are denoted $V^{1,0}$ and $V^{0,1}$, respectively, i.e.
+$$
+V^{1,0}=\left\{v \in V_{\mathbb{C}} \mid I(v)=i \cdot v\right\} \text { and } V^{0,1}=\left\{v \in V_{\mathbb{C}} \mid I(v)=-i \cdot v\right\} .
+$$
+\begin{lemma}
+  Let $V$ be a real vector space endowed with an almost complex structure $I$. Then
+  $$
+  V_{\mathbb{C}}=V^{1,0} \oplus V^{0,1}
+  $$
+  Complex conjugation on $V_{\mathbb{C}}$ induces an $\mathbb{R}$-linear isomorphism $V^{1,0} \cong V^{0,1}$.
+\end{lemma}
+\begin{proof}[Proof]
+  Since $V^{1,0} \cap V^{0,1}=0$, the canonical map $V^{1,0} \oplus V^{0,1} \longrightarrow V_{\mathbb{C}}$ is injective. 
+  The first assertion follows from the existence of the inverse map
+  $$
+  v \longmapsto \frac{1}{2}(v-i I(v)) \oplus \frac{1}{2}(v+i I(v)) .
+  $$
+
+  For the second assertion we write $v \in V_{\mathbb{C}}$ as $v=x+i y$ with $x, y \in V$.
+  Then 
+  $$
+  \begin{aligned}
+    \overline{(v-i I(v))}&=\overline{I(x\otimes 1 + y\otimes i)-i I(x\otimes 1 + y\otimes i)} \\
+    &=\overline{I(x)\otimes 1+I(y)\otimes i-I(x)\otimes i + I(y)\otimes 1} \\
+    &=(x-i y+i I(x)+I(y))=(\bar{v}+i I(\bar{v})).
+  \end{aligned}
+  $$ Hence, complex conjugation interchanges the two factors.
+\end{proof}
+From the above proof, one easily knows that
+\begin{equation}
+  V^{1,0}=\left\{v-iI(v) \mid v\in V\right\} \text { and } V^{0,1}=\left\{v+iI(v) \mid v\in V\right\}.
+\end{equation}
+Also, $V^{1,0}$ and $V^{0,1}$ are both $n$-dimensional complex vector spaces. Therefore the matrix of $I$ in an appropriate basis here is diagonal, with $n$ entries equal to $i$, 
+and $n$ entries equal to $-i$. 
+
+One should be aware of the existence of two almost complex structures on $V_{\mathbb{C}}$. 
+One is given by $I$ and the other one by $i$, denoted by $(V_\mathbb{C},I)$, respectively, $(V_\mathbb{C},i)$. 
+Together with the complex structure given in Lemma 1, where a real vector space is made into a complex vector space $(V,I)$, we now have four complex vector spaces in total.
+
+$(V,I)$, discussed above, is equivalent to $(V,i)$, and in any basis, the matrix of $I$ is an $n\times n$ diagonal matrix, with every diagonal entry equal to $i$, i.e.
+$I$ satisfies the linear polynomial $I-i=0$.
+
+As for in the complexification $V_\mathbb{C}$, the operator $I$ is a particular $2n\times 2n$ diagonalisable operator with eigenvalues $\pm i$ since satisfying the polynomial $I^2+1=0$.
+And $i$ simply acts as the scalar multiplication operator on $V_\mathbb{C}$, written by $i\cdot \operatorname{id}_{2n\times 2n}$. 
+The two almost complex structures on $V_{\mathbb{C}}$ coincide on the subspace $V^{1,0}$ but differ by a sign on $V^{0,1}$. In the sequel, we will always 
+regard $V_{\mathbb{C}}$ as the complex vector space with respect to $i$. The $\mathbb{C}$-linear extension of $I$ is the additional structure that gives rise to the above decomposition. 
+
+\subsection*{The fundamental form on vector spaces}
+
+Let $(V,\langle\ ,\ \rangle)$, be a Euclidian vector space, i.e. $V$ is a real vector space and $\langle\ ,\ \rangle$ is a positive definite symmetric bilinear form.
+
+\begin{definition}[Compatible]
+  An almost complex structure $I$ on $V$ is compatible with the scalar product $\langle\ ,\ \rangle$ if $\langle I(v), I(w)\rangle=\langle v, w\rangle$ for all $v, w \in V$, 
+  i.e. $I \in \mathrm{O}(V,\langle\ ,\ \rangle)$. 
+\end{definition}
+
+Denote $(V,\langle\ ,\ \rangle, I)$ the Euclidian vector space $(V,\langle\ ,\ \rangle)$ endowed by a compatible almost complex structure $I$. One can define the fundamental form.
+\begin{definition}[Fundamental form]
+  The fundamental form associated to $(V,\langle\ ,\ \rangle, I)$, is the form
+  $$
+  \omega:=-\langle(\ ), I(\ )\rangle=\langle I(\ ),(\ )\rangle .
+  $$
+\end{definition}
+One can know that $\omega$ is skew-symmetric since, for all $v, w \in V$, 
+$$
+\omega(v,w)=-\langle v, I(w)\rangle=-\langle I(w), v\rangle=\langle I(w), I(I(v))\rangle=\langle w, I(v)\rangle=-\omega(w,v).
+$$
+
+Note that two of the three structures $\{\langle\ ,\ \rangle, I, \omega\}$ determine the remaining one (by $I \in \operatorname{GL}(V)$).
+
+By lemma 1, we know that $(V,I)$ is a complex vector space, and a natural Hermitian form on $(V,I)$ can be given by the scalar product and the fundamental form. 
+\begin{lemma}
+  $(V,\langle\ ,\ \rangle, I)$ and $\omega$ are given as above. The form $(\ ,\ ):=\langle\ ,\ \rangle-i \cdot \omega$, 
+  is a positive Hermitian form on $(V, I)$.
+\end{lemma}
+\begin{proof}[Proof]
+  The form $(\ ,\ )$ is clearly $\mathbb{R}$-linear and $(v, v)=\langle v, v\rangle>0$ for $0 \neq v \in V$.
+  Moreover, $(v, w)=\overline{(w, v)}$ and
+  $$
+  \begin{aligned}
+  (I(v), w) &=\langle I(v), w\rangle-i \cdot \omega(I(v), w) \\
+  &=\langle I(I(v)), I(w)\rangle+i \cdot\langle v, w\rangle \\
+  &=i \cdot(i \cdot\langle v, I(w)\rangle+\langle v, w\rangle)=i \cdot(v, w) .
+  \end{aligned}
+  $$
+\end{proof}
+
+We will show that the fundamental form $\omega$ is of type $(1,0)$. To do so, we need to consider the extension of the scalar product, 
+the dual space of $V_\mathbb{C}$ and its exterior algebra. 
+
+One considers the extension of the scalar product $\langle\ ,\ \rangle$ to a positive definite Hermitian form $\langle\ ,\ \rangle_{\mathbb{C}}$ on $V_{\mathbb{C}}$. 
+This is defined by
+$$
+\langle v \otimes \lambda, w \otimes \mu\rangle_{\mathbb{C}}:=(\lambda \bar{\mu}) \cdot\langle v, w\rangle
+$$
+for $v, w \in V$ and $\lambda, \mu \in \mathbb{C}$.
+
+An easy calculation shows $\langle v-i I(v), w+i I(w)\rangle_{\mathbb{C}}=0,\ \forall v,w\in V$. Then we have
+\begin{lemma}
+  $V_{\mathbb{C}}=V^{1,0} \oplus V^{0,1}$ is an orthogonal decomposition with respect to $\langle\ ,\ \rangle_{\mathbb{C}}$. 
+\end{lemma}
+
+And by the way, there is a relation between $(\ ,\ )$ and $\langle\ ,\ \rangle_{\mathbb{C}}$. Under the canonical isomorphism $(V, I) \cong(V^{1,0}, i)$, given by $v \mapsto \frac{1}{2}(v-i I(v))$, 
+one has 
+$$
+\frac{1}{2}(\ ,\ )=\langle\ ,\ \rangle_{\mathbb{C}}\big|_{V^{1,0}},
+$$ 
+for an easy calculation shows $\langle\big(v-i I(v)\big),\big(w-i I(w)\big)\rangle_{\mathbb{C}}=2\left(v, w\right)$. 
+
+An almost complex structure on $V$, $I$, also induces an almost complex structure on the dual space of $V^*=\text{Hom}_\mathbb{R}(V,\mathbb{R})$ which is given by $I(f)(v)=f(I(v))$.
+
+As the same as $V_\mathbb{C}$, we can consider the complexification of the dual space. The complexification of $V^{*}$ can naturally be thought of as the space of all real linear maps 
+from $V$ to $\mathbb{C}$ (denoted $\operatorname{Hom}_{\mathbb{R}}(V, \mathbb{C})$ ). That is,
+$$
+\left(V^{*}\right)_{\mathbb{C}}=V^{*} \otimes \mathbb{C} \cong \operatorname{Hom}_{\mathbb{R}}(V, \mathbb{C})
+$$
+The isomorphism is given by
+$$
+\left(\varphi_{1} \otimes 1+\varphi_{2} \otimes i\right) \leftrightarrow \varphi_{1}+i \varphi_{2}
+$$
+where $\varphi_{1}$ and $\varphi_{2}$ are elements of $V^{*}$. A real linear map $\varphi: V \rightarrow \mathbb{C}$ can be uniquely extended by linearity to obtain a complex linear map 
+$\varphi: V_{\mathbb{C}} \rightarrow \mathbb{C}$. That is, 
+$$
+\varphi(v \otimes z)=z \varphi(v).
+$$
+This extension gives an isomorphism from $\operatorname{Hom}_{\mathbb{R}}(V, \mathbb{C})$ 
+to $\operatorname{Hom}_{\mathbb{C}}(V_{\mathbb{C}}, \mathbb{C})$ (surjective by letting $\varphi(v)=\varphi(v\otimes 1)$). The latter is just the complex dual space 
+to $V_{\mathbb{C}}$, so we have a natural isomorphism: $\left(V^{*}\right)_{\mathbb{C}} \cong\left(V_{\mathbb{C}}\right)^{*}$ (denoted by $V_\mathbb{C}^*$). 
+
+Then the induced decomposition on $V_\mathbb{C}^*$ is given by
+\begin{align*}
+  (V^*)^{1,0}=\{f\in V_\mathbb{C}^* \mid I(f)=i\cdot f\}=(V^{1,0})^*, \\
+  (V^*)^{0,1}=\{f\in V_\mathbb{C}^* \mid I(f)=-i\cdot f\}=(V^{0,1})^*. 
+\end{align*}
+And we have (consider $I\big(f(v)\big)$) 
+\begin{equation}
+  \begin{aligned}
+    (V^*)^{1,0}=\{f\in V_\mathbb{C}^* \mid f(v)=0,\ \forall v\in V^{0,1}\}, \\
+    (V^*)^{0,1}=\{f\in V_\mathbb{C}^* \mid f(v)=0,\ \forall v\in V^{1,0}\}. 
+  \end{aligned}
+\end{equation}
+
+We are about to discuss the exterior algebra of $V_\mathbb{C}^*$, but for convenience, here we are actually discussing about $V_\mathbb{C}$, and there is no essential difference. 
+The exterior algebra of $V$ has a natural decomposition, denoted by
+$$
+\sideset{}{^*}\bigwedge V=\bigoplus_{k=0}^{2n}\sideset{}{^k}\bigwedge V.
+$$
+Analogously, $\bigwedge^* V_\mathbb{C}$ denotes the exterior algebra of the complex vector space $V_\mathbb{C}$, and the complex conjugation in $V_{\mathbb{C}}$, extended to $\bigwedge^* V_\mathbb{C}$ in a natural manner
+
+One defines $\bigwedge^{p, q} V$ the subspace of $\bigwedge^* V_\mathbb{C}$ spanned by $\alpha\wedge\beta$,
+where $\alpha\in\bigwedge^p V^{1,0}$ and $\beta\in\bigwedge^q V^{0,1}$. The following proposition is evident. 
+\begin{proposition}
+  For a real vector space $V$ endowed with an almost complex structure $I$ one has:
+  
+  i) $\bigwedge^{k} V_{\mathbb{C}}=\bigoplus_{p+q=k} \bigwedge^{p, q} V$.
+
+  ii) Complex conjugation on $\bigwedge^{*} V_{\mathbb{C}}$ defines a ($\mathbb{C}$-antilinear) isomorphism $\bigwedge^{p, q} V \cong \bigwedge^{q, p} V$, 
+  i.e. $\overline{\bigwedge^{p, q} V}=\bigwedge^{q, p} V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Since $V$ has real dimension $2n$, $V_{\mathbb{C}}$ decomposes as $V_{\mathbb{C}}=V^{1,0} \oplus V^{0,1}$ with $V^{1,0}$ and $V^{0,1}$ complex vector spaces of dimension $n$. 
+
+  Let $v_{1}, \cdots, v_{n} \in \bigwedge^{1,0} V=V^{1,0}$ and $w_{1}, \cdots, w_{n} \in \bigwedge^{0,1} V=V^{0,1}$ be $\mathbb{C}$-basis. Then $v_{J_{1}} \otimes w_{J_{2}} \in \bigwedge^{p, q} V$ with 
+  $J_{1}=\left\{i_{1}<\cdots<i_{p}\right\}$ and $J_{2}=\left\{j_{1}<\right.$ $\left.\cdots<j_{q}\right\}$ form a basis of $\bigwedge^{p, q} V$.
+
+  This shows i). 
+
+  Since complex conjugation is multiplicative, i.e. $\overline{w_{1} \wedge w_{2}}=\overline{w_{1}} \wedge \overline{w_{2}}$, assertion ii) follows from $\overline{V^{1,0}}=V^{0,1}$. 
+\end{proof}
+
+In the same way, one can also define the exterior algebra $\bigwedge^{p, q} V^*$ and have the corresponding proposition as above. 
+
+By the fundamental form $\omega$ is skew-symmetric, one has $\omega \in \bigwedge^{2} V^{*}$. Since $\bigwedge^{2} V^{*}$ can be considered as a subspace of $\bigwedge^{2} V^{*}_\mathbb{C}$, $\omega$ may be considered as 
+an element of $\bigwedge^{2} V^{*}_\mathbb{C}$, i.e. $\omega$ can be uniquely extended to a bilinear form on $V_\mathbb{C}$, denoted also by $\omega$. 
+And $\omega$ preserves the almost complex structure, i.e. $\omega(u,v)=\omega\bigl(I(u),I(v)\bigr)$, $\forall u,v\in V_\mathbb{C}$.
+Then one knows that $\omega \in \bigwedge^{1,1} V^{*}$.  
+\begin{proposition}
+  Given $(V,\langle\ ,\ \rangle, I)$, then its fundamental form $\omega$ is a real $(1,1)$ form, 
+  i.e. $\omega \in \bigwedge^{2} V^{*} \cap \bigwedge^{1,1} V^{*}$.
+\end{proposition}
+\begin{proof}[Proof]
+  % Since  
+  % $$
+  % \begin{aligned}
+  %   & \omega(v+iI(v),w+iI(w))=\langle I(v)-iv,\overline{w+iI(w)}\rangle_\mathbb{C}=-i\cdot\langle v+iI(v),\overline{w}-iI(\overline{w})\rangle_\mathbb{C}=0, \\
+  %   & \omega(v-iI(v),w-iI(w))=\langle I(v)+iv,\overline{w-iI(w)}\rangle_\mathbb{C}= i\cdot\langle v-iI(v),\overline{w}+iI(\overline{w})\rangle_\mathbb{C}=0,
+  % \end{aligned}
+  % $$
+  % for all $v,w\in V$. Then by (1) and (2) we have $\omega\in\bigwedge^{1,1} V^{*}$.
+  By (1), one can calculate that $\omega$, and by (2) it is of $(1,1)$ type for it preserves the almost complex structure. 
+  is real. 
+\end{proof}
+
+Since $\overline{I(v)}=I(\bar{v})$, $\forall v\in V_{\mathbb{C}}$ (similarly in Lemmma 2), we have: for all $v,w\in V_{\mathbb{C}}$,
+$$
+\omega(v,w)=\langle I(v),\overline{w}\rangle_\mathbb{C}=-\langle v,I(\overline{w})\rangle_\mathbb{C}.
+$$
+Here we calculate the extension of $\omega$ under given coordinate of $V_\mathbb{C}$. 
+
+Let $z_{1}, \cdots, z_{n}$ be a $\mathbb{C}$-basis of $V^{1,0}$, and let $z^{1}, \cdots, z^{n}$ be a $\mathbb{C}$-basis of $(V^*)^{1,0}$. 
+% Write $z_{i}=\frac{1}{2}\left(x_{i}-i I\left(x_{i}\right)\right)$ with $x_{i} \in V$. 
+% Then $x_{1}, y_{1}:=I\left(x_{1}\right), \cdots, x_{n}, y_{n}:=I\left(x_{n}\right)$ is a $\mathbb{R}$-basis of $V$ and $x_{1}, \cdots, x_{n}$ is a $\mathbb{C}$-basis of $(V, I)$. 
+The Hermitian form $\langle\ ,\ \rangle_{\mathbb{C}}$ on $V^{1,0}$ is given by an Hermitian matrix $\left(h_{j \bar{k}}\right)_{n\times n}$. Concretely, 
+$$
+\left\langle\sum_{j=1}^{n} a_{j} z_{j}, \sum_{k=1}^{n} b_{k} z_{k}\right\rangle_{\mathbb{C}}=\sum_{j, k=1}^{n} h_{j \bar{k}} a_{j} \bar{b}_{k} .
+$$
+% Using the lemma above, we obtain $\left(x_{i}, x_{j}\right)=h_{i j}$. Since $(\ ,\ )$ is Hermitian on $(V, I)$, this yields $\left(x_{i}, y_{j}\right)=-i h_{i j}$ and $\left(y_{i}, y_{j}\right)=h_{i j}$.
+
+% By definition of $(\ ,\ )$, one has $\omega=-\operatorname{Im}(\ ,\ )$, and $\langle\ ,\ \rangle=\operatorname{Re}(\ ,\ )$. Hence, 
+% $\omega\left(x_{i}, x_{j}\right)=\omega\left(y_{i}, y_{j}\right)=-\operatorname{Im}\left(h_{i j}\right), \omega\left(x_{i}, y_{j}\right)=\operatorname{Re}\left(h_{i j}\right),
+% \left\langle x_{i}, x_{j}\right\rangle=\left\langle y_{i}, y_{j}\right\rangle=\operatorname{Re}\left(h_{i j}\right)$, 
+% and $\left\langle x_{i}, y_{j}\right\rangle=\operatorname{Im}\left(h_{i j}\right)$. Thus,
+% $$
+% \omega=-\sum_{i<j} \operatorname{Im}\left(h_{i j}\right)\left(x^{i} \wedge x^{j}+y^{i} \wedge y^{j}\right)+\sum_{i, j=1}^{n} \operatorname{Re}\left(h_{i j}\right) x^{i} \wedge y^{j}
+% $$
+% Using $z^{i} \wedge \bar{z}^{j}=\left(x^{i}+i y^{i}\right) \wedge\left(x^{j}-i y^{j}\right)=x^{i} \wedge x^{j}-i\left(x^{i} \wedge y^{j}+x^{j} \wedge y^{i}\right)+y^{i} \wedge y^{j}$ this yields
+
+For all $v,w\in V_\mathbb{C}$, suppose $v=z^j(v)z_j+\overline{z}^j(v)\overline{z}_j$, $w=z^j(w)z_j+\overline{z}^j(w)\overline{z}_j$. Then we have
+$$
+\begin{aligned}
+  \omega(v,w)
+    &=\langle I(v),\overline{w}\rangle_\mathbb{C} \\
+    &=\sum_{j, k}\langle I\big(z^j(v)z_j+\overline{z}^j(v)\overline{z}_j\big),z^k(w)z_k+\overline{z}^k(w)\overline{z}_k\rangle_\mathbb{C} \\
+    &=i \sum_{j, k}h_{j\bar{k}}\big(z^j(v)\overline{z}^k(w)-z^j(w)\overline{z}^k(v)\big)
+\end{aligned}
+$$
+Then we have
+$$
+\omega=i \sum_{j, k}h_{j \bar{k}} z^{j} \wedge \bar{z}^{k}.
+$$
+
+% If $x_{1}, y_{1}, \cdots, x_{n}, y_{n}$ is an orthonormal basis of $V$ with respect to $\langle\ ,\ \rangle$ , i.e. $\langle\ ,\ \rangle=\sum_{i=1}^{n} x^{i} \otimes x^{i}+\sum_{i=1}^{n} y^{i} \otimes y^{i}$, then
+% $$
+% \omega=\frac{i}{2} \sum_{i=1}^{n} z^{i} \wedge \bar{z}^{i}=\sum_{i=1}^{n} x^{i} \wedge y^{i}
+% $$
+
+% Note that there always exists an orthonormal basis as above. Indeed, pick $x_{1} \neq 0$ arbitrary of norm one and define $y_{1}=I\left(x_{1}\right)$, which is automatically orthogonal to $x_{1}$. 
+% Then continue with the orthogonal complement of $x_{1} \mathbb{R} \oplus y_{1} \mathbb{R}$.
+
+\subsection*{Complex and almost complex manifold}
+
+With enough preparation, we introduce complex and almost complex manifold manifolds, and then Hermitian manifolds which is exactly what we are trying to explain.
+\begin{definition}[Holomorphically compatible]
+    Let $X$ be a differentiable manifold. A complex chart on $X$ is a homeomorphism $\varphi: U \rightarrow V$ of an open subset $U \subset X$ onto an open subset $V \subset \mathbb{C}^n$. 
+    Two complex charts $\varphi_{i}: U_{i} \rightarrow V_{i}, i=1,2$ are said to be holomorphically compatible if the maps
+    $$
+    \varphi_{2} \circ \varphi_{1}^{-1}: \varphi_{1}\left(U_{1} \cap U_{2}\right) \rightarrow \varphi_{2}\left(U_{1} \cap U_{2}\right)
+    $$
+    $$
+    \varphi_{1} \circ \varphi_{2}^{-1}: \varphi_{2}\left(U_{1} \cap U_{2}\right) \rightarrow \varphi_{1}\left(U_{1} \cap U_{2}\right)
+    $$
+    are holomorphic.
+\end{definition}
+A complex atlas on $X$ is a system $\mathfrak{A}=\left\{\varphi_{i}: U_{i} \rightarrow V_{i}, i \in I\right\}$ of charts which are holomorphically compatible and which cover $X$, i.e., 
+$\bigcup_{i \in I} U_{i}=X$.
+
+Two complex atlases $\mathfrak{A}$ and $\mathfrak{A}^\prime$ on $X$ are called analytically equivalent if every chart of $\mathfrak{A}$ is holomorphically compatible with 
+every chart of $\mathfrak{A}^{\prime}$.
+
+\begin{definition}[Complex manifold]
+    A complex manifold $X$ of dimension $n$ is a $2n$-dimensional differential manifold endowed with an equivalence class of analytically equivalent atlases. 
+\end{definition}
+
+We will see that a complex structure is determined by an almost complex structure on any tangent space, 
+a purely linear algebra notion, satisfying a certain integrability condition.
+
+\begin{definition}[Almost complex manifold]
+  An almost complex manifold is a differentiable manifold $X$ together with a vector bundle endomorphism
+  $$
+  I: TX\rightarrow TX, \text{ with }I^2 = -\operatorname{id}. 
+  $$
+  Here, $T X$ is the real tangent bundle of the underlying real manifold.
+\end{definition}
+
+The endomorphism is also called the almost complex structure on the underlying differentiable manifold. If an almost complex structure exists, 
+then the real dimension of $X$ is even. 
+
+To show that every complex manifold carries a natural almost complex structure, we consider the space $\mathbb{C}^{n}$ of $n$-tuples of complex numbers $\left(z^{1}, \cdots, z^{n}\right)$ 
+with $z^{j}=x^{j}+i y^{j}, j=1, \cdots, n$. With respect to the coordinate system $\left(x^{1}, \cdots, x^{n}, y^{1}, \cdots, y^{n}\right)$ we define an almost complex structure $I$ 
+on each tangent space $\mathbb{C}^{n}$ by
+$$
+I\left(\frac{\partial}{\partial x^{j}} \right)=\frac{\partial}{\partial y^{j}} , \quad I\left(\frac{\partial}{\partial y^{j}} \right)=-\frac{\partial}{\partial x^{j}}, \quad j=1, \cdots, n.
+$$
+
+\begin{lemma}
+  A mapping $f$ of an open subset of $\mathbb{C}^{n}$ into $\mathbb{C}^{m}$ preserves the almost complex structures of $\mathbb{C}^{n}$ and $\mathbb{C}^{m}$, 
+  i.e., $f_{*} \circ I_{\mathbb{C}^{n}}=I_{\mathbb{C}^{m}} \circ f_{*}$, if and only if $f$ is holomorphic.
+\end{lemma}
+\begin{proof}[Proof]
+  Let $\left(w^{1}, \cdots, w^{m}\right)$ with $w^{k}=u^{k}+i v^{k}, k=1, \cdots, m$, be the natural coordinate system in $\mathbb{C}^{m}$. 
+  Express $f$ in terms of these coordinate systems in $\mathbb{C}^{n}$ and $\mathbb{C}^{m}$: for $k=1, \cdots, m,$
+  $$
+  \begin{aligned}
+  &u^{k}=u^{k}\left(x^{1}, \cdots, x^{n}, y^{1}, \cdots, y^{n}\right), \\
+  &v^{k}=v^{k}\left(x^{1}, \cdots, x^{n}, y^{1}, \cdots, y^{n}\right),
+  \end{aligned}
+  $$
+  then $f$ is holomorphic when and only when the following Cauchy-Riemann equations hold:
+  $$
+  \frac{\partial u^{k}}{\partial x^{j}} - \frac{\partial v^{k}}{\partial y^{j}} =0\quad\text{and}\quad\frac{\partial u^{k}}{\partial y^{j}} + \frac{\partial v^{k}}{\partial x^{j}} =0,
+  % \begin{aligned}
+  % &, \\
+  % &
+  % \end{aligned}
+  $$
+  where $j=1, \cdots, n ; \ k=1, \cdots, m .$
+
+  On the other hand, we have (whether $f$ is holomorphic or not), for $j=1, \cdots, n$, 
+  $$
+  \begin{gathered}
+  f_{*}\left(\partial / \partial x^{j}\right)=\sum_{k=1}^{m}\left(\partial u^{k} / \partial x^{j}\right)\left(\partial / \partial u^{k}\right)+\sum_{k=1}^{m}\left(\partial v^{k} / \partial x^{j}\right)\left(\partial / \partial v^{k}\right), \\
+  f_{*}\left(\partial / \partial y^{j}\right)=\sum_{k=1}^{m}\left(\partial u^{k} / \partial y^{j}\right)\left(\partial / \partial u^{k}\right)+\sum_{k=1}^{m}\left(\partial v^{k} / \partial y^{j}\right)\left(\partial / \partial v^{k}\right). 
+  \end{gathered}
+  $$
+
+  From these formulas and the almost complex structure in $\mathbb{C}^{n}$ and $\mathbb{C}^{m}$ given above, we see that $f_{*} \circ I_{\mathbb{C}^{n}}=I_{\mathbb{C}^{m}} \circ f_{*}$ 
+  if and only if $f$ satisfies the Cauchy-Riemann equations.
+\end{proof}
+To define an almost complex structure on a complex manifold $X$, we transfer the almost complex structure of $\mathbb{C}^n$ to $X$ by means of charts. Lemma 5 implies that an almost complex structure 
+can be thus defined on $X$ independently of the choice of charts. 
+An almost complex structure $I$ on a manifold $X$ is also called a complex structure 
+if $X$ is an underlying differentiable manifold of a complex manifold which induces $I$ in the way just described.
+
+\subsection*{Hermitian structure}
+
+% The dual basis of $(T_xM)^*$ is denoted by $\mathrm{d}x^1, \cdots , \mathrm{d}x^n$, $\mathrm{d}y^1, \cdots, \mathrm{d}y^n.$ Recall that the induced almost complex structure on $T_xM$ in terms of this dual basis 
+% is described by $I(\mathrm{d}x^i) = -\mathrm{d}y^i, I(\mathrm{d}y^i) = \mathrm{d}x^i$. 
+
+To study the tangent vector bundle and its complexification, we first introduce the holomorphic vector bundle, a complex vector bundle with a holomorphic structure.
+\begin{definition}
+  Let $X$ be a complex manifold. A holomorphic vector bundle of rank $r$ on $X$ consists of a complex manifold $E$ together with a holomorphic map $\pi: E \longrightarrow X$ and 
+  the structure of an $r$-dimensional complex vector space on any fibre $\pi^{-1}(x)$, satisfying the following condition: there exists an open covering $X=\bigcup U_i$ and biholomorphic maps 
+  $$
+  \psi_i: \pi^{-1}\left(U_i\right) \cong U_i \times \mathbb{C}^r
+  $$ 
+  commuting with the projections to $U_i$ such that the induced map $\pi^{-1}(x) \cong \mathbb{C}^r$ is $\mathbb{C}$-linear.  
+\end{definition}
+
+Let $X$ be an almost complex manifold. Then $T_{\mathbb{C}} X$ denotes the complexification of $T X$, i.e. $T_{\mathbb{C}} X=T X \otimes \mathbb{C}$. 
+We emphasize that even for a complex manifold $X$ the bundle $T_{\mathbb{C}} X$ is a priori just a complex vector bundle without a holomorphic structure.
+\begin{proposition}
+  i) Let $X$ be an almost complex manifold. Then there exists a direct sum decomposition
+  $$
+  T_{\mathbb{C}} X=T^{1,0} X \oplus T^{0,1} X
+  $$
+  of complex vector bundles on $X$, such that the $\mathbb{C}$-linear extension of $I$ acts as multiplication by $i$ on $T^{1,0} X$ respectively by $-i$ on $T^{0,1} X$.
+
+  ii) If $X$ is a complex manifold, then $T^{1,0} X$ is the holomorphic vector bundle on $X$ of rank $n$ which is 
+  given by the transition functions $J\left(\varphi_i \circ \varphi_j^{-1}\right) \circ \varphi_j$.
+\end{proposition}
+\begin{proof}[Proof]
+  i) One defines $T^{1,0} X$ and $T^{0,1} X$ as the kernel of $I-i \cdot$ id respectively $I+i$. id. That these maps are vector bundle homomorphisms and that 
+  the direct sum decomposition holds, follows from the direct sum decomposition on all the fibres (cf. Lemma 2)
+  
+  ii) Giving a holomorphic map $f: U \rightarrow V$ between open subsets $U \subset \mathbb{C}^m$ and $V \subset \mathbb{C}^n$, one knows the $\mathbb{C}$-linear extension 
+  of the differential $f_*: T_x U \rightarrow T_{f(x)} V$ respects the decomposition, 
+  i.e. $f_*\left(T_x^{1,0} U\right) \subset T_{f(x)}^{1,0} V$ and $f_*\left(T_x^{0,1} U\right) \subset T_{f(x)}^{0,1} V$. 
+
+  Moreover, the Jacobian
+  $$
+  f_*: T_x^{1,0} U \oplus T_x^{0,1} U \cong T_{f(x)}^{1,0} V \oplus T_{f(x)}^{0,1} V
+  $$
+  of a biholomorphic map $f: U \cong V$, where $U, V \subset \mathbb{C}^n$ are open subsets, has the form 
+  $$
+  \left(\begin{array}{cc}J(f) & 0 \\ 0 & \overline{J(f)}\end{array}\right).
+  $$
+
+  Let $X=\bigcup U_i$ be a covering by holomorphic charts $\varphi_i: U_i \cong \varphi\left(U_i\right)=V_i\subset\mathbb{C}^n$. 
+  Then $\left(\varphi_i^{-1}\right)^*\left(\left.T^{1,0} X\right|_{U_i}\right) \cong T^{1,0} V_i$ and the latter is canonically trivialized. 
+  With respect to these canonical trivializations the induced isomorphisms $T_{\varphi_j(x)}^{1,0} V_j \cong T_{\varphi_i(x)}^{1,0} V_i$ are given by 
+  $J\left(\varphi_i \circ \varphi_j^{-1}\right) \circ \varphi_j(x)$. 
+\end{proof}
+
+\begin{definition}[Holomorphic and antiholomorphic tangent bundle]
+  The bundles $T^{1,0} X$ and $T^{0,1} X$ are called the holomorphic respectively the antiholomorphic tangent bundle of the (almost) complex manifold $X$.
+\end{definition}
+
+
+As in the vector space situation, we are more interested in the dual bundles. We can use the results of the previous section in order to decompose the bundles of $k$-forms.
+
+\begin{definition}
+  For an almost complex manifold $X$ one defines the complex vector bundles $\bigwedge^k X:=\bigwedge^k\left(T X\right)^*$ and 
+  $\bigwedge_\mathbb{C}^k X:=\bigwedge^k\left(T_{\mathbb{C}} X\right)^*$
+  $$
+  \sideset{}{^{p, q}}\bigwedge X:=\{\alpha\wedge\beta\mid\alpha\in\sideset{}{^{p}}\bigwedge\left(T^{1,0} X\right)^*\text{ and }\beta\in\sideset{}{^{q}}\bigwedge\left(T^{0,1} X\right)^*\}. 
+  $$
+  By $\mathcal{A}^k(X)$, $\mathcal{A}_{\mathbb{C}}^k(X)$ and $\mathcal{A}^{p, q}(X)$ we denote the spaces of sections of $\bigwedge^k X$, $\bigwedge_{\mathbb{C}}^k X$ and 
+  $\bigwedge^{p, q} X$, respectively. Elements in $\mathcal{A}^{p, q}(X)$ are called forms of type $(p, q)$.
+\end{definition}
+
+As immediate consequences of Proposition 1, there exists a natural direct sum decomposition
+$$
+\sideset{}{_\mathbb{C}^k}\bigwedge X=\bigoplus_{p+q=k} \sideset{}{^{p, q}}\bigwedge X. 
+$$
+Moreover, $\overline{\bigwedge^{p, q} X}=\bigwedge^{q, p} X$.
+
+% \begin{definition}
+%   Let $X$ be an almost complex manifold. If $d: \mathcal{A}_{X, \mathbb{C}}^k \rightarrow \mathcal{A}_{X, \mathbb{C}}^{k+1}$ is the $\mathbb{C}$-linear extension of the exterior differential, 
+%   then one defines
+%   $$
+%   \partial:=\Pi^{p+1, q} \circ d: \mathcal{A}_X^{p, q} \longrightarrow \mathcal{A}_X^{p+1, q}, \bar{\partial}:=\Pi^{p, q+1} \circ d: \mathcal{A}_X^{p, q} \longrightarrow \mathcal{A}_X^{p, q+1}.
+%   $$
+% \end{definition}
+% As in the proof of Lemma 1.3.6 the Leibniz rule for the exterior differential $d$ implies the Leibniz rule for $\partial$ and $\bar{\partial}$, 
+% e.g. $\partial(\alpha \wedge \beta)=\partial(\alpha) \wedge \beta+(-1)^{p+q} \alpha \wedge \partial(\beta)$ for $\alpha \in \mathcal{A}^{p, q}(X)$.
+
+We now go back to our definition 1 (definition of Hermitian structure). The metric $g$ is compatible with the natural (almost) complex structure on $X$ if for any $x \in X$ the scalar product $g_{x}$ on $T_{x} X$ 
+is compatible with the induced almost complex structure $I$, i.e. $g_{x}(v, w)=g_{x}(I(v), I(w))$ for all $v, w \in T_{x} X$. By definition 4, one has in this situation a $(1,1)$-form 
+$\omega \in \mathcal{A}^{1,1}(X) \cap \mathcal{A}^{2}(X)$ defined by $\omega:=g(I(\ ),(\ )),$ which is called the fundamental form of $g$. 
+
+The complex manifold $X$ endowed with an Hermitian structure $g$ is called an Hermitian manifold. Note that the Hermitian structure $g$ is uniquely determined by 
+the almost complex structure $I$ and the fundamental form $\omega$. Indeed, $g(\ ,\ )=\omega(\ , I(\ ))$.
+
+One could as well define Hermitian structures on almost complex manifolds. All assertions concerning the linear structure would still be valid 
+in this more general context. But, as soon as we use the splitting of the exterior differential $d=\partial+\bar{\partial}$, 
+we need an integrable almost complex structure (for explanation of the splitting and an integrable almost complex structure, see \cite{Huybrechts2005}, section 1.3 and 2.6).
+
+In local coordinates $z^1, \ldots, z^n$, the Hermitian metric $g$ can be extended uniquely 
+to a complex symmetric bilinear form, determined by the components $g_{j \bar{k}}$ where
+$$
+g_{j \bar{k}}=g\left(\frac{\partial}{\partial z^j}, \frac{\partial}{\partial \bar{z}^k}\right).
+$$
+The Hermitian condition implies that for any $j, k$ we have
+$$
+g\left(\frac{\partial}{\partial z^j}, \frac{\partial}{\partial z^k}\right)=g\left(\frac{\partial}{\partial \bar{z}^j}, \frac{\partial}{\partial \bar{z}^k}\right)=0
+$$
+In terms of the components $g_{j \bar{k}}$ we can therefore write
+$$
+g=\sum_{j, k} g_{j \bar{k}}\left(d z^j \otimes d \bar{z}^k+d \bar{z}^k \otimes d z^j\right)
+$$
+Note that the bar on $\bar{k}$ in the components $g_{j \bar{k}}$ is used to remember the distinction between holomorphic and antiholomorphic components.
+
+The symmetry of $g$ implies that $\overline{g_{j \bar{k}}}=g_{k \bar{j}}$, and the positivity of $g$ means that $g_{j \bar{k}}$ is a positive definite Hermitian matrix at each point. The associated 2-form $\omega$ can be written as
+$$
+\omega=i \sum_{j, k} g_{j \bar{k}} d z^j \wedge d \bar{z}^k
+$$
+
+% We can also consider the decomposition of the exterior algebra on tangent spaces. $T_{\mathbb{C}}X$ and $T^*_{\mathbb{C}}X$ stand for the complexification of tangent bundle and cotangent bundle. Then one defines the 
+% complex vector bundles
+% $$
+% \sideset{}{^{p, q}}\bigwedge X:=\{\alpha\wedge\beta\mid\alpha\in\sideset{}{^{p}}\bigwedge\left(T^{*} X\right)^{1,0}\text{ and }\beta\in\sideset{}{^{q}}\bigwedge\left(T^{*} X\right)^{0,1}\}. 
+% $$
+% And by $\mathcal{A}_{\mathbb{C}}^{k}(X)$ and $\mathcal{A}^{p, q}(X)$ we denote the spaces of sections of $\bigwedge_{\mathbb{C}}^{k} X:=\bigwedge^{k} T_{\mathbb{C}}^{*} X$ and $\bigwedge^{p, q} X$, respectively.
+
+% So far, we have thoroughly explained the definition of the Hermitian Structure. The complex manifold $X$ endowed with an Hermitian structure $g$ is called an Hermitian manifold. On a Hermitian manifold the metric can be written 
+% in local holomorphic coordinates $(z^\alpha)$ as 
+% $$ 
+% h=h_{\alpha {\bar {\beta }}}\,dz^{\alpha }\otimes d{\bar {z}}^{\beta },
+% $$
+% where $h_{\alpha\bar\beta}$ are the components of a positive-definite Hermitian matrix. The metric $g$, as the real part, can be written as
+% $$
+% g={1 \over 2}h_{\alpha {\bar {\beta }}}\,\left(dz^{\alpha }\otimes d{\bar {z}}^{\beta }+d{\bar {z}}^{\beta }\otimes dz^{\alpha }\right).
+% $$
+% And the fundamental form, as the imaginary part, can be written as
+% $$
+% \omega ={i \over 2}h_{\alpha {\bar {\beta }}}\,dz^{\alpha }\wedge d{\bar {z}}^{\beta }.
+% $$
+% It is clear from the coordinate representations that any one of the three forms $h$, $g$, and $\omega$ uniquely determine the other two.
+
+% All three forms $h$, $g$, and $\omega$ preserve the almost complex structure $I$. That is,
+% $$
+% \begin{aligned}
+%   h(I(u),I(v))&=h(u,v)\\g(I(u),I(v))&=g(u,v)\\\omega (I(u),I(v))&=\omega (u,v)
+% \end{aligned}
+% $$
+% for all $u,v\in TX$.
+% An Hermitian structure on an (almost) complex manifold $X$ can therefore be specified by one of which: 
+% \begin{itemize}
+%   \item a Hermitian metric $h$ as above,
+%   \item a Riemannian metric $g$ that preserves the almost complex structure $I$, 
+%   \item a nondegenerate $2$-form $\omega$ which preserves $I$ and is positive-definite in the sense that $\omega\big(u, I(u)\big) > 0$ for all nonzero real tangent vectors $u$.
+% \end{itemize}
+% Note that many authors call $g$ itself the Hermitian metric.
+
+At last, every paracompact (almost) complex manifold admits a Hermitian metric. 
+\begin{proposition}
+  Every almost complex manifold admits a Hermitian metric provided it is paracompact.
+\end{proposition}
+\begin{proof}[Proof]
+  Given an arbitrary Riemannian metric $g$ (which exists provided $X$ is paracompact) on an almost complex manifold $X$ one can construct a new metric $g^\prime$ 
+  compatible with the almost complex structure $I$ in an obvious manner:
+  $$
+  g^\prime(u,v)={1 \over 2}\big(g(u,v)+g(I(u),I(v))\big).
+  $$
+\end{proof}
+
+% \paragraph*{Another definition of $\bigwedge^{p, q} V$}
+\subsection*{* Another definition of $\bigwedge^{p, q} V$}
+
+$\bigwedge^{p, q} V:=\bigwedge^p V^{1,0} \otimes_\mathbb{C} \bigwedge^q V^{0,1},$ where the exterior products of 
+$V^{1,0}$ and $V^{0,1}$ are taken as exterior products of complex vector spaces. An element $\alpha \in \bigwedge^{p, q} V$ is of bidegree $(p, q)$. And one has the following propositions.
+
+\begin{proposition}
+  For a real vector space $V$ endowed with an almost complex structure $I$ one has:
+
+  i) $\bigwedge^{p, q} V$ is in a canonical way a subspace of $\bigwedge^{p+q} V_{\mathbb{C}}$.
+
+  ii) $\bigwedge^{k} V_{\mathbb{C}}=\bigoplus_{p+q=k} \bigwedge^{p, q} V$.
+
+  iii) Complex conjugation on $\bigwedge^{*} V_{\mathbb{C}}$ defines a ($\mathbb{C}$-antilinear) isomorphism $\bigwedge^{p, q} V \cong \bigwedge^{q, p} V$, 
+  i.e. $\overline{\bigwedge^{p, q} V}=\bigwedge^{q, p} V$.
+
+  iv) The exterior product is, i.e. $(\alpha, \beta) \mapsto \alpha \wedge \beta$, maps $\bigwedge^{p, q} V \times \bigwedge^{r, s} V$ to the subspace $\bigwedge^{p+r, q+s} V$.
+\end{proposition}
+\begin{proof}[Proof]
+  Here to show i) and ii), one could as well use the general fact that any direct sum decomposition $V_{\mathbb{C}}=W_{1} \oplus W_{2}$ induces 
+  a direct sum decomposition $\bigwedge^{k} V_{\mathbb{C}}=\bigoplus_{p+q=k} \bigwedge^{p} W_{1} \otimes \bigwedge^{q} W_{2}$, given by the following.
+
+  For vector spaces $V, W$ over a field $K$, we have
+  $$
+  \bigoplus_{k=0}^{n}\left(\sideset{}{^{k}}\bigwedge V \otimes_{K} \sideset{}{^{n-k}}\bigwedge W \right) \cong \sideset{}{^{n}}\bigwedge(V \oplus W), 
+  $$
+  which holds in a canonical way : for $0 \leq k \leq n$, the maps $\bigwedge^{k}(V) \times \bigwedge^{n-k}(W) \rightarrow \bigwedge^{n}(V \oplus W)$, given by 
+  $$
+  \left(v_{1} \wedge \cdots \wedge v_{k}, w_{k+1} \wedge \cdots \wedge w_{n}\right) \mapsto\left(v_{1} \wedge \cdots \wedge v_{k}\right) \wedge\left(w_{k+1} \wedge \cdots \wedge w_{n}\right).
+  $$
+  By universal properties of the tensor product, we obtain a map $\varphi_{k}: \bigwedge^{k}(V) \otimes_{K} \bigwedge^{n-k}(W) \rightarrow \bigwedge^{n}(V \oplus W)$, 
+  and then get a canonical map (which is actually a bijective map)
+  $$
+  \varphi=\bigoplus_{k=0}^{n} \varphi_{k}: \bigoplus_{k=0}^{n}\left(\bigwedge^{k}(V) \otimes_{K} \bigwedge^{n-k}(W)\right) \longrightarrow \bigwedge^{n}(V \oplus W). 
+  $$
+\end{proof}
+
+% With respect to the direct sum decompositions $\bigwedge^* V_\mathbb{C}=\bigoplus\limits_{k=0}^d\bigwedge^k V_\mathbb{C}$ and i) of Proposition 1 one defines the natural projections
+% $$
+% \Pi^{k}: \sideset{}{^*}\bigwedge V_{\mathbb{C}} \longrightarrow \sideset{}{^k}\bigwedge V_{\mathbb{C}} \text { and } \Pi^{p, q}: \sideset{}{^{*}}\bigwedge V_{\mathbb{C}} \longrightarrow \sideset{}{^{p, q}}\bigwedge V.
+% $$
+% Furthermore, $\mathbf{I}: \sideset{}{^*}\bigwedge V_{\mathbb{C}} \rightarrow \sideset{}{^*}\bigwedge V_{\mathbb{C}}$, a linear operator, is the multiplicative extension of 
+% the almost complex structure $I$ on $V_{\mathbb{C}}$, defined as 
+% $$
+% \mathbf{I}=\sum_{p, q} i^{p-q} \cdot \Pi^{p, q} .
+% $$
+% The operator $\Pi^{k}$ does not depend on the almost complex structure $I$, but the operators $\mathbf{I}$ and $\Pi^{p, q}$ certainly do. Since $I$ is defined on the real vector space $V$, 
+% also $\mathbf{I}$ is an endomorphism of the real exterior algebra $\bigwedge^{*} V$.
+
+% We denote the corresponding operators on the dual space $\bigwedge^{*} V_{\mathbb{C}}^{*}$ also by $\Pi^{k}, \Pi^{p, q}$, respectively $\mathbf{I}$. Note that 
+% $\mathbf{I}(\alpha)\left(v_{1}, \cdots, v_{k}\right)=\alpha\left(\mathbf{I}\left(v_{1}\right), \cdots, \mathbf{I}\left(v_{k}\right)\right)$ 
+% for $\alpha \in \bigwedge^{k} V_{\mathbb{C}}^{*},\ v_{i} \in V_{\mathbb{C}}$.
+
+
+\bibliographystyle{unsrt}
+\bibliography{NoteRef}
+
+\end{document}
