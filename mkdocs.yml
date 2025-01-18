@@ -17,11 +17,39 @@ nav:
   - Suggestions/Tricks/Skills: 
     - Compare Credit Cards: suggestions/creditcardcomp.md
     - Acrobat 自动添加书签: suggestions/acrobatbookmark.md
+    
 
-theme: 
+theme:
   name: material
   icon:
     annotation: material/chevron-right-circle
+  features:
+    - navigation.top
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default 
+      primary: blue grey
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+plugins:
+  - social
 
 markdown_extensions:
   - pymdownx.arithmatex:
@@ -29,6 +57,7 @@ markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.superfences
+  - pymdownx.critic
   
 extra_javascript:
   - javascripts/mathjax.js
