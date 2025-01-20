@@ -1,6 +1,7 @@
 site_name: Homepage
 nav:
   - Home: index.md
+  - Academic Background: academic_profile.md
   - Notes: 
     - Lecture Notes: 
       - STAT 541 Statistics for Leaning: 
@@ -22,6 +23,9 @@ theme:
   name: material
   icon:
     annotation: material/chevron-right-circle
+
+  features:
+    - navigation.indexes
   palette:
 
     # Palette toggle for automatic mode

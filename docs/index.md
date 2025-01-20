@@ -1,9 +1,9 @@
 ---
 hide:
-  - navigation
   - toc
-width: 60%
 ---
+
+<img align="right" src=https://s2.loli.net/2025/01/20/N4PG25AlpQzjOnk.jpg  width=25% />
 
 # Welcome to My Homepage!
 
