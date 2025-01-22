@@ -20,8 +20,7 @@ which holds for all functions $g$ where $Var\left(g(x)\right)<+\infty$(1). Speci
 {.annotate}
 
 1. This a technical assumption which is usually satisfied in practical problems.
-2. One special case states that if $\left\{A_i\right\}$ is a finite or countable partition of the sample space, then $E(X)=\sum_i E\left(X | A_i\right) \cdot Pr\left(A_i\right)$. 
-
+2. One special case states that if $\left\{A_i\right\}$ is a finite or countable partition of the sample space, then $E(X)=\sum_i E\left(X | A_i\right) \cdot Pr\left(A_i\right)$.
 
 Obviously, it is equivalent to
 
@@ -66,4 +65,9 @@ Note that both the $\color{green}{\text{green}}$ and $\color{blue}{\text{blue}}$
 
 ### Geometric Illustration
 
-Pythogorean Theorem of $R(f,P)$:
+Pythagorean Decomposition of $R(f,P)$: $E(y|x)$ can be viewed as an orthogonal projection of $y$ on the space of random variables that are functions of $x$. Precisely, consider the space of all r.v. with finite variance(1) and the set of all r.v. that are functions of $x$ becomes a hyperplane lying in this space. The Pythagorean decomposition of $R(f,P)$ is shown in the following figure. 
+{.annotate}
+
+1. This space is a $L^2$ space. 
+
+![Pythagorean Decomposition](stat541_week201.svg "Pythagorean Decomposition")
