@@ -49,7 +49,22 @@ is a random function(1) determined by the data and the learning algorithm $\phi_
 
 ### **Definition** Loss function
 
-Loss function $L: \mathcal{Y} \times \mathcal{Y} \rightarrow [0,+\infty)$ is to estimate the error of $f$. How close $f(x)$ is to $y$ is gauged by $L(f(x),y)$.Examples: squared error loss and $0-1$ loss.
+Loss function $L: \mathcal{Y} \times \mathcal{Y} \rightarrow [0,+\infty)$ is to estimate the error of $f$. How close $f(x)$ is to $y$ is gauged by $L(f(x),y)$. Examples: squared error loss
+
+$$
+L(f(x),y) = (y - f(x))^2, 
+$$
+
+and $0-1$ loss
+
+$$
+L(f(x),y) = I\left(f(x) \neq y\right) = \left\{\begin{matrix}
+1,\quad & \text{ if } f(x) \neq y, \\
+0,\quad & \text{ if } f(x) = y,
+\end{matrix}\right.
+$$
+
+where $I$ is the indicator function. 
 
 ### **Definition** Risk function
 
@@ -71,23 +86,23 @@ $$
 R(f^*,P) = R^*(P)
 $$
 
-### Compute $R^*(P)$
+### Compute the Oracle Predictor
 
 Compute $R^*(P)$ for squared error loss:
 
 $$
 \begin{aligned}
 R(f,P) 
-&= E_{(x,y)}\left((f(x,y) - y^2)\right) \\
-&= \int_{\mathcal{X}} \int_{\mathcal{Y}} (y - f(x)^2) p(y|x) p(x) \,\mathrm{d}y \mathrm{d}x \\
-&= \int_{\mathcal{X}}p(x)\left(\int_{\mathcal{Y}}(y - f(x)^2) p(y|x)\,\mathrm{d}y\right)\,\mathrm{d}x
+&= E_{(x,y)}\left((f(x) - y)^2\right) \\
+&= \int_{\mathcal{X}} \int_{\mathcal{Y}} (y - f(x))^2 p(y|x) p(x) \,\mathrm{d}y \mathrm{d}x \\
+&= \int_{\mathcal{X}}p(x)\left(\int_{\mathcal{Y}}(y - f(x))^2 p(y|x)\,\mathrm{d}y\right)\,\mathrm{d}x
 \end{aligned}
 $$
 
 For fixed $x$, we minimize over the value of $f(x)$, that is, it's suffice to set
 
 $$
-(x) = \operatorname*{arg\, min}\limits_z \int_{\mathcal{Y}}(y - f(x)^2) p(y|x)\,\mathrm{d}y.
+f(x) = \operatorname*{arg\, min}\limits_z \int_{\mathcal{Y}}(y - z)^2 p(y|x)\,\mathrm{d}y.
 $$
 
 It is equivalent to minimize:
@@ -107,7 +122,7 @@ for fixed $x$. Then we have
 $$
 \begin{aligned}
 f(x)
-&= \operatorname*{arg\, min}\limits_{z} - 2z\cdot \int_{\mathcal{Y}} y\cdot p(y|x)\,\mathrm{d}y + z^2 \\
+&= \operatorname*{arg\, min}\limits_{z} \left(- 2z\cdot \int_{\mathcal{Y}} y\cdot p(y|x)\,\mathrm{d}y + z^2 \right) \\
 &= \int_{\mathcal{Y}} y\cdot p(y|x)\,\mathrm{d}y \\
 &= E(y|x). 
 \end{aligned}
