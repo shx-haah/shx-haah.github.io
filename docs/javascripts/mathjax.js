@@ -1,7 +1,7 @@
 window.MathJax = {
-    loader: {load: ['[tex]/color']},
+    loader: {load: ['[tex]/color', '[tex]/boldsymbol']},     
     tex: {
-      tex: {packages: {'[+]': ['color']}},
+      tex: {packages: {'[+]': ['color', 'boldsymbol']}},
       inlineMath: [["\\(", "\\)"]],
       processEscapes: true,
       processEnvironments: true

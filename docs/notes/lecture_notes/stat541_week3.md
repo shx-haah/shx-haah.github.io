@@ -335,4 +335,16 @@ $$
 
 Roughly speaking, if $\boldsymbol{x_{*}}$ is similar to the training data features, the variance will be small; otherwise, the variance will be large. 
 
-### Interval Estimate  
+### Interval Estimate 
+
+We want to make a prediction interval for $y_*$ in the form of  
+
+$$
+\left[C_{low}(\boldsymbol{Y}, \boldsymbol{X}, \boldsymbol{x_{*}}),C_{high}(\boldsymbol{Y}, \boldsymbol{X}, \boldsymbol{x_{*}})\right]. 
+$$
+
+We hope $y_*$ to be contained in this with probability of at least $1-\alpha$ (usually $\alpha = 0.05$ or $\alpha = 001$), i.e. 
+
+$$
+Pr\left(y_*\in \left[C_{low},C_{high}\right] \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) \geq 1-\alpha. 
+$$
