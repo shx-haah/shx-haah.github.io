@@ -335,4 +335,4 @@ $$
 
 Roughly speaking, if $\boldsymbol{x_{*}}$ is similar to the training data features, the variance will be small; otherwise, the variance will be large. 
 
-### Interval Estimate 
+### Interval Estimate  
