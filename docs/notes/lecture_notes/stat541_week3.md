@@ -166,7 +166,7 @@ $$
 y \approx \beta_0 + \sum_{i=1}^{p} \beta_i x_i,
 $$
 
-where $\boldsymbol{X} = [x_1, x_2, \dots, x_p]^T$ (for now we assume $\boldsymbol{x}\in \mathbb{R}^p$). More precisely, we make a statement about $p(y\mid\boldsymbol{x})$ as follows: 
+where $\boldsymbol{X} = [x_1, x_2, \dots, x_p]^T$ (for now we assume $\boldsymbol{x}\in \mathbb{R}^p$). More precisely, we make a assumption about $p(y\mid\boldsymbol{x})$ as follows: 
 
 $$
 y = \beta_0 + \sum_{i=1}^{p} \beta_i x_i + \varepsilon, 
@@ -188,7 +188,7 @@ The goal is to find $\beta_0,\dots,\beta_p$ and thus $f^*$.
 
 ### Rewrite Training Data in Matrix Form
 
-Assume training data $\{(\boldsymbol{x}^{(i)},y^{(i)})\}_{i=1}^n$ were i.i.d. generated via the statement about $p(y\mid\boldsymbol{x})$. To simplify the notations, we define 
+Assume training data $\{(\boldsymbol{x}^{(i)},y^{(i)})\}_{i=1}^n$ were i.i.d. generated via [the assumption](#linear-regression) about $p(y\mid\boldsymbol{x})$. To simplify the notations, we define 
 
 $$
 \boldsymbol{Y} = \begin{bmatrix} 
@@ -284,7 +284,10 @@ $$
 \hat{\boldsymbol{\beta}} = \left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1} \boldsymbol{X}^T\boldsymbol{Y}, 
 $$
 
-where we assume $\boldsymbol{X}$ is a full-rank matrix and thus $\boldsymbol{X}^T \boldsymbol{X}$ has an inverse. 
+where we assume $\boldsymbol{X}$ is a full-rank matrix and thus $\boldsymbol{X}^T \boldsymbol{X}$ has an inverse(1). 
+{.annotate}
+
+1. Otherwise, if $\boldsymbol{X}^T \boldsymbol{X}$ is not invertible, there exists $v\neq \boldsymbol{0}\in \mathbb{R}^{p+1}$ such that $\boldsymbol{X}^T \boldsymbol{X} v = \boldsymbol{0}$, which indicates columns of $\boldsymbol{X}$ are linearly dependent. And columns of $\boldsymbol{X}$ are always linearly dependent when $p\geq n$. 
 
 Furthermore, we can find the distribution of $\hat{\boldsymbol{\beta}}$ conditional on the training features $\boldsymbol{X}$: 
 
@@ -343,8 +346,61 @@ $$
 \left[C_{low}(\boldsymbol{Y}, \boldsymbol{X}, \boldsymbol{x_{*}}),C_{high}(\boldsymbol{Y}, \boldsymbol{X}, \boldsymbol{x_{*}})\right]. 
 $$
 
-We hope $y_*$ to be contained in this with probability of at least $1-\alpha$ (usually $\alpha = 0.05$ or $\alpha = 001$), i.e. 
+We hope $y_*$ to be contained in this with probability of at least $1-\alpha$ (usually $\alpha = 0.05$ or $\alpha = 0.01$), i.e. 
 
 $$
 Pr\left(y_*\in \left[C_{low},C_{high}\right] \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) \geq 1-\alpha. 
 $$
+
+Recall [the assumption](#linear-regression) that $y_*\mid \boldsymbol{\tilde{x}} \sim \mathcal{N}(\boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}}, \sigma^2)$. By
+
+$$
+E(y_* - \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}) = 0,
+$$
+
+and $Cov\left(y_*, \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right)=0$(1) and thus
+{.annotate}
+
+1. This is because $\hat{\boldsymbol{\beta}}$ only depends on the training data and we assume newly received data pair is independent of training data. 
+
+$$
+\begin{aligned}
+&Var(y_* - \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}) \\
+&= Var\left(y_*\mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) - 2 Cov\left(y_*, \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) + Var\left(\boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) \\
+&= \sigma^2 + \sigma^2 \boldsymbol{\tilde{x}}^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}\tilde{\boldsymbol{x}},
+\end{aligned}
+$$
+
+we know that $y_* - \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}}$ is still normally distributed, given by 
+
+$$
+y_* - \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}} \sim \mathcal{N}\left(0, \sigma^2\left(1+\boldsymbol{\tilde{x}}^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}\tilde{\boldsymbol{x}}\right)\right). 
+$$
+
+To obtain the interval estimation, we also need to get rid of $\sigma^2$ as it is unknown. Recall [the assumption](#linear-regression) that the noise is normally distributed. We can estimate the variance $\sigma^2$ by the scaled residuals, i.e.
+
+$$
+\hat{\sigma}^2 = \frac{\|\boldsymbol{Y} - \boldsymbol{X}\hat{\boldsymbol{\beta}\|^2}}{n-p}. 
+$$
+
+Then we have 
+
+$$
+\frac{y_*-\boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}}}{\sqrt{\hat{\sigma}^2\left(1+\boldsymbol{\tilde{x}}^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}\tilde{\boldsymbol{x}}\right)}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}
+$$
+
+follows a t-distribution with $n-p$ degree of freedom. Let $t_{n-p,\alpha/2}$ and $t_{n-p,1-\alpha/2}$ be the $\alpha/2$ and $1-\alpha/2$ quantile of the this distribution. Denote $\sqrt{\hat{\sigma}^2\left(1+\boldsymbol{\tilde{x}}^T(\boldsymbol{X}^T \boldsymbol{X})^{-1}\tilde{\boldsymbol{x}}\right)}$ as $C$. Then, we have 
+
+$$
+Pr\left(\frac{y_*-\boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}}}{C}\in \left[t_{n-p,\alpha/2}, t_{n-p,1-\alpha/2}\right] \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) \geq 1-\alpha,  
+$$
+
+that is 
+
+$$
+Pr\left(y_*\in \left[C t_{n-p,\alpha/2} + \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}},C t_{n-p,1-\alpha/2} + \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}}\right] \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right) \geq 1-\alpha. 
+$$
+
+### Examples and Types of Features
+
+So far we assume $\boldsymbol{x}$ lies in $\mathbb{R}^p$. Here we will introduce discrete features and mixed features by giving some examples. 
