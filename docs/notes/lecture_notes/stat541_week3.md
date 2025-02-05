@@ -623,10 +623,10 @@ Forward selection:
 
 Backward selection: start at full model and remove variables until reaching the null model. 
 
-Best subset selection needs to fit $2^p$ linear models. On the other hand, forward selection needs to fit
+Best subset selection needs to fit $2^p$ linear models. On the other hand, for forward (backward) selection needs to fit
 
 $$
 p+(p-1)+\dots + 1 = \frac{p(p+1)}{2}
 $$
 
-models. 
+models, which is an order of $O(p^2)$ computations. 
