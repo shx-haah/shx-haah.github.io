@@ -131,9 +131,16 @@ $$
 
 where the two terms are ${\color{blue} \text{variance term}}$ (at a fixed $x$) and ${\color{gray} \text{bias term}}$, respectively. 
 
+### Illustrations by Polynomial Fitting
+
 To illustrate this, if the oracle predictor $E(y|x)$ is some 3-degree polynomial, assume we fit data sets via linear functions and 3-degree polynomials. For the linear learning algorithms, since $E(y|x)$ is some 3-degree polynomial and $E_{\mathcal{D}_n}\left(\hat{f}_{\mathcal{D}_n}\right)$ is some linear function, the ${\color{gray} \text{bias term}}$ is likely to be large; on the other hand, ${\color{blue} \text{variance term}}$ may not be too large, for linear functions vary slightly compared among linear functions. This 'small variance' is shown in the following figure, 
 ![Linear Model](stat541_week202.svg "Linear Model") 
 where the gray thick curve is $E(y|x)$, and  colored curves are different prediction functions based on different data sets, and dashed curve is $E_{\mathcal{D}_n}\left(\hat{f}_{\mathcal{D}_n}\right)$. Conversely, for 3-degree-polynomial learning algorithms, the ${\color{gray} \text{bias term}}$ is likely to be small and ${\color{blue} \text{variance term}}$ may be large. This 'large variance' is shown in the following figure. 
 ![Linear Model](stat541_week203.svg "Linear Model")
 
-To better understand this, we can consider an extreme example. If we use very high degree polynomials to fit data sets, we can make our prediction function exactly go through each training data point. In this case, the bias would be small, which mainly comes from the noise of the data set itself. However, higher degree polynomials can oscillate more freely than lower degree polynomials, and this usually leads to our prediction function shaping drastically different to each other when coming from different data sets. 
+To better understand this, we can consider an extreme example. If we use very high degree polynomials to fit data sets, we can make our prediction function exactly go through each training data point. In this case, the bias would be small(1). However, higher degree polynomials can oscillate more freely than lower degree polynomials, and this usually leads to our prediction function shaping drastically different to each other when coming from different data sets. 
+{.annotate}
+
+1. The empirical risk is 0 in this case. 
+
+Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  

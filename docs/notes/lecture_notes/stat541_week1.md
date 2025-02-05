@@ -161,7 +161,7 @@ $$
 - ${\color{blue} \text{Blue}}$: the inherent error, which is the best we can do!
 
 
-## Emperical Risk Minimization (ERM)
+## Empirical Risk Minimization (ERM)
 
 Idea is to find an approximation of $R(f,P)$ and minimize this over $f$ (also assume that $f$ lies in some specified class of functions $\mathcal{F}$). The ERM predictor $\hat{f}$ is defined as 
 
@@ -169,9 +169,9 @@ $$
 \hat{f} = \operatorname*{arg\, min}_{g\in \mathcal{F}}\left(\frac{1}{n}\sum_{i=1}^{n}L\left(g(x^{(i)}),y^{(i)}\right)\right),
 $$
 
-which is called the average loss or emperical risk. Note that 
+which is called the average loss or empirical risk. Note that 
 
-- The emperical risk depends on the choice of function class $\mathcal{F}$, such as linear functions and complicated neural networks.
+- The empirical risk depends on the choice of function class $\mathcal{F}$, such as linear functions and complicated neural networks.
 - Finding the `argmin` is not always easy, and hence there are various optimization algorithms approximating the `argmin`.
 
 ### Gauge Learning Algorithms
