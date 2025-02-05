@@ -110,7 +110,7 @@ Similar to the covariance of random variable, we have
 $$
 \begin{aligned}
     Cov(\boldsymbol{X}) 
-    &= E\left(\left(\boldsymbol{X}-E(\boldsymbol{X})\right)\left(\boldsymbol{X}-E(v)\right)^T\right) \\
+    &= E\left(\left(\boldsymbol{X}-E(\boldsymbol{X})\right)\left(\boldsymbol{X}-E(\boldsymbol{X})\right)^T\right) \\
     &= E(\boldsymbol{X} \boldsymbol{X}^T) - E(\boldsymbol{X})E(\boldsymbol{X})^T.  
 \end{aligned}
 $$
@@ -322,10 +322,10 @@ $$
 Consider the bias of $\hat{f}$ (conditional on $\boldsymbol{X},\boldsymbol{x_{*}}$),
 
 $$
-E(\hat{f}(\boldsymbol{x_{*}}) \mid \boldsymbol{X},\boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T E(\hat{\boldsymbol{\beta}} \mid \boldsymbol{X},\boldsymbol{x_{*}}).
+E(\hat{f}(\boldsymbol{x_{*}}) \mid \boldsymbol{X},\boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T E(\hat{\boldsymbol{\beta}} \mid \boldsymbol{X},\boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \boldsymbol{\beta}.
 $$
 
-We know that $E(y_* \mid \boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \hat{\boldsymbol{\beta}}$,and thus the OLS prediction is unbiased(1).
+We know that $E(y_* \mid \boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \boldsymbol{\beta}$, and thus the OLS prediction is unbiased(1).
 {.annotate}
 
 1. This conclusion relied on the assumption that the data has a linear relationship. In practice, our model is only an approximation to the true distribution. So we will have bias.

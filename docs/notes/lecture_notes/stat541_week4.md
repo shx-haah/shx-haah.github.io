@@ -14,7 +14,7 @@ Suppose we have a $C>0$ (we assume a proper $C$ is given by an oracle), and we w
 1. In ridge, we don't want to penalize the $\beta_0$ but other $\beta$. 
 
 $$
-\|\boldsymbol{\beta}\|^2 = \sum_{i=1}^{p} \beta_i \leq C. 
+\|\boldsymbol{\beta}\|^2 = \sum_{i=1}^{p} \beta_i^2 \leq C. 
 $$
 
 The ridge regression estimator $\boldsymbol{\beta}_{\rm Ridge}$ is defined as 
@@ -28,14 +28,14 @@ Using Lagrange multiplies to convert the above minimization problem into an equi
 $$
 \begin{aligned}
 \hat{\boldsymbol{\beta}}_{\rm Ridge}
-&= \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \left(\\|\boldsymbol{\beta}\|^2-C\right)\right) \\
-&= \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \\|\boldsymbol{\beta}\|^2\right), 
+&= \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \left(\|\boldsymbol{\beta}\|^2-C\right)\right) \\
+&= \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|^2\right), 
 \end{aligned}
 $$
 
 where the constant $\lambda>0$ is dependent on $C$. 
 
-Ridge is an example of ERM plus regularization term (or penalty) $\lambda \\|\boldsymbol{\beta}\|^2$. The general formulation of ERM + regularization is 
+Ridge is an example of ERM plus regularization term (or penalty) $\lambda \|\boldsymbol{\beta}\|^2$. The general formulation of ERM + regularization is 
 
 $$
 \operatorname*{arg\, min}_{f} \left(\frac{1}{n} \sum_{i=1}{n} L\left(y^{(i)},f(x^{(i)})\right) + \operatorname{Penalty}(f)\right), 
@@ -50,7 +50,7 @@ To find $\hat{\boldsymbol{\beta}}_{\rm Ridge}$, we let
 $$
 \begin{aligned}
 0 
-&= \nabla_{\boldsymbol{\beta}}\left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \\|\boldsymbol{\beta}\|^2\right) \\
+&= \nabla_{\boldsymbol{\beta}}\left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|^2\right) \\
 &= -2\boldsymbol{X}^T\boldsymbol{Y} + 2(\boldsymbol{X}^T\boldsymbol{X})\boldsymbol{\beta} + 2\lambda \boldsymbol{\beta}. 
 \end{aligned}
 $$
@@ -148,7 +148,7 @@ $$
 **Constrain Formulation**
 
 $$
-\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \\|\boldsymbol{\beta}\|^2\right).
+\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|^2\right).
 $$
 
 For $p=2$ and $C=1$, the constraints of ridge and LASSO are respectively $L^2$ and $L^1$ balls shown as follows.
