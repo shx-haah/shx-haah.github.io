@@ -9,7 +9,7 @@ hide:
 
 ## My name is Haoxin Sang (Hollis).
 
-I'm excited to share my journey as a PhD student in CS at the University of Alberta. Welcome to my blog!
+I'm excited to share my journey as a PhD student in CS at the University of Alberta, under the guidance of [Xiaoqi Tan](https://xiaoqitan.org/). 
 
 Here, you'll find insights into my research, experiences as an international student, and reflections on various topics in Computer Science. (1)
 {.annotate}

@@ -151,7 +151,7 @@ $$
 \hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|^2\right).
 $$
 
-For $p=2$ and $C=1$, the constraints of ridge and LASSO are respectively $L^2$ and $L^1$ balls shown as follows.
+For $p=2$ and $C=1$, the constraints of ridge and LASSO are respectively $L^2$ and $L^1$ balls, and the (contour of) corresponding objective functions are shown as follows.
 
 ![Ridge and LASSO](stat541_week401.svg "Ridge and LASSO")
 
@@ -214,7 +214,10 @@ The following figure illustrates the difference of the OLS estimator and LASSO e
 
 ![OLS and LASSO](stat541_week402.svg "OLS and LASSO")
 
-For more features, we may use a coefficient plot with respect to $\lambda$, i.e. $\beta_i$-$\lambda$ plot. As $\lambda$ grows, the later a $\beta_i$ becomes 0, the more important this corresponding feature should be as it remains in our model even with large penalty. 
+For more features, we may use a coefficient plot with respect to $\lambda$, i.e. $\beta_i$-$\lambda$ plot(1). ![Coefficient Plot](stat541_week403.svg "Coefficient Plot") As $\lambda$ grows, the later a $\beta_i$ becomes 0, the more important this corresponding feature should be as it remains in our model even with large penalty. 
+{.annotate}
+
+1. For $p=1$, $\beta$ is linear with respect to $\lambda$. For $p>1$, we may choose a proper transformation (using parameters like $d$ and $c$) of $\lambda$ to make the coefficient plot piecewise linear as the figure below. 
 
 ### Group LASSO
 
@@ -235,3 +238,7 @@ $$
 $$
 
 where $\|\beta^{(i)}\| = \sqrt{\sum_{j=1}^{p_i}(\beta^{(i)}_j)^2}$. 
+
+## Model Selection, Data Splitting and  Cross-Validation
+
+Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use ERM to evaluate these two classes. 

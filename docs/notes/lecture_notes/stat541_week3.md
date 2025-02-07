@@ -605,7 +605,8 @@ $$
 (0,1,0,0,1)
 $$ 
 
-is an index set of 5 features where the second and fifth feature are included. In this way, $I$ is a point in ${0,1}^p$ and we may visualize the choice of $I$ as picking a vertex of a hypercube. Minimizing AIC is the same as searching for the optimal vertex on the cube.
+is an index set of 5 features where the second and fifth feature are included. In this way, $I$ is a point in $\{0,1\}^p$ and we may visualize the choice of $I$ as picking a vertex of a hypercube. ![Cube with p=3](stat541_week301.svg "Cube with p=3") Minimizing AIC is the same as searching for the optimal vertex on the cube. 
+
 
 For $p>40$, search becomes infeasible. If we enumerate the AIC for every $I$, this called best subset selection. Instead, we can do greedy search over the cube. 
 
