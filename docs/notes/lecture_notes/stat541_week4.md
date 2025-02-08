@@ -239,6 +239,86 @@ $$
 
 where $\|\beta^{(i)}\| = \sqrt{\sum_{j=1}^{p_i}(\beta^{(i)}_j)^2}$. 
 
-## Model Selection, Data Splitting and  Cross-Validation
+## Data Splitting and Cross-Validation
 
-Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use ERM to evaluate these two classes. 
+Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use the empirical risk to evaluate these two classes. This is because we use the data set to fit our model under the guidance of [ERM](/notes/lecture_notes/stat541_week1/#empirical-risk-minimization-erm), and therefore, the model from a more complex class will achieve a lower empirical risk on this exactly same data set(1). 
+{.annotate}
+
+1. An extreme example: we fit the data set using a very high degree polynomial, and we will find a zero-ERM polynomial model. If we follow the standard of ERM, this should be THE BEST model, which is clearly not the case. 
+
+Solution is to split the data into training set and a validation set: 
+
+$$
+\underbrace{\left(x^{(1)},y^{(1)}\right),\dots,\left(x^{(k)},y^{(k)}\right)}_{\text{Training Set } \mathcal{D}_{\rm Train}},\underbrace{\left(x^{(k+1)},y^{(k+1)}\right),\dots,\left(x^{(n)},y^{(n)}\right)}_{\text{Validation Set } \mathcal{D}_{Valid}}. 
+$$
+
+More precisely, our objective is to estimate $R(\hat{f}_i,P)$, $\hat{f}_i\in \mathcal{F}_i$, and find the model $i$ that minimizes, which is achieved by the following steps: 
+
+1. Fit $\hat{f}_i\in \mathcal{F}_i$ via ERM (or another method) using only the data in $\mathcal{D}_{\rm Train}$. 
+
+2. Compute 
+$\displaystyle \frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\right)\in \mathcal{D}_{\rm Valid}} L\left(\hat{f}_i(x^{(j)}),y^{(j)}\right).$
+
+3. Find the model $i$ that minimizes Step 2. 
+
+4. Usually, we then fit $\hat{f}$ using the model in Step 3 on the entire data set $\mathcal{D}_{\rm Train}\cup \mathcal{D}_{\rm Valid}$. 
+
+If we consider the expected value of empirical risk conditional on $\mathcal{D}_{\rm Train}$, we have 
+
+$$
+E\left(\frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\right)\in \mathcal{D}_{\rm Valid}} L\left(\hat{f}_i(x^{(j)}),y^{(j)}\right) \mid \mathcal{D}_{\rm Train}\right) = R(\hat{f},P),
+$$
+
+where in converse, the empirical risk on whole data set, we will underestimate the true risk. 
+
+### Example of Ridge Regression
+
+For each $\lambda$ (or equivalently $C$), we get a class of functions $\mathcal{F}_{C_1},\dots,\mathcal{F}_{C_K}$. For some choices of $C$, if for some $i,j$, $C_i<C_j$, then $\mathcal{F}_{C_i}\subset\mathcal{F}_{C_j}$; similarly, if $\lambda_i<\lambda_j$, then $\mathcal{F}_{\lambda_i}\supset\mathcal{F}_{\lambda_j}$. To find the most reasonable model, we follow the steps below: 
+
+1. Start off with a grid of $\lambda$'s, for instance $\{\lambda_1 = 0.1, \lambda_2 = 1, \lambda_3 = 10, \lambda_4 = 100\}$. 
+
+2. For every $\lambda_i$, find the ridge estimator $\hat{\boldsymbol{\beta}}_{\lambda_i}$ using only the training data. 
+
+3. We compute $\displaystyle \frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\right)\in \mathcal{D}_{\rm Valid}} \left(\left(x^{(j)}\right)^T\hat{\boldsymbol{\beta}}_{\lambda_i} - y^{(j)}\right)^2.$
+
+4. Choose the $\lambda_i$ with the smallest value in Step 3. 
+
+### Proportions to Split
+
+Usually, we take the 80% or 90% of the data set as the training set. 
+
+The larger $\mathcal{D}_{\rm Valid}$ is the lower the variance of $\hat{R}(\hat{f},P)$ is. However, we don't want to take $\mathcal{D}_{\rm Valid}$ too large. This is because if $\mathcal{D}_{\rm Train}$ is small when fitting $\hat{f}$, then $\hat{f}_{\mathcal{D}_{\rm Train}}$ might be very different from $\hat{f}_{\mathcal{D}_{\rm Train}\cup\mathcal{D}_{\rm Valid}}$, which means $\hat{f}_{\mathcal{D}_{\rm Train}}$ is biased. 
+
+### $K$-Fold Cross-Validation 
+
+Split the data into $K$-groups of roughly the same size: 
+
+$$
+\mathcal{D} = \left(\mathcal{D}^{(1)}, \underbrace{\mathcal{D}^{(2)}}_{\text{called "folds"}}, \dots, \mathcal{D}^{(K)}\right). 
+$$
+
+We estimate $R(\hat{f},P)$ by the following steps: 
+
+1. For $i=1,\dots,K$, fit a model using $\mathcal{D}^{(1)}, \dots, \mathcal{D}^{(i-1)}, \mathcal{D}^{(i+1)}, \dots, \mathcal{D}^{(K)}$ to get $\hat{f}^{(i)}$. 
+
+2. Compute $\displaystyle CV^{(i)} \frac{1}{|\mathcal{D}^{(i)}|} \sum_{\left(x,y\right)\in \mathcal{D}^{(i)}} L\left(\hat{f}^{(i)}(x),y\right).$
+
+3. Estimate $R(\hat{f},P)\approx \frac{1}{K}\sum_{i=1}^K CV^{(i)} = CV$. 
+
+How many folds to choose? Usually $K$ is chosen from 5-10. To show that it may not always be beneficial to choose large $K$, we consider an example of $K=n$ (size of the data set), which is called leave-one-out cross-validation (LOOCV). LOOCV may not always give better estimates of $R(\hat{f},P)$: 
+
+$$
+\begin{aligned}
+Var(CV) 
+&= \frac{1}{K^2} Cov\left(\sum_{i=1}^K CV^{(i)},\sum_{j=1}^K CV^{(j)} \right) \\
+&= \frac{1}{K^2}\sum_{i=1}^K\sum_{j=1}^K Cov\left(CV^{(i)},CV^{(j)} \right), 
+\end{aligned}
+$$
+
+which indicates that if $Cov\left(CV^{(i)},CV^{(j)} \right)=0$ for $i\neq j$, then the larger $K$ is better. However, if $K$ is large, then $\hat{f}^{(i)}\approx\hat{f}^{(j)}$ as the training sets are nearly identical, and thus, $Cov\left(CV^{(i)},CV^{(j)} \right)$ might be large and positive. 
+
+Specifically, for linear regression the LOOCV error has a closed form expression: 
+
+$$
+CV= \frac{1}{n} \sum_{i=1}^n\left(\frac{y^{(i)} - \left(x^{(i)}\right)^T\hat{\boldsymbol{\beta}} }{1-\left(x^{(i)}\right)^T \left(X^T X\right)^{-1} x^{(i)}} \right)^2. 
+$$
