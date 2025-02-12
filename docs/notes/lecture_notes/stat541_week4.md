@@ -263,10 +263,10 @@ $\displaystyle \frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\ri
 
 4. Usually, we then fit $\hat{f}$ using the model in Step 3 on the entire data set $\mathcal{D}_{\rm Train}\cup \mathcal{D}_{\rm Valid}$. 
 
-If we consider the expected value of empirical risk conditional on $\mathcal{D}_{\rm Train}$, we have 
+If we consider the expected value of empirical risk conditional on $\mathcal{D}_{\rm Train}$ (in this case, $\hat{f} = \hat{f}_{\rm Train}$ is regarded as fixed, which is obtained by $\mathcal{D}_{\rm Train}$),  we have 
 
 $$
-E\left(\frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\right)\in \mathcal{D}_{\rm Valid}} L\left(\hat{f}_i(x^{(j)}),y^{(j)}\right) \mid \mathcal{D}_{\rm Train}\right) = R(\hat{f},P),
+E_{\mathcal{D}_{\rm Valid}}\left(\frac{1}{|\mathcal{D}_{\rm Valid}|} \sum_{\left(x^{(i)},y{(i)}\right)\in \mathcal{D}_{\rm Valid}} L\left(\hat{f}_i(x^{(j)}),y^{(j)}\right) \mid \mathcal{D}_{\rm Train}\right) = R(\hat{f},P),
 $$
 
 where in converse, the empirical risk on whole data set, we will underestimate the true risk. 
@@ -301,11 +301,14 @@ We estimate $R(\hat{f},P)$ by the following steps:
 
 1. For $i=1,\dots,K$, fit a model using $\mathcal{D}^{(1)}, \dots, \mathcal{D}^{(i-1)}, \mathcal{D}^{(i+1)}, \dots, \mathcal{D}^{(K)}$ to get $\hat{f}^{(i)}$. 
 
-2. Compute $\displaystyle CV^{(i)} \frac{1}{|\mathcal{D}^{(i)}|} \sum_{\left(x,y\right)\in \mathcal{D}^{(i)}} L\left(\hat{f}^{(i)}(x),y\right).$
+2. Compute $\displaystyle CV^{(i)} = \frac{1}{|\mathcal{D}^{(i)}|} \sum_{\left(x,y\right)\in \mathcal{D}^{(i)}} L\left(\hat{f}^{(i)}(x),y\right).$
 
-3. Estimate $R(\hat{f},P)\approx \frac{1}{K}\sum_{i=1}^K CV^{(i)} = CV$. 
+3. Estimate $R(\hat{f},P)\approx \frac{1}{K}\sum_{i=1}^K CV^{(i)} = CV$.
 
-How many folds to choose? Usually $K$ is chosen from 5-10. To show that it may not always be beneficial to choose large $K$, we consider an example of $K=n$ (size of the data set), which is called leave-one-out cross-validation (LOOCV). LOOCV may not always give better estimates of $R(\hat{f},P)$: 
+How many folds to choose? Usually $K$ is chosen from 5-10. To show that it may not always be beneficial to choose large $K$, we consider an example of $K=n$ (size of the data set), which is called leave-one-out cross-validation (LOOCV)(1). LOOCV may not always give better estimates of $R(\hat{f},P)$: 
+{.annotate}
+
+1. Specifically, for linear regression we can calculate the LOOCV error of $\hat{f}(x) = \boldsymbol{\hat{\beta}}^T x$ without fitting $\hat{f}_i$, which has a closed form expression: $\displaystyle R(\hat{f},P)= \frac{1}{n} \sum_{i=1}^n\left(\frac{y^{(i)} - \left(x^{(i)}\right)^T\hat{\boldsymbol{\beta}} }{1-\left(x^{(i)}\right)^T \left(X^T X\right)^{-1} x^{(i)}} \right)^2$. 
 
 $$
 \begin{aligned}
@@ -316,9 +319,3 @@ Var(CV)
 $$
 
 which indicates that if $Cov\left(CV^{(i)},CV^{(j)} \right)=0$ for $i\neq j$, then the larger $K$ is better. However, if $K$ is large, then $\hat{f}^{(i)}\approx\hat{f}^{(j)}$ as the training sets are nearly identical, and thus, $Cov\left(CV^{(i)},CV^{(j)} \right)$ might be large and positive. 
-
-Specifically, for linear regression the LOOCV error has a closed form expression: 
-
-$$
-CV= \frac{1}{n} \sum_{i=1}^n\left(\frac{y^{(i)} - \left(x^{(i)}\right)^T\hat{\boldsymbol{\beta}} }{1-\left(x^{(i)}\right)^T \left(X^T X\right)^{-1} x^{(i)}} \right)^2. 
-$$

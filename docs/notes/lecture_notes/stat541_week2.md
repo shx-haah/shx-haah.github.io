@@ -143,4 +143,7 @@ To better understand this, we can consider an extreme example. If we use very hi
 
 1. The empirical risk is 0 in this case. 
 
-Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  
+Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium(1) $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  
+{.annotate}
+
+1. Usually, we say $n\leq 50$ is small, $50<n\leq 100$ is medium, and $n>100$ is large, but there is actually no formal standard. The best way to select a model is to compare different models using the [cross-validation](/notes/lecture_notes/stat541_week4/#data-splitting-and-cross-validation) method. 
