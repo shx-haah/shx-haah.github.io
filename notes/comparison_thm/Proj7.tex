@@ -1,0 +1,698 @@
+%!TEX program = Xelatex
+\documentclass{ctexart}
+
+\usepackage{amsmath, amssymb, amsthm, titlesec}
+\usepackage[skins, breakable, theorems]{tcolorbox}
+\usepackage{xparse, ocgx2, hyperref, endnotes}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+
+\def\Id{\,\mathrm{d}} % 积分中的正体d
+\newcommand{\norm}[1]{\left|#1\right|} % 范数
+
+% [number within=section/...]{}{<display name>}{<style>}{<label>(cite as "Thm:...")}
+\newtcbtheorem[]{tcbdefinition}{Definition}{fonttitle = \bfseries}{Def}
+\newtcbtheorem[]{tcbtheorem}{Theorem}{fonttitle = \bfseries}{Thm}
+\newtcbtheorem[]{tcbproposition}{Proposition}{fonttitle = \bfseries}{Pro}
+\newtcbtheorem[]{tcblemma}{Lemma}{fonttitle = \bfseries}{Lem}
+\newtcbtheorem[]{tcbcorollary}{Corollary}{fonttitle = \bfseries}{Cor}
+\NewDocumentEnvironment{definition}{ O{} O{} } % two optional arguments
+  {\tcbdefinition{#1}{#2}}
+  {\endtcbdefinition}
+\NewDocumentEnvironment{theorem}{ O{} O{} }
+  {\tcbtheorem{#1}{#2}}
+  {\endtcbtheorem}
+\NewDocumentEnvironment{proposition}{ O{} O{} }
+  {\tcbproposition{#1}{#2}}
+  {\endtcbproposition}
+\NewDocumentEnvironment{lemma}{ O{} O{} }
+  {\tcblemma{#1}{#2}}
+  {\endtcblemma}
+\NewDocumentEnvironment{corollary}{ O{} O{} }
+  {\tcbcorollary{#1}{#2}}
+  {\endtcbcorollary}
+\makeatletter
+\newcommand\tcb@cnt@tcbdefinitionautorefname{Definition}
+\newcommand\tcb@cnt@tcbtheoremautorefname{Theorem}
+\newcommand\tcb@cnt@tcbpropositionautorefname{Proposition}
+\newcommand\tcb@cnt@tcblemmaautorefname{Lemma}
+\newcommand\tcb@cnt@tcbcorollaryautorefname{Corollary} 
+\makeatother
+
+% Sketch of proof & Remark
+\newtcolorbox{sop}{
+    blanker, breakable, left = 5mm,
+    before skip = 10pt, after skip = 10pt,
+    borderline west = {1mm}{0pt}{red},
+    coltitle = black, title = \emph{Sketch of Proof}
+}
+\newtcolorbox{remark}{
+    colback = white, fonttitle = \bfseries,
+    colbacktitle = white, coltitle = black, enhanced,
+    boxed title style = {sharp corners},
+    attach boxed title to top left={yshift = -2mm, xshift = 5mm},
+    title = Remark
+}
+
+\newcommand{\linktoprf}[1]{\hyperlink{#1}{To complete proof.}}
+\newcommand{\targetprf}[1]{\hypertarget{#1}{Proof of \autoref{#1}}}
+
+\title{Note 7: Comparison Theorems in Riemannian Geometry}
+\date{} % 显示日期
+
+\renewcommand\refname{Reference}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\subsection*{Jacobi field and conjugate points}
+
+In the Euclidean plane, geodesics originating from the same point may move farther apart, or figuratively speaking, they "diverge". However, on a unit sphere, 
+any two geodesics originating from the same point will intersect at the antipodal point, or in other words, they "converge".
+
+To study this "divergence" or "convergence" on a Riemannian manifold, the usual approach is to embed the geodesics into a family of geodesics, 
+by considering a "variation of geodesics" with a fixed starting point, and analyzing the corresponding variation vector field which is known as a Jacobi field. 
+
+For any given geodesic variation $\alpha$, we now determine the differential equation satisfied by $V \left|_{\alpha(t, 0)}\right.$. 
+By the induced covariant derivatives (see \cite{ChenWeiHuan2002}, pp.149-150, Example 8.2), we have
+$$
+\nabla_T V-\nabla_V T-\alpha_*\left(\left[\frac{\partial}{\partial t}, \frac{\partial}{\partial s}\right]\right)=0 .
+$$
+But $\left[\frac{\partial}{\partial t}, \frac{\partial}{\partial s}\right]=0$, so $\nabla_T V=\nabla_V T$. Therefore $\nabla_T \nabla_T V=\nabla_T \nabla_V T$. Since $\nabla_T T=0$, we may write
+$$
+\nabla_T \nabla_T V=\nabla_T \nabla_V T-\nabla_V \nabla_T T
+$$
+Using the definition of the curvature tensor and the fact that
+$$
+[T, V]=\nabla_T V-\nabla_V T=\alpha_*\left(\left[\frac{\partial}{\partial t}, \frac{\partial}{\partial s}\right]\right)=0
+$$
+we get the Jacobi equation $\nabla_T \nabla_T V=R(T, V) T.$
+\begin{definition}[Jacobi fields]
+  A vector field $J$, along a geodesic $\gamma$ with tangent vector $T$ satisfying the equation 
+  $$
+  \nabla_T \nabla_T J=R(T, J) T
+  $$
+  is called a Jacobi field. 
+\end{definition}
+
+Let $\left\{E_i(t)\right\}$ be orthogonal and parallel along $\alpha(t, 0)$. Then the Jacobi equation may be written as the linear second-order system of ordinary differential equations
+$$
+\left[\begin{array}{c}
+\left\langle J, E_1\right\rangle \\
+\vdots \\
+\left\langle J, E_n\right\rangle
+\end{array}\right]^{\prime \prime}=\left[\left\langle R\left(T, E_i\right) T, E_j\right\rangle \right]_{i j}
+\left[\begin{array}{c}
+\left\langle J, E_1\right\rangle \\
+\vdots \\
+\left\langle J, E_n\right\rangle
+\end{array}\right].
+$$
+From the theory of ordinary differential equations it follows that the space of solutions of this system is $2 n$-dimensional and that there exists a unique solution with prescribed initial value and first derivative. This is equivalent to prescribing $J(0)$ and $J^{\prime}(0)=\left.\nabla_T J\right|_{t=0}$. 
+Also, we know that the zeros of a Jacobi field must be discrete provided it is not constantly zero. Otherwise, there will be a limit point of zeros at which $J$ and $J^\prime$ are both $0$, which leads to $J\equiv 0$.
+
+Notice that since $\nabla_T T=0$, we have
+$$
+\langle J, T\rangle^{\prime \prime}=\left\langle J^{\prime \prime}, T\right\rangle=\langle R(T, J) T, T\rangle=0 .
+$$
+Therefore any Jacobi field $J$ may be written uniquely as
+$$
+J=J^\perp+(a t+b) T
+$$
+where $\left\langle J^\perp, T\right\rangle \equiv 0$. This shows that those Jacobi fields, called normal Jacobi fields, perpendicular to $T$ are what we really care about. 
+One can calculate the coefficients: 
+$$
+a= \langle J'(0), T(0)\rangle \quad \text{ and } \quad b= \langle J(0), T(0)\rangle. 
+$$
+Thus $J$ is a normal Jacobi field if and only if 
+$$
+J(0)\perp T(0) \quad \text{ and } \quad J'(0)\perp T(0). 
+$$
+
+Finally, if $J$ is a Jacobi field, then $J$ comes from a variation of geodesics.
+% In fact, let $c(s)$ be a curve such that $c^{\prime}(0)=J(0)$, and let $T$ and $J^{\prime}(0)$ be extended to parallel fields along $c(s)$. 
+% Then the variation field of $\exp _{c(s)}\left(t\left(T+s J^{\prime}(0)\right)\right)$ is a Jacobi field with the same initial conditions as $J$. Therefore it equals $J$ by the uniqueness theorem above.
+\begin{proposition}
+  Let $M$ be a Riemannian manifold, $\gamma:[0,1] \rightarrow M$ a geodesic, and $J$ a Jacobi field along $\gamma$. Then there exists 
+  a geodesic variation $\alpha(t, s)$, where $\alpha(t, 0)=\gamma(t)$, such that 
+  $$
+  J(t)=V \left|_{\alpha(t, 0)}\right..
+  $$
+\end{proposition}
+\begin{proof}[Proof]
+  Choose a curve $\lambda(s), s \in(-\varepsilon, \varepsilon)$ in $M$ such that $\lambda(0)=$ $\gamma(0), \lambda^{\prime}(0)=J(0)$. 
+  Using parallel transport, along $\lambda$ choose a vector field $W(s)$ with $W(0)=\gamma^{\prime}(0), \nabla_{\frac{\partial}{\partial s}}W(0)=J'(0)$. 
+  Define $\alpha(s, t)=\exp _{\lambda(s)} t W(s)$ and verify that $V(0,0)=\lambda^{\prime}(0)=J(0)$ and
+  $$
+  \nabla_{\frac{\partial}{\partial t}} V(0,0)=\nabla_{\frac{\partial}{\partial s}} T(0,0)=\nabla_{\frac{\partial}{\partial s}}W(0)=J'(0).
+  $$
+\end{proof}
+
+% \begin{proposition}
+%   Let $\gamma:[0, a] \rightarrow M$ be a geodesic and let $J$ be a Jacobi field along $\gamma$ with $J(0)=0$. Put $\frac{D J}{d t}(0)=w$ and $\gamma^{\prime}(0)=v$. Consider $w$ as an element of $T_{a v}\left(T_{\gamma(0)} M\right)$ and construct a curve $v(s)$ in $T_{\gamma(0)} M$ with $v(0)=a v, v^{\prime}(0)=w$. 
+%   Put $f(t, s)=\exp _p\left(\frac{t}{a} v(s)\right)$, $p=\gamma(0)$, and define a Jacobi field $\bar{J}$ by $\bar{J}(t)=\frac{\partial f}{\partial s}(t, 0)$. Then $\bar{J}=J$ on $[0, a]$.
+% \end{proposition}
+% \begin{proof}[Proof]
+%   For $s=0$, we have
+%   $$
+%   \begin{aligned}
+%   \frac{D}{d t} \frac{\partial f}{\partial s} & =\frac{D}{\partial t}\left(\left(d \exp _p\right)_{t v}(t w)\right)=\frac{D}{\partial t}\left(t\left(d \exp _p\right)_{t v}(w)\right) \\
+%   & =\left(d \exp _p\right)_{t v}(w)+t \frac{D}{\partial t}\left(\left(d \exp _p\right)_{t v}(w)\right)
+%   \end{aligned}
+%   $$
+%   Therefore, for $t=0$,
+%   $$
+%   \frac{D \bar{J}}{d t}(0)=\frac{D}{\partial t} \frac{\partial f}{\partial s}(0,0)=\left(d \exp _p\right)_0(w)=w
+%   $$
+%   Since $J(0)=\bar{J}(0)=0$ and $\frac{D J}{d t}(0)=\frac{D \bar{J}}{d t}(0)=w$, we conclude, from the uniqueness theorem, that $J=\bar{J}$.
+% \end{proof}
+
+\begin{corollary}
+  Let $\gamma:[0, a] \rightarrow M$ be a geodesic. Then a Jacobi field $J$ along $\gamma$ with $J(0)=0$ is given by
+  $$
+  J(t)=\left(\exp_{\gamma(0)}\right)_{*\left(t \gamma^{\prime}(0)\right)} \left(t J^{\prime}(0)\right), \quad t \in[0, a] .
+  $$
+\end{corollary}
+
+The Gauss lemma tells us that the exponential mapping preserves the orthogonality with radial geodesics, and the length along the radial geodesic is preserved. 
+Meanwhile, the change in length of the tangent vector orthogonal to the radial geodesic under the exponential mapping can be attributed to the computation of the magnitude of the Jacobi field.
+Now we are going to relate the rate of spreading of the geodesics that start from $p \in M$ with the curvature at $p$. 
+\begin{proposition}
+  Let $p \in M$ and $\gamma:[0, a] \rightarrow M$ be a geodesic with $\gamma(0)=p, \gamma^{\prime}(0)=v$. Let $w \in T_v\left(T_p M\right)$ and let $J$ be a Jacobi field along $\gamma$ given by
+  $$
+  J(t)=\exp_{t v}(t w), \quad 0 \leq t \leq a
+  $$
+  Then the Taylor expansion of $|J(t)|^2$ about $t=0$ is given by
+  $$
+  |J(t)|^2=|w|t^2+\frac{1}{3}\langle R(v, w) v, w\rangle t^4+o(t^4).
+  $$
+\end{proposition}
+\begin{proof}[Proof]
+  Since $J(0)=0, J^{\prime}(0)=w$, let 
+  $$
+  f(t)=\langle J(t), J(t)\rangle=|J(t)|^2
+  $$
+  and we have: 
+  $$
+  f^{\prime}(t)=2\left\langle J^{\prime}(t), J(t)\right\rangle, \quad f^{\prime \prime}(t)=2\left\langle J^{\prime \prime}(t), J(t)\right\rangle+2\left\langle J^{\prime}(t), J^{\prime}(t)\right\rangle .
+  $$
+  Then for the first three coefficients: 
+  $$
+  f(0)=0, \quad f^{\prime}(0)=0, \quad f^{\prime \prime}(0)=2|w|^2.
+  $$
+  Take covariant derivative of $f^{\prime \prime}(t)$ and we have 
+  $$
+  \begin{aligned}
+  f^{\prime \prime \prime}(t) & =6\left\langle J^{\prime \prime}(t), J^{\prime}(t)\right\rangle+2\left\langle J^{\prime \prime \prime}(t), J(t)\right\rangle, \\
+  f^{(4)}(t) & =8\left\langle J^{\prime \prime \prime}(t), J^{\prime}(t)\right\rangle+6\left\langle J^{\prime \prime}(t), J^{\prime \prime}(t)\right\rangle+2\left\langle J^{(4)}(t), J(t)\right\rangle .
+  \end{aligned}
+  $$
+  By Jacobi equation $J^{\prime \prime}(t)= R\left(\gamma^{\prime}, J\right) \gamma^{\prime}$, 
+  $$
+  f^{\prime \prime \prime}(0)=\left.6\left\langle R\left(\gamma^{\prime}, J\right) \gamma^{\prime}, J^{\prime}\right\rangle\right|_{t=0}=0, \quad f^{(4)}(0)=\left.8\left\langle J^{\prime \prime \prime}(t), J^{\prime}(t)\right\rangle\right|_{t=0},
+  $$
+  and 
+  $$
+  \begin{aligned}
+  &\left\langle J^{\prime \prime \prime}(t), J^{\prime}(t)\right\rangle=\left\langle D_{\gamma^{\prime}}\left( R\left(\gamma^{\prime}, J\right) \gamma^{\prime}\right), J^{\prime}\right\rangle \\
+  &= \gamma^{\prime}\left(\left\langle R\left(\gamma^{\prime}, J\right) \gamma^{\prime}, J^{\prime}\right\rangle\right)-\left\langle R\left(\gamma^{\prime}, J\right) \gamma^{\prime}, J^{\prime \prime}\right\rangle \\
+  &= \gamma^{\prime}\left(\left\langle R\left(\gamma^{\prime}, J^{\prime}\right) \gamma^{\prime}, J\right\rangle\right)-\left\langle R\left(\gamma^{\prime}, J\right) \gamma^{\prime}, J^{\prime \prime}\right\rangle \\
+  &=\left\langle D_{\gamma^{\prime}}\left( R\left(\gamma^{\prime}, J^{\prime}\right) \gamma^{\prime}\right), J\right\rangle+\left\langle R\left(\gamma^{\prime}, J^{\prime}\right) \gamma^{\prime}, J^{\prime}\right\rangle
+    -\left\langle R\left(\gamma^{\prime}, J\right) \gamma^{\prime}, J^{\prime \prime}\right\rangle .
+  \end{aligned}
+  $$
+  Therefore, $f^{(4)}(0)=8\langle R(v, w) v, w\rangle$.
+  From Taylor expansion, we have  
+  $$
+  \begin{aligned}
+  f(t) & =f(0)+t f^{\prime}(0)+\frac{t^2}{2 !} f^{\prime \prime}(0)+\frac{t^3}{3 !} f^{\prime \prime \prime}(0)+\frac{t^4}{4 !} f^{(4)}(0)+o\left(t^4\right) \\
+  & =|w|^2 t^2+\frac{1}{3}\langle R(v, w) v, w\rangle t^4+o\left(t^4\right). 
+  \end{aligned}
+  $$
+\end{proof}
+
+\begin{corollary}
+  If $\gamma:[0, \ell] \rightarrow M$ is parametrized by arc length, (i.e. $|v|=1$ ). Letting $w \in T_v\left(T_p M\right)$ with $|w|=1$ satisfying $\langle w, v\rangle=0$, 
+  and $J(t)=\exp_{t v}(t w)$, then we have 
+  $$
+  |J(t)|^2=t^2-\frac{1}{3} K(v, w) t^4+o(t^4), 
+  $$
+  where $\sigma$ is the plane generated by $v$ and $w$. Moreover, 
+  \begin{equation}
+    |J(t)|=t-\frac{1}{6} K(v, w) t^3+o(t^3). 
+  \end{equation}
+\end{corollary}
+\begin{proof}[Proof]
+  Since $v \perp w,|v|=|w|=1$, then $\langle R(v, w) v, w\rangle=-K(v, w)$. Therefore, 
+  $$
+  |J(t)|=t \sqrt{1-\frac{1}{3} K(v, w) t^2+o\left(t^2\right)} .
+  $$
+  Together with expansion
+  $$
+  \sqrt{1-x}=1-\frac{1}{2} x+o(x),
+  $$
+  one can prove the corollary. 
+\end{proof}
+
+We now recall the introduction at the beginning of this subsection. The expression (1) essentially contains the relation between geodesics and curvature. 
+Indeed, considering the geodesic variation
+$$
+\alpha(t, s)=\exp t v(s), \quad t \in[0, \delta], \quad s \in(-\varepsilon, \varepsilon),
+$$
+where$v(s)$ is a curve in $T_p M$ with $|v(s)|=1, v(0)=v, v^{\prime}(0)=w$, we see that 
+the rays $t \mapsto t v(s), t \in[0, \delta]$, that start from the origin 0 of $T_p M$, deviate from the ray $t \rightarrow t v(0)$ with the velocity
+$$
+\left|\left(\frac{\partial}{\partial s} t v(s)\right)(0)\right|=|t w|=t
+$$
+On the other hand, (1) tells us that the geodesics $t \mapsto \exp _p(t v(s))$ deviate from the geodesic $\gamma(t)=\exp _p t v(0)$ 
+with a velocity that differs from $t$ by a term of the third order in $t$, given by $-\frac{1}{6} K(v, w) t^3$. This tells us that, locally, 
+the geodesics spread apart less than the rays in $T_p M$, if $K(v, w)>0$, and that they spread apart more than the rays in $T_p M$, if $K(v, w)<0$. 
+Actually, for $t$ small, the value $K(v, w) t^3$ furnishes an approximation for the extent of this spread with an error of order $t^3$.
+
+Now we are going to turn to the relationship between the singularities of the exponential map and Jacobi fields. 
+\begin{definition}[Conjugate points]
+  Let $\gamma:[0, a] \rightarrow M$ be a geodesic. The point $\gamma\left(t_0\right)$ is said to be conjugate to $\gamma(0)$ along $\gamma, t_0 \in(0, a]$, 
+  if there exists a Jacobi field $J$ along $\gamma$, not identically zero, with $J(0)=0=J\left(t_0\right)$. 
+  % The maximum number of such linearly independent fields is called the multiplicity of the conjugate point $\gamma\left(t_0\right)$.
+\end{definition}
+
+Observe that if $\gamma\left(t_0\right)$ is conjugate to $\gamma(0)$, then $\gamma(0)$ is conjugate to $\gamma\left(t_0\right)$
+% 3.2 REMARK. If the dimension of $M$ is $n$, there exist exactly $n$ linearly independent Jacobi fields along the geodesic $\gamma:[0, a] \rightarrow M$, which are zero at $\gamma(0)$. 
+% This follows from the fact, easily checked, that the Jacobi fields $J_1, \ldots, J_k$ with $J_i(0)=0$ are linearly independent if and only if $J_1^{\prime}(0), \ldots, J_k^{\prime}(0)$ are linearly independent. 
+% In addition, the Jacobi field $J(t)=t \gamma^{\prime}(t)$ never vanishes for $t \neq 0$ (see Rem. 2.2). From this we deduce that the multiplicity of a conjugate point never exceeds $n-1$.
+
+The following proposition relates conjugate points with the singularities of the exponential map. 
+\begin{proposition}
+  Let $\gamma:[0, a] \rightarrow M$ be a geodesic and put $\gamma(0)=$ $p$. The point $q=\gamma\left(t_0\right), t_0 \in(0, a]$, is conjugate to $p$ along $\gamma$ if 
+  and only if $v_0=t_0 \gamma^{\prime}(0)$ is a critical point of $\exp _p$. 
+  % In addition, the multiplicity of $q$ as a conjugate point of $p$ is equal to the dimension of the kernel of the linear map $\left(d \exp _p\right)_{v_0}$.
+\end{proposition}
+\begin{proof}[Proof]
+  The point $q=\gamma\left(t_0\right)$ is a conjugate point of $p$ along $\gamma$ if and only if there exists a non-zero Jacobi field $J$ along $\gamma$ 
+  with $J(0)=$ $J\left(t_0\right)=0$. Let $v=\gamma^{\prime}(0)$ and $w=J^{\prime}(0)$. From Corollary 1, 
+  $$
+  J(t)=\exp_{*t v}(t w), t \in[0, a].
+  $$
+  Observe that $J$ is non-zero if and only if $w \neq 0$. Therefore, $q=\gamma\left(t_0\right)$ is conjugate to $p$ if and only if
+  $$
+  0=J\left(t_0\right)=\exp_{*t_0 v}\left(t_0 w\right), \quad w \neq 0,
+  $$
+  that is, if and only if, $t_0 v$ is a critical point of $\exp _p$. The first assertion is therefore proved.
+
+  % The multiplicity of $q$ is equal to the number of linearly independent Jacobi fields $J_1, \ldots, J_k$ which are zero at 0 and at $t_0$. As is easy to verify, the fields $J_1, \ldots, J_k$ are linearly independent if and only if $J_1^{\prime}(0), \ldots, J_k^{\prime}(0)$ are linearly independent in $T_p M$. From the
+  % construction above, the multiplicity of $q$ is equal to the dimension of the kernel of $\left(d \exp _p\right)_{t_0 v}$.
+\end{proof}
+
+\subsection*{Rauch Comparison Theorem}
+
+With enough preparations, we now state Rauch comparison theorem. Then we will give a brief proof as $n=2$ given that the motivation of the proof 
+in this case is most clear. For general situations, we need introduce Morse index forms to complete the proof which will be discussed in the sequel subsection. 
+
+Let $M$ and $\widetilde{M}$ be two $n$-dimensional Riemannian manifolds with $p\in M$ and $\widetilde{p}\in \widetilde{M}$. 
+Let $\varphi:T_pM\rightarrow T_{\widetilde{p}}\widetilde{M}$ be a linear isometry. Let $x\in T_pM$ and $\widetilde{x}=\varphi(x)$. 
+Consider the two geodesics $\gamma:[0,1]\rightarrow M$ and $\widetilde{\gamma}:[0,1]\rightarrow \widetilde{M}$ determined by 
+$\gamma(t)=\exp_{p} t x$ and $\widetilde{\gamma}(t)=\exp_{\widetilde{p}} t \widetilde{x}$, respectively. Let $X\in T_x(T_pM)$, and 
+let $\widetilde{X}=\varphi_*(X)\equiv \varphi(X)$, where $\widetilde{X}\in T_{\widetilde{x}}(T_{\widetilde{p}}M)$. 
+\begin{theorem}[Rauch comparison theorem]
+  Assume that 
+
+  (1) $\tilde{\gamma}$ does not have conjugate points on $(0, a]$, 
+
+  (2) for all $t$ and all $x \in T_{\gamma(t)}(M), \tilde{x} \in T_{\tilde{\gamma}(t)}(\tilde{M})$, we have
+  $$
+  \tilde{K}\left(\tilde{x}, \tilde{\gamma}^{\prime}(t)\right) \geq K\left(x, \gamma^{\prime}(t)\right). 
+  $$
+  Then 
+  $$
+  |(\exp_{\widetilde{p}})_{*(t\tilde{x})}\widetilde{X}|\leq |(\exp_{p})_{*(tx)} X|.
+  $$
+\end{theorem}
+
+If any plane containing $\gamma'(t)$ has a non-positive sectional curvature, then $\exp_{p}: T_pM \rightarrow M$ is a distance-expanding map, i.e.
+$$
+\left|(\exp_{p})_{*(tx)} X\right| \geq |X|, \quad \forall X \in T_pM.
+$$
+Also, if any plane containing $\gamma'(t)$ has a non-negative sectional curvature and $\gamma$ has no conjugate point to $p$, 
+then $\exp_{p}: T_pM \rightarrow M$ is a distance-reducing map, i.e.
+$$
+\left|(\exp_{p})_{*(tx)} X\right| \leq |X|, \quad \forall X \in T_pM.
+$$
+
+Since $(\exp_{p})_{*(tx)}$ is always isometric along the direction of $x$, without loss of generality, we can assume that $X \perp x, \widetilde{X} \perp \widetilde{x}$ 
+in $T_pM, T_{\widetilde{p}}\widetilde{M}$, respectively, and describe $(\exp_{p})_{*(tx)} X$ via Jacobi fields. 
+% Let $\gamma_u(t) = \exp_{p} t(\widetilde{x}+uX)$ define the variation $\{\gamma_u\}$ (one-parameter family of geodesics), and let $\widetilde{J}(t)$ be 
+% the restriction of the transverse vector field of $\{\gamma_u\}$ on $\gamma$. Then $\widetilde{J}$ is the Jacobi field along $\gamma$, 
+% with $\widetilde{J}(0) = 0, \dot{\widetilde{J}}(0) = X, \widetilde{J}(1) = (\exp_{p})_* X$. Similarly, using $\widetilde{\gamma}_u(t) = \exp_{p} t(x+u\widetilde{X})$, 
+% we have $J(t)$, which is the Jacobi field along $\widetilde{\gamma}$, with $J(0) = 0, \dot{J}(0) = \widetilde{X}, J(1) = (\exp_{p})_* \widetilde{X}$. 
+By these observations, we can restate the Rauch comparison theorem with slight generalization of $\widetilde{M}$ as follows:
+\begin{theorem}[Rauch Comparison Theorem]\label{RCT}
+  Let $\gamma:[0, a] \rightarrow M^n$ and $\tilde{\gamma}:[0, a] \rightarrow \tilde{M}^{n+k}$, $k \geq 0$, be geodesics with the same velocity 
+  (i.e. $\left.\left|\gamma^{\prime}(t)\right|=\left|\tilde{\gamma}^{\prime}(t)\right|\right)$. 
+  Let $J$ and $\tilde{J}$ be normal Jacobi fields along $\gamma$ and $\tilde{\gamma}$, respectively, with $J(0)=\tilde{J}(0)=0$ such that
+  $$
+  \left|J^{\prime}(0)\right|=\left|\tilde{J}^{\prime}(0)\right| .
+  $$
+  Assume that 
+
+  (1) $\tilde{\gamma}$ does not have conjugate points on $(0, a]$, 
+
+  (2) for all $t$ and all $x \in T_{\gamma(t)}(M), \tilde{x} \in T_{\tilde{\gamma}(t)}(\tilde{M})$, we have
+  $$
+  \tilde{K}\left(\tilde{x}, \tilde{\gamma}^{\prime}(t)\right) \geq K\left(x, \gamma^{\prime}(t)\right). 
+  $$
+  Then
+  $$
+  |\tilde{J}| \leq|J|
+  $$
+  % In addition, if for some $t_0 \in(0, a]$, we have $\left|\tilde{J}\left(t_0\right)\right|=\left|J\left(t_0\right)\right|$, then $\tilde{K}\left(\tilde{J}(t), \tilde{\gamma}^{\prime}(t)\right)=K\left(J(t), \gamma^{\prime}(t)\right)$, for all $t \in\left[0, t_0\right]$.
+\end{theorem}
+
+\begin{proof}[Proof of Theorem 2 as $n=2$]
+  First, we know that $J, \widetilde{J}$ are normal Jacobi fields. If we let $W(t), \widetilde{W}(t)$ be the unit vector fields parallel
+  along $\gamma, \widetilde{\gamma}$, respectively, such that $W \perp \dot{\gamma}, \widetilde{W} \perp \dot{\widetilde{\gamma}}$, then we can write
+  $$
+   J(t)=f(t) W(t), \quad\widetilde{J}(t)=\tilde{f}(t) \widetilde{W}(t).
+  $$
+  Then the theorem becomes:
+  Assuming $\tilde{f}, f$ are functions on $[0, a]$ satisfying the following equations:
+  $$
+  \begin{aligned}
+  & \left\{\begin{array}{l}
+  f^{\prime \prime}+K f=0, \\
+  f(0)=0, \quad f^{\prime}(0)=b>0 ;
+  \end{array}\right.
+  & \left\{\begin{array}{l}
+    \tilde{f}^{\prime \prime}+\tilde{K} \tilde{f}=0, \\
+    \tilde{f}(0)=0, \quad \tilde{f}^{\prime}(0)=b>0 ;
+    \end{array}\right. 
+  \end{aligned}
+  $$
+  where $\tilde{K}, K$ are functions on $(0, a]$ and
+  $$
+  \tilde{K}(t) \geq K(t), \quad \forall t \in[0, a],
+  $$
+  then for any $\tilde{f}>0$ on $[0, a]$, we have $f \geq \tilde{f}$. 
+  
+  To prove this, we only need to let 
+  $$
+  \Phi(t) = (ff' - \tilde{f}'f)(t).
+  $$ 
+  It is known that when $\tilde{f},f \geq 0$, we always have $\Phi'(t) \geq 0$. 
+  Guaranteed by $f'(0)>0$, there exists $0<r\leq a$ such that $f>0$ on $(0,r)$. Therefore, since $\Phi(0)=0$, we have
+  $$
+  \Phi(t) \geq 0, \quad \forall t \in [0,r].
+  $$
+  Then rewrite $\Phi \geq 0$ as
+  \begin{equation}
+    \frac{f' }{f} \geq \frac{\tilde{f}'}{\tilde{f}}
+  \end{equation}
+  and integrate it yields
+  $$
+  \ln\frac{f(t)}{f(\epsilon)} \geq \ln\frac{\tilde{f}(t)}{\tilde{f}(\epsilon)}
+  $$
+  where $0 < \epsilon < t < r$. Therefore,
+  \begin{equation}
+    \frac{f(t)}{\tilde{f}(t)} \geq \lim_{\epsilon \rightarrow 0} \frac{f(\epsilon)}{\tilde{f}(\epsilon)} = \frac{b}{b} = 1.
+  \end{equation}
+  Thus we have $f(t) \geq \tilde{f}(t), \forall t \in (0,r)$, and furthermore, $f \geq \tilde{f}$ on $[0,r]$.
+
+  To illustrate one can set $r=a$, we prove that $f>0$ on $(0,a]$. Otherwise, there exists $c\in (0,a)$ such that $f(c)=0$ and $f(t)>0$ on $(0,c)$. 
+  Taking $r=c$, repeat the above steps and we have: as $t\rightarrow c$ in limit (3),
+  $$
+  0=f(c)\geq \tilde{f}(c)>0, 
+  $$
+  which leads to a contradiction.
+\end{proof}
+
+\hypertarget{GSpre}{For general situations}, let 
+$$
+f(t)=\langle J(t),J(t)\rangle,\quad \widetilde{f}(t)=\langle \widetilde{J}(t),\widetilde{J}(t)\rangle.
+$$
+Motivated by above proof, we want to prove: 
+$$
+\lim_{\epsilon \rightarrow 0} \frac{f(\epsilon)}{\tilde{f}(\epsilon)} = 1, \quad \quad \frac{f' }{f} \geq \frac{\tilde{f}'}{\tilde{f}} \text{ on } (0,r)\quad \text{ and } \quad 
+\tilde{f},f > 0 \text{ on } (0,a],
+$$
+where $0<r\leq a$ such that $f>0$ on $(0,r)$.
+The first can be obtained by L'Hospital's rule:
+$$
+\begin{aligned}
+\lim _{t \rightarrow 0} \frac{f(t)}{\tilde{f}(t)} 
+& =\lim _{t \rightarrow 0} \frac{\left\langle J^{\prime}(t), J(t)\right\rangle}{\left\langle\tilde{J}^{\prime}(t), \tilde{J}(t)\right\rangle} \\
+& =\lim _{t \rightarrow 0} \frac{\left\langle J^{\prime}(t), \frac{J(t)-J(0)}{t}\right\rangle}{\left\langle\tilde{J}^{\prime}(t), \frac{\tilde{J}(t)-\tilde{J}(0)}{t}\right\rangle} \\
+% & =\lim _{t \rightarrow 0} \frac{\left\langle J^{\prime \prime}(t), J(t)\right\rangle+\left\langle J^{\prime}(t), J^{\prime}(t)\right\rangle}{\left\langle\tilde{J}^{\prime \prime}(t), \tilde{J}(t)\right\rangle+\left\langle\tilde{J}^{\prime}(t), \tilde{J}^{\prime}(t)\right\rangle} \\
+& =\frac{\left|J^{\prime}(0)\right|^2}{\left|\tilde{J}^{\prime}(0)\right|^2}=1.
+\end{aligned}
+$$
+To prove $\tilde{f},f > 0$ on $(0,a]$, assume that $\tilde{J}$ is a non-zero Jacobi field; otherwise, the conclusion is trivial. 
+Since there are no conjugate points to $\tilde{\gamma}(0)$ along $\tilde{\gamma}$, the function $|\tilde{J}(t)|$ has no zeros other than $t=0$, 
+i.e. $\tilde{f} > 0$ on $(0,a]$. On the other hand, since $|J'(0)|>0$, there exists $0<r\leq a$ such that $f>0$ on $(0,r)$. 
+Then one can prove $f>0$ on $(0,a]$ in the same way as the case $n=2$, provided the second inequality holds for $(0,r)$.  
+However, to verify this inequality, one needs the minimal property of Jacobi fields which is known as the basic index lemma.
+
+% \begin{theorem}
+%   Let $\gamma:[0, a] \rightarrow \widetilde{M}, \widetilde{\gamma}:[0, a] \rightarrow M$ be both normal geodesics, where $\operatorname{dim} \widetilde{M} = \operatorname{dim} M$. 
+%   Let $\widetilde{J}, J$ be the Jacobi fields along $\gamma, \widetilde{\gamma}$, respectively, such that 
+%   $\widetilde{J}(0) = J(0) = 0, \dot{\widetilde{J}}(0) \perp \dot{\gamma}(0), \dot{J}(0) \perp \dot{\widetilde{\gamma}}(0), |\dot{\widetilde{J}}(0)| = |\dot{J}(0)|$. 
+%   Assuming that (1) and (2) in the previous theorem hold (i.e., replacing $[0,1]$ with $[0, a]$), then
+%   $$
+%   |J(t)| \geq |\widetilde{J}(t)|, \quad \forall t \in [0, a]
+%   $$
+% \end{theorem}
+
+% Proof. Observe that, from Proposition 3.6 of Chapter 5, the condition $\left\langle J^{\prime}(0), \gamma^{\prime}(0)\right\rangle=\left\langle\tilde{J}^{\prime}(0), \tilde{\gamma}^{\prime}(0)\right\rangle$ is equivalent (with $J(0)=\tilde{J}(0)=$ $0)$ to the condition $\left\langle J, \gamma^{\prime}\right\rangle=\left\langle\tilde{J}, \tilde{\gamma}^{\prime}\right\rangle$. In addition, since
+% $$
+% \left\langle J, \gamma^{\prime}\right\rangle \gamma^{\prime}=\left\langle J^{\prime}(0), \gamma^{\prime}(0)\right\rangle t \gamma^{\prime}+\left\langle J(0), \gamma^{\prime}(0)\right\rangle \gamma^{\prime}
+% $$
+% the tangential components of $J$ and $\tilde{J}$ have, by hypothesis, the same length. Therefore, we can suppose that
+% $$
+% \left\langle J, \gamma^{\prime}\right\rangle=0=\left\langle\tilde{J}, \tilde{\gamma}^{\prime}\right\rangle
+% $$
+
+\subsection*{Morse index form and proof of Rauch comparison theorem}
+
+To see how the Morse index form is motivated, we shall introduce "path space" and one can see more details in \cite{Milnor1973}, Part \uppercase\expandafter{\romannumeral3}. 
+And for simplicity, we replace "the energy of a path" in \cite{Milnor1973} by the length of a path, which is more convenient to understand.
+
+The set of all piecewise smooth paths from $p$ to $q$ in $M$ will be denoted by $\Omega(M ; p, q)$, or briefly by $\Omega(M)$ or $\Omega$.
+We will think of $\Omega$ as being something like an "infinite dimensional manifold", for example, a topological space in which each point has a neighborhood 
+homeomorphic to an open set in a Banach space. To start the analogy we make the following definition.
+
+By the tangent space of $\Omega$ at a path $w$ will be meant the vector space consisting of all piecewise smooth vector fields $W$ along $\omega$ for which vanishes 
+at endpoints. The notation $T_\omega \Omega$ will be used for this vector space.
+
+If $F$ is a real valued function on $\Omega$ it is natural to ask what
+$$
+F_{*\omega}: T_\omega \Omega \rightarrow T_{F(\omega)} \mathbb{R}
+$$
+the induced map on the tangent space, should mean. When $F$ is a function which is smooth in the usual sense, on a Riemannian manifold $M$. 
+Given $X \in T_p M$, choose a smooth path $u \rightarrow \alpha(u)$ in $M$, which is defined for $-\varepsilon<u<\varepsilon$, so that
+$$
+\alpha(0)=p, \quad \frac{d \alpha}{d u}(0)=X. 
+$$
+Then $F_*(X)$ is equal to 
+$$
+\left.\frac{d(F(\alpha(u))}{d u}\right|_{u=0},
+$$
+multiplied by the basis vector $\left(\frac{d}{d t}\right)_{F(p)} \in T_{F(p)}\mathbb{R}$. 
+
+A fixed endpoints variation of $\omega$ denoted by $\bar{\alpha}(u)=\alpha(u,t)$ for $u\in (-\varepsilon,\varepsilon)$ may be considered as 
+a "smooth path" in $\Omega$ (recall that a variation is a smooth map). And more generally if $u$ in the variation is defined on a neighborhood of $0\in\mathbb{R}^n$, 
+then it is called an $n$-parameter variation of $\omega$. By analogy, if $F$ is a real valued function on $\Omega$, we attempt to define $F_{*\omega}$
+% $$
+% F_{*\omega}: T_\omega\Omega \rightarrow T_{F(\omega)}\mathbb{R}
+% $$
+as follows. Given $W \in T_\omega \Omega$ choose a variation $\bar{\alpha}:(-\varepsilon, \varepsilon) \rightarrow \Omega$ with
+$$
+\bar{\alpha}(0)=\omega,\quad \frac{d \bar{\alpha}}{d u}(0)=W
+$$
+and set $F_{* \omega}(W)$ equal to $\left.\frac{d(F(\bar{\alpha}(u))}{d u}\right|_{u=0}$ multiplied by the tangent vector
+$\left(\frac{d}{d t}\right)_{F(\omega)}$. Of course without hypothesis on $F$ there is no guarantee that
+this derivative will exist, or will be independent of the choice of $\bar{\alpha}$.
+We will not investigate what conditions $F$ must satisfy but we have indicated how $F_*$ might be defined only to motivate the following.
+\begin{definition}
+  A path $\omega$ is a critical path for a function $F: \Omega\rightarrow \mathbb{R}$ if and only if for any variation of $\omega$,
+  $$
+  \left.\frac{d(F(\bar{\alpha}(u))}{d u}\right|_{u=0} = 0.
+  $$
+\end{definition}
+
+We denote the length of the piecewise smooth curve $\gamma:[a, b] \rightarrow M$ by $L(\gamma)$. By definition,
+$$
+L(\gamma)=\int_a^b|\gamma^{\prime}(t)| \mathrm{d} t
+$$
+It follows from the chain rule that $L(\gamma)$ does not depend on a particular choice of parameterization. Then the length $L: \Omega\rightarrow\mathbb{R}$ is a real valued 
+function on $\Omega$. By first variation of arc length (\cite{ChenWeiHuan2002}, Corollary 3.6, p.190), we know that the path $\omega$ is a critical point for the function $L$ if and only if $\omega$ is a geodesic.
+
+Continuing with the analogy developed in the previous, we now wish to define a bilinear functional, called the Hessian of $L$ at $\gamma$
+$$
+L_{* * \gamma}: T_\gamma \Omega\times T_\gamma \Omega\rightarrow \mathbb{R}
+$$
+when $\gamma$ is a critical point of the function $L$, i.e. a geodesic. 
+
+If $f$ is a real valued function on a Riemannian manifold $M$ with critical point $p$, then the Hessian
+$$
+\nabla^2 f: T_p M \times T_p M \rightarrow \mathbb{R}
+$$
+is a $(0,2)$-tensor can be defined as $\nabla^2 f=\nabla(df)$. Equivalently, given $X_1, X_2 \in T M_p$ choose a smooth map
+$\alpha: U\rightarrow M$ where $U$ is a neighborhood of $(0,0)$ in $\mathbb{R}^2$ such that 
+$$
+\alpha(0,0)=p,\quad \frac{\partial \alpha}{\partial u_1}(0,0)=X_1,\quad \frac{\partial \alpha}{\partial u_2}(0,0)=X_2 .
+$$
+Then
+$$
+\nabla^2 f\left(X_1, X_2\right)=\left.\frac{\partial^2 f\left(\alpha\left(u_1, u_2\right)\right)}{\partial u_1 \partial u_2}\right|_{(0,0)}.
+$$
+This suggests defining $L_{* *}$ as follows. Given vector fields $W_1, W_2 \in T_\gamma\Omega$ choose a 2-parameter variation
+$\alpha: U \times[a,b] \rightarrow M$, such that
+$$
+\alpha(0,0, t)=\gamma(t), \quad \frac{\partial \alpha}{\partial u_1}(0,0, t)=W_1(t), \quad \frac{\partial \alpha}{\partial u_2}(0,0, t)=W_2(t) .
+$$
+Then the Hessian $L_{* *}\left(W_1, W_2\right)$ will be defined to be the second partial derivative
+$$
+\left.\frac{\partial^2 L\left(\bar{\alpha}\left(u_1, u_2\right)\right)}{\partial u_1 \partial u_2}\right|_{(0,0)}
+$$
+where $\bar{\alpha}\left(u_1, u_2\right) \in \Omega$ denotes the path $\bar{\alpha}\left(u_1, u_2\right)(t)=\alpha\left(u_1, u_2, t\right)$. 
+By second variation formula theorem (\cite{Cheeger2008}, pp.16-18), $L_{* * \gamma}(W_1,W_2)$ is well defined symmetric and bilinear function and depends only on $W_1,W_2$ to $\gamma$. 
+This Hessian is a Morse index form and more generally, we write the index form as: 
+$$
+I_\gamma(V, W)=\int_a^b\left\langle\nabla_T V, \nabla_T W\right\rangle+\langle R(W, T) V, T\rangle\mathrm{d}\,t,
+$$
+where $V$ and $W$ are smooth vectors fields along $\gamma$. Sometimes, we simply write $I(V,W)$ or $I_a^b(V,W)$.
+Since $\left\langle\nabla_T V, \nabla_T W\right\rangle=\frac{\mathrm{d}}{\mathrm{d}t}\left\langle\nabla_T V, W\right\rangle-\left\langle\nabla_T \nabla_T V,  W\right\rangle$, 
+$I_\gamma(V, W)$ can be written as 
+$$
+I(V, W)=\left\langle\nabla_T V, W\right\rangle-\int_a^b\langle \nabla_T \nabla_T V - R(T, V) T, W\rangle\mathrm{d}\,t. 
+$$
+For cases of piecewise smooth ones, see \cite{Cheeger2008}, pp.16-18 as well.
+
+In a certain sense, Jacobi fields minimize the index form. 
+\begin{lemma}[Basic index lemma]
+  Let $\gamma$ be a geodesic in $M$ from $p$ to $q$ containing no points conjugate to $p$. Let $W$ be a piecewise smooth vector field on $\gamma$ 
+  and $V$ the unique Jacobi field such that $V(p)=W(p)=$ 0 and $V(q)=W(q)$. Then 
+  $$
+  I(V, V) \leq I(W, W), 
+  $$
+  and equality holds only if $V=W$.
+\end{lemma}
+
+We are now in the position to prove \underline{\hyperref[RCT]{Rauch Comparison Theorem}}.
+\begin{proof}[Proof of Theorem 2]
+  The conclusion we want to prove is:
+  $$
+  \frac{|J(t)|^2}{|\tilde{J}(t)|^2} \geq 1, \quad \forall t \in (0, a].
+  $$
+  By \underline{\hyperlink{GSpre}{previous analysis}}, we have 
+  $$
+  \lim _{t \rightarrow 0} \frac{|J(t)|^2}{|\tilde{J}(t)|^2}=1, \quad \text{and} \quad |\tilde{J}|, |J| > 0 \text{ on } (0, a].
+  $$
+  Therefore, we only need to prove:
+  \begin{equation}
+    \frac{\left\langle J^{\prime}, J\right\rangle}{\langle J, J\rangle} \geq \frac{\left\langle\tilde{J}^{\prime}, \tilde{J}\right\rangle}{\langle\tilde{J}, \tilde{J}\rangle}, \quad t \in (0, r),
+  \end{equation}
+  where $r \in (0, a]$, ensuring that the Jacobi field $J$ has no zeros on $(0, r)$.
+  
+  For any fixed $t_1 \in (0, r)$, since $J(t_1) \neq 0$, we can define
+  $$
+  W_{t_1}(t) = \frac{J(t)}{\left|J(t_1)\right|} \quad \text{and} \quad \tilde{W}_{t_1}(t) = \frac{\tilde{J}(t)}{\left|\tilde{J}(t_1)\right|}.
+  $$
+  Then, equation (4) holds at $t = t_1$ if and only if
+  \begin{equation}
+    \left.\left\langle W_{t_1}^{\prime}(t), W_{t_1}(t)\right\rangle\right|_{t=t_1} \geq \left.\left\langle\tilde{W}_{t_1}^{\prime}(t), \tilde{W}_{t_1}(t)\right\rangle\right|_{t=t_1}.
+  \end{equation}
+  Because $W_{t_1}$ and $\tilde{W}_{t_1}$ are Jacobi fields on $\gamma$ and $\tilde{\gamma}$, respectively, and both of which are zero at $t = 0$, we can write them as:
+  $$
+  \begin{aligned}
+  & \left.\left\langle W_{t_1}^{\prime}(t), W_{t_1}(t)\right\rangle\right|_{t=t_1}=I_0^{t_1}\left(W_{t_1}, W_{t_1}\right), \\
+  & \left.\left\langle\tilde{W}_{t_1}^{\prime}(t), \tilde{W}_{t_1}(t)\right\rangle\right|_{t=t_1}=\tilde{I}_0^{t_1}\left(\tilde{W}_{t_1}, \tilde{W}_{t_1}\right),
+  \end{aligned}
+  $$
+  where $I$ and $\tilde{I}$ are the index forms along the geodesics $\gamma$ and $\tilde{\gamma}$ in $M$ and $\tilde{M}$, respectively. 
+  Thus, the inequality to be proven in equation (5) is equivalent to an inequality involving the index forms:
+  $$
+  I_0^{t_1}\left(W_{t_1}, W_{t_1}\right) \geq \tilde{I}_0^{t_1}\left(\tilde{W}_{t_1}, \tilde{W}_{t_1}\right).
+  $$
+
+  In the following, we transform the vector field $W_{t_1}$ defined along $\left.\gamma\right|_{\left[0, t_1\right]}$ in $M$ 
+  into a vector field $U(t)$ defined along $\left.\tilde{\gamma}\right|_{\left[0, t_1\right]}$ in $\tilde{M}$. This transformation ensures that:
+  $$
+  |U(t)| = \left|W_{t_1}(t)\right| \quad \text{and} \quad \left|U^{\prime}(t)\right| = \left|W_{t_1}^{\prime}(t)\right|,
+  $$
+  Furthermore, $U$ and $\tilde{W}_{t_1}$ take the same values at both ends of $\left.\tilde{\gamma}\right|_{\left[0, t_1\right]}$. With this setup, 
+  we can use the Basic Index Lemma to compare $\tilde{I}_0^{t_1}(U, U)$ and $\tilde{I}_0^{t_1}\left(\tilde{W}_{t_1}, \tilde{W}_{t_1}\right)$. 
+  Additionally, based on the assumptions about the sectional curvatures of $M$ and $\tilde{M}$, we can compare $\tilde{I}_0^{t_1}(U, U)$ and $I_0^{t_1}\left(W_{t_1}, W_{t_1}\right)$.
+
+  Let $\left\{e_i(t)\right\}$ and $\left\{\tilde{e}_i(t)\right\}$ be unit orthogonal frames paralleling along $\gamma$ and $\tilde{\gamma}$, respectively, such that:
+  $$
+  \begin{array}{ll}
+  e_1(t)=\gamma^{\prime}(t), & e_2\left(t_1\right)=W_{t_1}\left(t_1\right), \\
+  \tilde{e}_1(t)=\tilde{\gamma}^{\prime}(t), & \tilde{e}_2\left(t_1\right)=\tilde{W}_{t_1}\left(t_1\right).
+  \end{array}
+  $$
+  Since $J \perp \gamma^{\prime}$, we can express $W_{t_1}(t)$ as:
+  $$
+  W_{t_1}(t)=\sum_{i=2}^m W^i(t) e_i(t),
+  $$
+  where $W^i(t)$ satisfies:
+  $$
+  \begin{aligned}
+  & W^2(0)=\cdots=W^m(0)=0, \\
+  & W^2\left(t_1\right)=1, \quad W^3\left(t_1\right)=\cdots=W^m\left(t_1\right)=0.
+  \end{aligned}
+  $$
+  Defining the vector field $U(t)$ along the geodesic $\tilde{\gamma}$ as:
+  $$
+  U(t)=\sum_{i=2}^m W^i(t) \tilde{e}_i(t),
+  $$
+  we have:
+  $$
+  U(0)=\tilde{W}_{t_1}(0)=0, \quad U\left(t_1\right)=\tilde{e}_2\left(t_1\right)=\tilde{W}_{t_1}\left(t_1\right).
+  $$
+  Since there are no conjugate points to $\tilde{\gamma}(0)$ along $\left.\tilde{\gamma}\right|_{\left[0, t_1\right]}$, according to the Basic Index Lemma:
+  \begin{equation}
+    \tilde{I}_0^{t_1}(U, U) \geq \tilde{I}_0^{t_1}\left(\tilde{W}_{t_1}, \tilde{W}_{t_1}\right).
+  \end{equation}
+
+  On the other hand, according to the definitions, we have:
+  $$
+  \begin{aligned}
+  I_0^{t_1}\left(W_{t_1}, W_{t_1}\right) & =\int_0^{t_1}\left\{\left|W_{t_1}^{\prime}\right|^2+\left\langle\mathcal{R}\left(\gamma^{\prime}, W_{t_1}\right) \gamma^{\prime}, W_{t_1}\right\rangle\right\} \mathrm{d} t \\
+  & =\int_0^{t_1}\left\{\left|W_{t_1}^{\prime}\right|^2-\left|W_{t_1}\right|^2 K\left(\gamma^{\prime}, W_{t_1}\right)\right\} \mathrm{d} t, \\
+  \tilde{I}_0^{t_1}(U, U) & =\int_0^{t_1}\left\{\left|U^{\prime}\right|^2+\left\langle\tilde{\mathcal{R}}\left(\tilde{\gamma}^{\prime}, U\right) \tilde{\gamma}^{\prime}, U\right\rangle\right\} \mathrm{d} t \\
+  & =\int_0^{t_1}\left\{\left|U^{\prime}\right|^2-|U|^2 \tilde{K}\left(\tilde{\gamma}^{\prime}, U\right)\right\} \mathrm{d} t .
+  \end{aligned}
+  $$
+  Based on the construction of the vector field $U$, we know that:
+  $$
+  |U(t)|^2=\left|W_{t_1}(t)\right|^2, \quad\left|U^{\prime}(t)\right|^2=\left|W_{t_1}^{\prime}(t)\right|^2 .
+  $$
+  Furthermore, according to the assumptions of the theorem, $K\left(\gamma^{\prime}, W_{t_1}\right) \leq \tilde{K}\left(\tilde{\gamma}^{\prime}, U\right)$, so we have 
+  $$
+  I_0^{t_1}\left(W_{t_1}, W_{t_1}\right) \geq \tilde{I}_0^{t_1}(U, U) .
+  $$
+  Therefore, combining it with equations (6), we obtain:
+  $$
+  I_0^{t_1}\left(W_{t_1}, W_{t_1}\right) \geq \tilde{I}_0^{t_1}\left(\tilde{W}_{t_1}, \tilde{W}_{t_1}\right),
+  $$
+  which is equivalent to the inequality (5). Therefore, we have shown that for any $t \in (0, r)$
+  $$
+  \frac{\left\langle J^{\prime}(t), J(t)\right\rangle}{\langle J(t), J(t)\rangle} \geq \frac{\left\langle\tilde{J}^{\prime}(t), \tilde{J}(t)\right\rangle}{\langle\tilde{J}(t), \tilde{J}(t)\rangle}.
+  $$
+\end{proof}
+\begin{remark}
+  Rauch Comparison Theorem also holds when $J(0),\tilde{J}(0)\neq 0$ or moreover, $J$ and $\tilde{J}$ are not normal Jacobi fields. 
+  In that case, $J$ and $\tilde{J}$ should satisfy: 
+  $$
+  \begin{aligned}
+    & \left\langle J(0), \gamma^{\prime}(0)\right\rangle=\left\langle\tilde{J}(0), \tilde{\gamma}^{\prime}(0)\right\rangle, \\
+    & \angle \left(J^{\prime}(0), \gamma^{\prime}(0)\right)=\angle\left(\tilde{J}^{\prime}(0), \tilde{\gamma}^{\prime}(0)\right).
+  \end{aligned}  
+  $$
+  For more details see \cite{ChenWeiHuan2002}, Theorem 5.1, p. 342. 
+\end{remark}
+
+\bibliographystyle{unsrt}
+\bibliography{NoteRef}
+
+\end{document}
