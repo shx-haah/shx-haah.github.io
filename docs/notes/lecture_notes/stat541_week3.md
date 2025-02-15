@@ -298,7 +298,12 @@ $$
 which indicates that $\hat{\boldsymbol{\beta}}$ is unbiased;
 
 $$
-Cov(\hat{\boldsymbol{\beta}}\mid \boldsymbol{X}) = Cov\left(\left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1} \boldsymbol{X}^T\boldsymbol{Y}\mid \boldsymbol{X}\right) = \sigma^2(\boldsymbol{X}^T \boldsymbol{X})^{-1};
+\begin{aligned}
+Cov(\hat{\boldsymbol{\beta}}\mid \boldsymbol{X}) 
+&= Cov\left(\left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1} \boldsymbol{X}^T\boldsymbol{Y}\mid \boldsymbol{X}\right) \\
+&= \left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1} \boldsymbol{X}^T \cdot Cov\left(\boldsymbol{Y}\mid \boldsymbol{X}\right) \cdot \boldsymbol{X} \left(\left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1}\right)^T \\
+&= \sigma^2(\boldsymbol{X}^T \boldsymbol{X})^{-1};
+\end{aligned}
 $$
 
 and therefore,
