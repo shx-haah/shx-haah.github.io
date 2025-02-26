@@ -109,7 +109,8 @@ $$
 Unfortunately, unlike linear regression, $\nabla L(\beta)$ here has no closed-form. Therefore, we may apply some other optimization method, such as gradient descent and Newton Raphson Algorithm(1). 
 {.annotate}
 
-1. Reference: 刘浩洋, 户将, 李勇锋, 文再文, 最优化：建模、算法与理论, 高教出版社. For GD see section 6.2, and for NR see section 6.4.
+1. Reference: 刘浩洋[等]编著, 最优化:建模,算法与理论 (Optimization: modeling, algorithm and theory), Di 1 ban. Beijing: 高等教育出版社, 2020.
+ For GD see section 6.2, and for NR see section 6.4.
 
 Brief comparison of GD and NR: 
 

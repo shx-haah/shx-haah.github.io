@@ -43,7 +43,7 @@ The column vectors of $V$ and $U$ are respectively called the left and right sin
 
 ### Spectral Decomposition
 
-A spectral decomposition of a symmetric matrix $A\in \mathbb{p\times p}$ is a representation of $A$ as
+A spectral decomposition of a symmetric matrix $A\in \mathbb{R}^{p\times p}$ is a representation of $A$ as
 
 $$
 A = VDV^T, \quad V\in \mathbb{R}^{p\times p}, D\in \mathbb{R}^{p\times p},
@@ -527,7 +527,6 @@ We can combine continous and categorical features. For instance, if $x\in \{1,2,
 
 $$
 x\mapsto \left(1,I(x_1=1),I(x_1=2),x_2,x_2^2\right). 
-
 $$
 
 Assume the training data is 

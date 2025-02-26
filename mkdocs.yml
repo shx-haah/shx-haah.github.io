@@ -5,6 +5,7 @@ nav:
   - Notes: 
     - Lecture Notes: 
       - STAT 541 Statistics for Leaning: 
+        - Introduction: notes/lecture_notes/stat541_intro.md
         - Week1: notes/lecture_notes/stat541_week1.md
         - Week2: notes/lecture_notes/stat541_week2.md
         - Week3: notes/lecture_notes/stat541_week3.md
@@ -12,6 +13,8 @@ nav:
         - Week4: notes/lecture_notes/stat541_week4.md
         - Week5: notes/lecture_notes/stat541_week5.md
         - Assignment 2: notes/lecture_notes/stat541_assignment2.md
+        - Week6: notes/lecture_notes/stat541_week6.md
+        - Assignment 3: notes/lecture_notes/stat541_assignment3.md
     - Python: notes/naming_conventions.md 
     - Comparison Theorems in Riemann Geometry: 
       - Preliminaries to Comparison Theorems: notes/comparison_thm/preliminaries.md
