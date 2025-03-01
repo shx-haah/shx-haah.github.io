@@ -8,9 +8,9 @@ $$
 y\mid x \sim {\rm Bernoulli}\left(g(x)\right), 
 $$
 
-which is completely general. See an example of this setting in the plane ($p=2$). ![Classification](stat541_week501.svg) 
+where $g$ is an arbitrary function determining the probability of $y=1$ for given $x$. Then this Bernoulli distribution is completely general. See an example of this setting in the plane ($p=2$). ![Classification](stat541_week501.svg) 
 
-We could try to just do linear regression: under squared error loss, $E(y\mid x)$ is optimal and $E(y\mid x) = g(x)$. However, $g(x)\in [0,1]$ as it's a probability where $x^T\boldsymbol{\beta}$ takes values in $\mathbb{R}$. 
+We could try to just do linear regression: under squared error loss, $E(y\mid x)$ is optimal and $E(y\mid x) = g(x)$. However, $g(x)\in [0,1]$ as it outputs a probability, but $x^T\boldsymbol{\beta}$ takes values in $\mathbb{R}$. 
 
 ### Logistic Regression
 
