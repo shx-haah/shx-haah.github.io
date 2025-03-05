@@ -2,21 +2,14 @@
 
 ## Generative Models for Classification
 
-For classification(1), [logistic regression](/notes/lecture_notes/stat541_week5/#logistic-regression) involves directly modeling 
+For classification(1), [logistic regression](/notes/lecture_notes/stat541_week5/#logistic-regression) involves directly modeling $g(x)$ (i.e.  $Pr(y=1\mid x)$) using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the feature in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$(2).
 {.annotate}
 
-1. For simplicity, here we assume $\mathcal{Y}=\{0,1\}$ and $\mathcal{X}=\mathbb{R}$. 
+1. For simplicity, we assume $\mathcal{Y}=\{0,1\}$ and $\mathcal{X}=\mathbb{R}$ in this paragraph. 
 
-$$
-g(x) = Pr(y=1\mid x)
-$$
+2. This requires the knowledge of $Pr(x)$ and $Pr(y)$ for each $x\in \mathcal{X}, y\in \mathcal{Y}$. We can either choose $Pr(y)$ to be the proportion of each class among the whole data set, or regard it as unknown parameters which we will estimate later. As for $Pr(x)$, since our goal is to give the best prediction for new data, this term will be canceled while comparing different predictions. 
 
-using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the predictor in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$(1).
-{.annotate}
-
-1. This requires the knowledge of $p(y)$ for each $y\in \mathcal{Y}$, which can be either the proportion of each class among the whole data set, or regarded as unknown parameters which we will estimate later. 
-
-To summarize, for discriminative models(1), we model $p(y\mid x)$ and use this to predict while for generative models, we model $p(y,x)$ and then use this to compute $p(y\mid x)$ for predictions. 
+Compared with discriminative models(1), where we model $p(y\mid x)$ and use it to predict, for generative models, we model $p(y,x)$ and then use it to compute $p(y\mid x)$ for predictions. 
 {.annotate}
 
 1. Discriminative models, also referred to as conditional models, studies the ${\displaystyle P(y|x)}$ or maps the given unobserved variable (target) $x$ to a class $y$ dependent on the observed variables (training samples). Types of discriminative models include logistic regression, conditional random fields, decision trees among many others. 
@@ -31,7 +24,7 @@ and want to obtain $p(y\mid x)$ from this. Therefore, we need to specify a distr
 
 ## QDA, LDA, and Naive Bayes
 
-Model assumptions (figures show the Contour of $x\mid y$ under different classes):
+Model assumptions (figures below show the Contour of $x\mid y$ with $p=2$ and $y$ in two different classes):
 
 - QDA assumes that $\displaystyle x\mid y=j \sim \mathcal{N}_p(\mu_j, \Sigma_j)$. 
 ![QDA](stat541_week601.svg)
@@ -102,7 +95,8 @@ $$
 \hat{f}(x_*) = \operatorname*{arg\, max}_{j\in \{1,\dots,K\}}\, p(y=j\mid x_*, \theta). 
 $$
 
-So we compute
+
+Computing $p(y=j\mid x, \theta)$ is actually similar with the computation in the [motivation for the logistic function in logistic regression](/notes/lecture_notes/stat541_week5/#motivation-and-interpretation). 
 
 $$
 \begin{aligned}
@@ -117,19 +111,21 @@ $$
 For QDA, since $x \mid y=l \sim \mathcal{N}(\mu_l,\Sigma_l)$, we have 
 
 $$
-p_\theta(y=j\mid x) = \frac{\frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_j)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_j\right)^T\Sigma_j^{-1}\left(x^{(i)}-\mu_j\right)\right)\pi_j}{\sum_{l=1}^K\frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_l)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_l\right)^T\Sigma_l^{-1}\left(x^{(i)}-\mu_l\right)\right)\pi_l}. 
+p_\theta(y=j\mid x) = \frac{\frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_j)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_j\right)^T\Sigma_j^{-1}\left(x^{(i)}-\mu_j\right)\right)\pi_j}{\sum_{l=1}^K\frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_l)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_l\right)^T\Sigma_l^{-1}\left(x^{(i)}-\mu_l\right)\right)\pi_l}, 
 $$
 
-Thus, is equivalent to 
+which is indeed the softmax function we use in logistic regression. 
+
+In fact, we don't need to exactly compute $p_\theta(y=j\mid x)$: we predict $y=j$ if for any $t\neq j$, 
 
 $$
 \begin{aligned}
 & p(y=j\mid x) > p(y=t\mid x)\\
-\Rightarrow& \frac{p(y=j,x)}{p(x)}>\frac{p(y=t,x)}{p(x)} \\
-\Rightarrow& p(y=j,x) > p(y=t,x) \\
-\Rightarrow& \frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_j)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_j\right)^T\Sigma_j^{-1}\left(x^{(i)}-\mu_j\right)\right)\pi_j > \frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_t)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_t\right)^T\Sigma_t^{-1}\left(x^{(i)}-\mu_t\right)\right)\pi_t \\
-\Rightarrow& \ln \pi_j -\frac{1}{2}\ln \left(\operatorname{det}(\Sigma_j)\right) - \frac{1}{2}(x-\mu_j)^T\Sigma_j^{-1}(x-\mu_j) > \ln \pi_t -\frac{1}{2}\ln \left(\operatorname{det}(\Sigma_t)\right) - \frac{1}{2}(x-\mu_t)^T\Sigma_t^{-1}(x-\mu_t) \\
-\Rightarrow& {\color{red} \ln \frac{\pi_j}{\pi_t} + \frac{1}{2}\ln \frac{\operatorname{det}(\Sigma_t)}{\operatorname{det}(\Sigma_j)} - \frac{1}{2}\mu_j^T\Sigma_j^{-1}\mu_j + \frac{1}{2} \mu_t^T\Sigma_t^{-1}\mu_t} + x^T{\color{green} \left(\Sigma_j^{-1}\mu_j-\Sigma_t^{-1}\mu_t\right)} + x^T{\color{blue} \left(\Sigma_t^{-1} - \Sigma_j^{-1}\right)}x>0. 
+\Leftrightarrow& \frac{p(y=j,x)}{p(x)}>\frac{p(y=t,x)}{p(x)} \\
+\Leftrightarrow& p(y=j,x) > p(y=t,x) \\
+\Leftrightarrow& \frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_j)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_j\right)^T\Sigma_j^{-1}\left(x^{(i)}-\mu_j\right)\right)\pi_j > \frac{1}{\sqrt{(2\pi)^p \operatorname{det}(\Sigma_t)}} \exp \left(-\frac{1}{2}\left(x^{(i)}-\mu_t\right)^T\Sigma_t^{-1}\left(x^{(i)}-\mu_t\right)\right)\pi_t \\
+\Leftrightarrow& \ln \pi_j -\frac{1}{2}\ln \left(\operatorname{det}(\Sigma_j)\right) - \frac{1}{2}(x-\mu_j)^T\Sigma_j^{-1}(x-\mu_j) > \ln \pi_t -\frac{1}{2}\ln \left(\operatorname{det}(\Sigma_t)\right) - \frac{1}{2}(x-\mu_t)^T\Sigma_t^{-1}(x-\mu_t) \\
+\Leftrightarrow& {\color{red} \ln \frac{\pi_j}{\pi_t} + \frac{1}{2}\ln \frac{\operatorname{det}(\Sigma_t)}{\operatorname{det}(\Sigma_j)} - \frac{1}{2}\mu_j^T\Sigma_j^{-1}\mu_j + \frac{1}{2} \mu_t^T\Sigma_t^{-1}\mu_t} + x^T{\color{green} \left(\Sigma_j^{-1}\mu_j-\Sigma_t^{-1}\mu_t\right)} + x^T{\color{blue} \left(\Sigma_t^{-1} - \Sigma_j^{-1}\right)}x>0. 
 \end{aligned}
 $$
 
@@ -139,7 +135,7 @@ $$
 c+b^Tx+x^TAx >0. 
 $$
 
-This is called Quadratic discriminant analysis because this is a quadratic function. 
+This is called quadratic discriminant analysis assuming that the log odds of the posterior probabilities (i.e. $p(y=j\mid x)$) is quadratic. 
 
 For LDA, since $\Sigma_j=\Sigma_t$ for any $j,t$, we have $A=0$ and the inequality becomes
 
@@ -155,7 +151,17 @@ $$
 
 where no terms $x_ix_j$ for $i\neq j$ appears in the classifier. 
 
+Based on the above expressions, the decision boundaries between two classes (i.e. the above inequalities becomes equal to 0) of QDA and NB are quadratic and the one of LDA is linear. The following figure shows an example.   
+![Decision Boundaries](stat541_week604.svg)
+
+### $K$-Classes Classification
+
+How to design the decision boundaries if we have $K>2$? 
+![K=3](stat541_week605.svg)
+
 ## Compare with Logistic Regression 
+
+We should choose between LDA, QDA, NB, and Log regression via cross-validation. Generally, it is known that 
 
 - Logistic regression with no feature transformation is similar to LDA. Both give linear decision boundaries. If $p(x\mid y=j)$ is approximately Gaussian, LDA is a bit better. If this fails, logistic regression is better. 
 
@@ -163,10 +169,6 @@ where no terms $x_ix_j$ for $i\neq j$ appears in the classifier.
 
 - Logistic regression with quadratic feature transformation (without intersection terms) is similar to NB. If $p(x\mid y=j)$ is approximately Gaussian, NB is a bit better. If this fails, logistic regression is better. 
 
-We should choose between LDA, QDA, NB, and Log regression via cross-validation. 
-
-To use QDA in practice, we estimate $A,b,c$ by plugging the estimators for $\mu,\Sigma,\pi$ (which is easy to compute). 
-
-Generative models are computationally easier than Log regression. 
+Generative models are computationally easier than Log regression: To use QDA,LDA, and NB in practice, we estimate $A,b,c$ by plugging the estimators for $\mu,\Sigma,\pi$, which is easy to compute. On the contrast, we need optimization techniques, such as GD and NR, in Log regression.  
 
 QDA can run into problems when some classes only have a few observations as we have to estimate $\Sigma_j$ for each class. For example, consider image classification of animals. Observations $X$ is high dimensional but only a couple of images of Walruses. So $\Sigma_{\rm Walrus}$ is tough to estimate, and QDA performs poorly. 
