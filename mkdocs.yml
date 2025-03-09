@@ -14,8 +14,11 @@ nav:
         - Week5: notes/lecture_notes/stat541_week5.md
         - Assignment 2: notes/lecture_notes/stat541_assignment2.md
         - Week6: notes/lecture_notes/stat541_week6.md
+        - Week8: notes/lecture_notes/stat541_week8.md
         - Assignment 3: notes/lecture_notes/stat541_assignment3.md
+        - Week9: notes/lecture_notes/stat541_week9.md
     - Python: notes/naming_conventions.md 
+    - R: notes/r_objects.md
     - Comparison Theorems in Riemann Geometry: 
       - Preliminaries to Comparison Theorems: notes/comparison_thm/preliminaries.md
       - Comparison Theorem: notes/comparison_thm/comp_thm.md

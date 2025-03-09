@@ -71,8 +71,8 @@ Maximizing this with respect to $\pi, \mu_j, \Sigma_j$ for $j=1,\dots, p$, we ob
 $$
 \begin{aligned}
 \hat{\pi_j} &= \frac{n_j}{n}, \\
-\hat{\mu_j} &= \frac{1}{n_j} \sum_{i\mid y^{i}=j} x^{(i)}, \\
-\hat{\Sigma_j} &= \frac{1}{n_j}\sum_{i\mid y^{i}=j} \left(x^{(i)}-\hat{\mu_j}\right)\left(x^{(i)}-\hat{\mu_j}\right)^T, 
+\hat{\mu_j} &= \frac{1}{n_j} \sum_{i\mid y^{(i)}=j} x^{(i)}, \\
+\hat{\Sigma_j} &= \frac{1}{n_j}\sum_{i\mid y^{(i)}=j} \left(x^{(i)}-\hat{\mu_j}\right)\left(x^{(i)}-\hat{\mu_j}\right)^T, 
 \end{aligned}
 $$
 
@@ -154,9 +154,22 @@ where no terms $x_ix_j$ for $i\neq j$ appears in the classifier.
 Based on the above expressions, the decision boundaries between two classes (i.e. the above inequalities becomes equal to 0) of QDA and NB are quadratic and the one of LDA is linear. The following figure shows an example.   
 ![Decision Boundaries](stat541_week604.svg)
 
-### $K$-Classes Classification
+### $K$-Classes Classification Boundaries
 
-How to design the decision boundaries if we have $K>2$? 
+For $K>2$, we follow the same classification rule: select (predict) the class $j$ where 
+
+$$
+p(y=j\mid x) = \max_{i\in\{1,\dots,n\}} p(y=i\mid x). 
+$$
+
+Take $K=3$ as an example. The decision boundaries divide the space into 3 subsets:  
+
+$$
+\mathcal{X} = \bigcup_{j\in\{1,2,3\}}\left(\bigcap_{t\neq j}\left\{x\left|\, \right. p(y=j\mid x)>p(y=t\mid x)\right\}\right),
+$$ 
+
+which is given by the following figure.  
+
 ![K=3](stat541_week605.svg)
 
 ## Compare with Logistic Regression 

@@ -50,8 +50,20 @@ References: ISLR: 4.1-4.3.
 
 ### [Week 6](/notes/lecture_notes/stat541_week6/#week-6) 
 
-Concepts: Linear discriminant analysis (LDA), quadratic discriminant analysis (QDA) and naive Bayes.  
+Concepts: Linear discriminant analysis (LDA), quadratic discriminant analysis (QDA) and naive Bayes, classification boundaries for multi-class problems. 
 
 References: ISLR: 4.4-4.5. 
 
 ### Week 7 – Reading Week
+
+### [Week 8](/notes/lecture_notes/stat541_week8/#week-8)
+
+Concepts: Basis functions. Regression splines as piecewise polynomials with smoothness and continuity constraints. Counting the number of basis functions for splines. Smoothing spline optimization problem – solution is a regularized, natural cubic spline with knots at every training feature. The smoothing matrix and effective degrees of freedom as an approximate parameter count. Computational issues with smoothing splines for large "n". Kernel smoothers as a weighted average of nearby responses with a measure of similarity provided by the kernel. Boxcar, Gaussian, and Epanechnikov kernels. The effect of the bandwidth parameter on the flexibility of the kernel smoothed fit.
+
+References: ISLR: 7.3-7.5, ESL: 5.2, 5.4, Have a look at equation (5.30) to see how smoothing splines can be applied to logistic regression. 6.1-6.2 (Note ISLR does not have any material on kernel smoothing). 
+
+### [Week 9](/notes/lecture_notes/stat541_week9/#week-9)
+
+Concepts: Local polynomial regression. Bias of KNN and kernel smoothing near boundaries and near maxima or minima. How to use these smoothing methods for classification. Smoothing methods for higher dimensional features by changing the distance or kernel. The importance of standardizing features and choosing features that are relevant in KNN or kernel smoothing. The curse of dimensionality. Generalized additive models and the backfitting algorithm.  
+
+References: ISLR: 7.6-7.7, ESL: 6.1.1-6.1.2, 6.3, 9.1.
