@@ -241,7 +241,7 @@ where $\|\beta^{(i)}\| = \sqrt{\sum_{j=1}^{p_i}(\beta^{(i)}_j)^2}$.
 
 ## Data Splitting and Cross-Validation
 
-Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use the empirical risk, based on the whole data set, to evaluate these two classes. This is because we use the data set to fit our model under the guidance of [ERM](/notes/lecture_notes/stat541_week1/#empirical-risk-minimization-erm), and therefore, the model from a more complex class will achieve a lower empirical risk on this exactly same data set(1). 
+Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use the empirical risk, based on the whole data set, to evaluate these two classes. This is because we use the data set to fit our model under the guidance of [ERM](stat541_week1.md#empirical-risk-minimization-erm), and therefore, the model from a more complex class will achieve a lower empirical risk on this exactly same data set(1). 
 {.annotate}
 
 1. An extreme example: we fit the data set using a very high degree polynomial, and we will find a zero-ERM polynomial model. If we follow the standard of ERM, this should be THE BEST model, which is clearly not the case. 

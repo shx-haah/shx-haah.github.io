@@ -563,7 +563,7 @@ $$
 x\mapsto \left(1,x_1,x_2,x_1x_2,x_1^2,x_2^2\right). 
 $$
 
-**Remark** Why don't we just use lots of features? I.e. in polynomial regression, why don't we take degree $d$ to be large? That is because problems owith overfitting! This is mentioned in the [variance-bias tradeoff](/notes/lecture_notes/stat541_week2#illustrations-by-polynomial-fitting).
+**Remark** Why don't we just use lots of features? I.e. in polynomial regression, why don't we take degree $d$ to be large? That is because problems owith overfitting! This is mentioned in the [variance-bias tradeoff](stat541_week2.md#illustrations-by-polynomial-fitting).
 
 ### Variable Selection
 

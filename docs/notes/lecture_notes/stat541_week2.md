@@ -96,7 +96,7 @@ The last equation is because $E\left(E(y|x)\right) = E(y)$, by [Key Property](#k
 Denote the data set as $\mathcal{D}_n$ and the model based on learning algorithm $\phi_n$ and this data set as $\hat{f}_{\mathcal{D}_n}(x)$ (1). Consider the expected risk of the learning algorithm $\phi_n$, denoted as $\mathcal{R}$, 
 {.annotate}
 
-1. The model is the function $f$ we are looking for, which uses features to predict outputs. For details, see [Learning Algorithm](/notes/lecture_notes/stat541_week1#learning-algorithm). 
+1. The model is the function $f$ we are looking for, which uses features to predict outputs. For details, see [Learning Algorithm](stat541_week1.md#learning-algorithm). 
 
 $$
 \begin{aligned}
@@ -146,4 +146,4 @@ To better understand this, we can consider an extreme example. If we use very hi
 Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium(1) $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  
 {.annotate}
 
-1. Usually, we say $n\leq 50$ is small, $50<n\leq 100$ is medium, and $n>100$ is large, but there is actually no formal standard. The best way to select a model is to compare different models using the [cross-validation](/notes/lecture_notes/stat541_week4/#data-splitting-and-cross-validation) method. 
+1. Usually, we say $n\leq 50$ is small, $50<n\leq 100$ is medium, and $n>100$ is large, but there is actually no formal standard. The best way to select a model is to compare different models using the [cross-validation](stat541_week4.md#data-splitting-and-cross-validation) method. 

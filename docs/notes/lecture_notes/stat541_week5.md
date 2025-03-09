@@ -88,7 +88,7 @@ where we regard the $K$-th class as the baseline class. It is easy to see $p_1,\
 
 ### Calculate the Estimator 
 
-We use [maximum likelihood](/notes/lecture_notes/stat541_week3/#recap-on-likelihood-function) to estimate $\beta$ to get $\hat{\beta}$. We take $K=2$ as an example.
+We use [maximum likelihood](stat541_week3.md#recap-on-likelihood-function) to estimate $\beta$ to get $\hat{\beta}$. We take $K=2$ as an example.
 
 Assume $y\mid x \sim {\rm Bernoulli}\left(\pi\right)$, i.e. $Pr(y) = \pi^y(1-\pi)^{1-y}$. To apply logistic regression, we assume $y^{(i)}\sim {\rm Bernoulli}\left(\sigma \left((x^{(i)})^T \beta\right)\right)$. Then the log-likelihood function is 
 

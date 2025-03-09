@@ -2,7 +2,7 @@
 
 ## Generative Models for Classification
 
-For classification(1), [logistic regression](/notes/lecture_notes/stat541_week5/#logistic-regression) involves directly modeling $g(x)$ (i.e.  $Pr(y=1\mid x)$) using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the feature in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$(2).
+For classification(1), [logistic regression](stat541_week5.md#logistic-regression) involves directly modeling $g(x)$ (i.e.  $Pr(y=1\mid x)$) using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the feature in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$(2).
 {.annotate}
 
 1. For simplicity, we assume $\mathcal{Y}=\{0,1\}$ and $\mathcal{X}=\mathbb{R}$ in this paragraph. 
@@ -96,7 +96,7 @@ $$
 $$
 
 
-Computing $p(y=j\mid x, \theta)$ is actually similar with the computation in the [motivation for the logistic function in logistic regression](/notes/lecture_notes/stat541_week5/#motivation-and-interpretation). 
+Computing $p(y=j\mid x, \theta)$ is actually similar with the computation in the [motivation for the logistic function in logistic regression](stat541_week5.md#motivation-and-interpretation). 
 
 $$
 \begin{aligned}
