@@ -87,38 +87,50 @@ We can use something called smoothing splines to improve this process.
 We will first start off with the optimization problem $\left(x, x^{(i)} \in \mathbb{R}\right)$ :
 
 $$
-\hat{f}(x)=\arg \min _f \left(\sum_{i=1}^n\left(f\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int_{-\infty}^{\infty}\left(f^{\prime \prime}(x)\right)^2 d x\right),
+\hat{f}(x)=\operatorname*{arg\, min} _f \left(\sum_{i=1}^n\left(f\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int_{-\infty}^{\infty}\left(f^{\prime \prime}(x)\right)^2 d x\right),
 $$
 
+where $\lambda$ is a fixed smoothing parameter. The first term measures closeness to the data, while the second term penalizes curvature in the function, and $\lambda$ establishes a tradeoff between the two(1). 
+{.annotate}
 
-where the integral term is a penalty and it is 0 for linear functions of $f$. If our function has curvature, the penalty applies, and the penalty will be larger for more 'wiggly' functions. 
+1. The penalty is 0 for linear functions of $f$. If our function has curvature, the penalty applies, and the penalty will be larger for more 'wiggly' functions. 
 
-The minimum of the optimization problem is a (regularized) natural cubic spline with knots (at every data point): $\theta_1=x^{(1)},\dots, \theta_n=x^{(n)}$. 
+Two special cases are:
+
+- $\lambda=0: f$ can be any function that interpolates the data.
+- $\lambda=\infty$ : the simple least squares line fit, since no second derivative can be tolerated.
+
+**Remarkable result:** The minimizer of the optimization problem is a (regularized) natural cubic spline with knots (at every data point): $\theta_1=x^{(1)},\dots, \theta_n=x^{(n)}$. 
 
 **Natural Cubic Splines:** A natural cubic spline is a cubic spline that is linear beyond the boundary knots, given by 
 
 $$
-f^{\prime \prime}(x)=0 \quad \text { for } x<\theta_1 \text { or } x>\theta_n. 
+f^{\prime \prime}(x)=0 \quad \text { for } x<\theta_1 \text { or } x>\theta_m. 
 $$
 
 
 Similarly to cubic splines, natural cubic splines can be represented with a basis 
 
 $$
-f(x)=\sum \beta_i f_i(x). 
+f(x)=\sum_{i=1}^m \beta_i f_i(x). 
 $$
+
+For natural cubic splines with $m$ knots, the number of parameters is $m$ -- recall a cubic spline with $m$ knots has $m+4$ parameters, and in a natural cubic spline, we have 4 boundary constraints (2(1) on each side), so it will have $m$ parameters.
+{.annotate}
+
+1. Two constraints: second and third order derivative being 0 at the boundary. 
 
 Since we are putting a knot at every single data point, one would think we would have a very wiggly curve. However, we use the idea of regularization to mitigate this. First we will plug the basis functions into the minimization problem, and we have a minimization problem over the $\beta_i$'s:
 
 $$
 \begin{aligned}
-\hat{f}(x) & =\arg \min _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{j=1}^m \beta_j f_j^{\prime \prime}(x)\right)^2 d x \\
-& =\arg \min _{\beta_1, \ldots, \beta_m} \sum_i\left(\sum_j \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{k=1}^m \sum_{j=1}^m \beta_j \beta_k f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x \\
-& =\arg \min _{\beta_1, \ldots, \beta_m} \sum_i\left(\sum_j \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\beta_j \beta_k \sum_k \sum_j f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x. 
+\hat{f}(x) & =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{j=1}^m \beta_j f_j^{\prime \prime}(x)\right)^2 d x \\
+& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{k=1}^m \sum_{j=1}^m \beta_j \beta_k f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x \\
+& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_i\left(\sum_j \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\beta_j \beta_k \sum_k \sum_j f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x. 
 \end{aligned}
 $$
 
-Define a design matrix
+Define a $m\times m$ matrix $\Omega$ with $\Omega_{ij}=\int f^{\prime \prime}_i f^{\prime \prime}_j \,\mathrm{d}x$ and a design matrix
 
 $$
 X_{i j}=\left(\begin{array}{cccc}
@@ -129,17 +141,54 @@ f_1\left(x_n\right) & f_2\left(x_n\right) & \ldots & f_m\left(x_n\right)
 \end{array}\right),
 $$
 
-and let $\beta=\left(\beta_1, \ldots, \beta_m\right)^T$. Then the optimization problem becomes
+and let $\boldsymbol{\beta}=\left(\beta_1, \ldots, \beta_m\right)^T$. Then the optimization problem becomes
 
 $$
-\arg \min _\beta\|Y-X \beta\|^2+\lambda \beta^T \Omega \beta,
+\operatorname*{arg\, min} _{\boldsymbol{\beta}}\|Y-X \boldsymbol{\beta}\|^2+\lambda \boldsymbol{\beta}^T \Omega \boldsymbol{\beta},
 $$
 
 and thus this implies that
 
 $$
-\hat{\beta}_{\text {smoothing spline }}=\left(X^T X+\lambda \Omega\right)^{-1} X^T Y. 
+\hat{\beta}_{\rm smoothing spline }=\left(X^T X+\lambda \Omega\right)^{-1} X^T Y. 
 $$
 
+### Degrees of Freedom and Smoother Matrices
+
+We have not yet indicated how $\lambda$ is chosen for the smoothing spline. To illustrate the meaning of $\lambda$, we first recall in linear regression (with $p$ features), where predictions at observed points are
+
+$$
+\hat{Y}=X \hat{\beta}=X \left(X^T X\right)^{-1} X^T Y. 
+$$
+
+We can interpret each $\hat{Y}_i$ as a linear combination of the $Y_i$ 's(1), i.e. $\hat{Y}_i=\sum_{j=1}^n H_{i j} Y_j$, where 
+{.annotate}
+
+1. If $H_{i i} \approx 1, H_{i j: i \neq j} \approx 0$, we can interpolate the data points for a flexible fit.
+
+$$
+H = X \left(X^T X\right)^{-1} X^T. 
+$$
+
+Recall for any two square matrices, we have $\operatorname{tr}(AB) = \operatorname{tr} (BA)$. Then we have 
+
+$$
+\operatorname{tr}(H)=\operatorname{tr}\left(X\left(X^T X\right)^{-1} X^T\right)=\operatorname{tr}\left(\left(X^T X\right)^{-1} X^T X\right)=p,
+$$
+
+which is the number of parameters. We will call the $\operatorname{tr}(H)$ as the number of effective parameters(1).  By analogy we now define the number of effective parameters (a.k.a. the effective degrees of freedom) of a smoothing spline. 
+{.annotate}
+
+1. The linear operator $H$ is a projection operator, also known as the hat matrix in statistics. The expression $\operatorname{trace}\left(H\right)$ gives the dimension of the projection space, which is also the number of basis functions, and hence the number of parameters involved in the fit. 
+
+For smoothing splines, we have 
+
+$$
+\hat{\beta}=\left(X^T X+\lambda \Omega\right)^{-1} X^T Y \Longrightarrow \hat{Y}=X \hat{\beta}=X\left(X^T X+\lambda \Omega\right)^{-1} X^T Y. 
+$$
+
+We define the smoothing matrix, $S_\lambda=X\left(X^T X+\lambda \Omega\right)^{-1} X^T$, so that we have: $\hat{Y}=S_{\lambda} Y$. The effective number of parameters is $\operatorname{tr}\left(S_{\lambda}\right)$, which generalizes the result for linear regression. Also note that the effective degrees of freedom here may not be an integer. 
+
+The effective degrees of freedom is a heuristic parameter count, which helps us compare the smoothing splines with other regression models, like polynomial regression. 
 
 

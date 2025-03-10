@@ -176,12 +176,12 @@ which is given by the following figure.
 
 We should choose between LDA, QDA, NB, and Log regression via cross-validation. Generally, it is known that 
 
-- Logistic regression with no feature transformation is similar to LDA. Both give linear decision boundaries. If $p(x\mid y=j)$ is approximately Gaussian, LDA is a bit better. If this fails, logistic regression is better. 
+- **When there is substantial separation between the two classes, the parameter estimates for the logistic regression model are surprisingly unstable while generative models do not suffer from this problem.**
 
-- Logistic regression with quadratic feature transformation (with intersection terms) is similar to QDA. If $p(x\mid y=j)$ is approximately Gaussian, QDA is a bit better. If this fails, logistic regression is better. 
+- **If $p(x\mid y=j)$ is approximately Gaussian, LDA, QDA, and NB are a bit better.** If this fails, logistic regression is better. 
 
-- Logistic regression with quadratic feature transformation (without intersection terms) is similar to NB. If $p(x\mid y=j)$ is approximately Gaussian, NB is a bit better. If this fails, logistic regression is better. 
+- **Logistic regression with feature transformation can be similar to LDA, QDA, and NB.** Logistic regression with no feature transformation is similar to LDA, and both give linear decision boundaries. Logistic regression with quadratic feature transformation (with intersection terms) is similar to QDA. Logistic regression with quadratic feature transformation (without intersection terms) is similar to NB. 
 
-Generative models are computationally easier than Log regression: To use QDA,LDA, and NB in practice, we estimate $A,b,c$ by plugging the estimators for $\mu,\Sigma,\pi$, which is easy to compute. On the contrast, we need optimization techniques, such as GD and NR, in Log regression.  
+- **Generative models are computationally easier than Log regression:** To use QDA,LDA, and NB in practice, we estimate $A,b,c$ by plugging the estimators for $\mu,\Sigma,\pi$, which is easy to compute. On the contrast, we need optimization techniques, such as GD and NR, in Log regression.  
 
-QDA can run into problems when some classes only have a few observations as we have to estimate $\Sigma_j$ for each class. For example, consider image classification of animals. Observations $X$ is high dimensional but only a couple of images of Walruses. So $\Sigma_{\rm Walrus}$ is tough to estimate, and QDA performs poorly. 
+- **QDA can run into problems when some classes only have a few observations.** This is because we have to estimate $\Sigma_j$ for each class. For example, consider image classification of animals. Observations $X$ is high dimensional but only a couple of images of Walruses. So $\Sigma_{\rm Walrus}$ is tough to estimate, and QDA performs poorly. 
