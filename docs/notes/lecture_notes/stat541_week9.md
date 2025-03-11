@@ -125,5 +125,75 @@ This suggests that $K$ should scale proportionally to $n$ to prevent overly comp
 
 - Interpretable (e.g. KNN is easy to make sense of because we’re just taking the $K$ nearest data points and averaging them). 
 
-## Extention to Multivariate Feature Spaces
+## Multivariate Feature Spaces
+
+### Multivariate KNN
+
+In KNN, to extend to spaces beyond the real line, we simply need to introduce a distance over the feature space, $d(x, y)$, for any $x, y \in \mathbb{R}^p$. If we take $d$ to be Euclidean distance, we can compute
+
+$$
+d_i\left(x_i, x_*\right)=\left\|x_i-x_*\right\|
+$$
+
+to find the K-smallest $d_i$ 's and the prediction is the average.
+
+### Multivariate Kernel Smoothing
+
+We can extend the notion of our Kernel function to the multivariate setting:
+
+$$
+K_\lambda: \mathbb{R}^{p}\times \mathbb{R}^{p} \rightarrow[0, \infty)
+$$
+
+
+Often times the multivariate kernel has the form
+
+$$
+K\left(\frac{\|\boldsymbol{x}-\boldsymbol{y}\|}{\lambda}\right). 
+$$
+
+FOr example, the **Gaussian Kernel (a.k.a. Radial Basis-Function, RBF)** is defined as
+
+$$
+K_\lambda(x, y)=\exp \left(-\frac{\|\boldsymbol{x}-\boldsymbol{y}\|^2}{\lambda}\right). 
+$$
+
+The kernel smoother predicts 
+
+$$
+\hat{f}(x_*) = \frac{\sum_{i=1}^n K_{\lambda}(x_*,x^{(i)})y^{(i)}}{\sum_{i=1}^n K_{\lambda}(x_*,x^{(i)})}. 
+$$
+
+### Scaling
+
+In multivariate kernels or distances, **scaling of features** is very important. For example, suppose we have information about a player (Scottie Barnes) from the Toronto Raptors. Say his salary is 5 Million CAD, and his height is 200 cm, and we don't know his points. We can find the 'closest' player on the Raptors to him by using the Euclidean distance from the point $(5000000,200)$, where the first component is salary, and the second is heights in cm. The issue with this approach is that the salary is much greater than the height, so any distances we compute will only really be affected by the salaries, since they are so much bigger. We need to scale our data by its standard deviation to account for this.
+
+We will scale every feature, $x_i$ by its standard deviation.
+
+###  Classification
+
+It turns out that all the methods mentioned can extend to classification settings.
+
+- For KNN, just predict the class that appears most often when looking at the $K$-nearest neighbors. We can use this to define a decision boundary by computing the KNN at every point in the plane (assume $p=2$). 
+
+## Memory-Based Method
+
+The methods, KNN, smoothing splines, and local regression, are memory-based, which means the algorithm "memorize" the entire training data set when making predictions(1). The computational complexity of making a new prediction for memory-based methods is $O(n)$(2). 
+{.annotate}
+
+1. For example, for KNN, we can't throw away any data point as it may the nearest neighbor. 
+2. KNN need to query $O(n)$ data points to find the nearest neighbors. 
+
+On the other hand, linear regression only requires the coefficients $\hat{\beta}_0,\dots,\hat{\beta}_p$ to make predictions, which compresses the training data into $p+1$ parameters. Then the computational complexity is roughly $O(p)$. 
+
+Therefore, in terms of making predictions on-the-fly, memory-based methods are not always the best since the computation will be expensive if $n$ is large. 
+
+### Curse of Dimensionality
+
+Curse of dimensionality occurs when the features are too many. In high dimensions, there are a few points that are close to each other(1). Thus, it is impossible to simultaneously maintain localness (i.e. low bias) and a sizable sample in the neighborhood (i.e. low variance) as the dimension increases, without **the total sample size increasing exponentially** in $p$(2).
+{.annotate}
+
+1. For $p=1$, let $x$ be a uniform random variable on $[0,1]$ and we consider the distance between 0 and $x$. The probability of $x\in [0,\epsilon]$ is $\epsilon$. For higher dimension $p=k$, the probability of the uniform variable $x$ being in $[0,\epsilon]^k$ becomes $\epsilon^k$, which shows points that are within $\epsilon$-distance to 0 is getting less when the space dimension grows. 
+2. Conversely, if we increase the number of features without adding new data to training set, the predictions made by our model would likely be worse. 
+ 
 
