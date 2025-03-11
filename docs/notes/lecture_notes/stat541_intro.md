@@ -58,7 +58,7 @@ References: ISLR: 4.4-4.5.
 
 ### [Week 8](stat541_week8.md#week-8)
 
-Concepts: Basis functions. Regression splines as piecewise polynomials with smoothness and continuity constraints. Counting the number of basis functions for splines. Smoothing spline optimization problem – solution is a regularized, natural cubic spline with knots at every training feature. The smoothing matrix and effective degrees of freedom as an approximate parameter count. Computational issues with smoothing splines for large "n". Kernel smoothers as a weighted average of nearby responses with a measure of similarity provided by the kernel. Boxcar, Gaussian, and Epanechnikov kernels. The effect of the bandwidth parameter on the flexibility of the kernel smoothed fit.
+Concepts: Basis functions. Regression splines as piecewise polynomials with smoothness and continuity constraints. Counting the number of basis functions for splines. Smoothing spline optimization problem. The smoothing matrix and effective degrees of freedom. Kernel smoothers. Boxcar, Gaussian, and Epanechnikov kernels. The effect of the bandwidth parameter.
 
 References: ISLR: 7.3-7.5, ESL: 5.2, 5.4, Have a look at equation (5.30) to see how smoothing splines can be applied to logistic regression. 6.1-6.2 (Note ISLR does not have any material on kernel smoothing). 
 

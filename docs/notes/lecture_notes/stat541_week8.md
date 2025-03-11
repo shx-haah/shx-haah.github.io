@@ -17,10 +17,10 @@ The idea for splines is to fit two polynomial regressions on different pieces of
 The idea is to have at hand a family of functions or feature transformations that can be applied to a variable $X$ : $b_1(X), b_2(X), \dots, b_K(X)$. Instead of fitting a linear model in $X$, we fit the model
 
 $$
-y_i=\beta_0+\beta_1 b_1\left(x_i\right)+\beta_2 b_2\left(x_i\right)+\beta_3 b_3\left(x_i\right)+\cdots+\beta_K b_K\left(x_i\right)+\epsilon_i
+y^{(i)}=\beta_0+\beta_1 b_1\left(x^{(i)}\right)+\beta_2 b_2\left(x^{(i)}\right)+\beta_3 b_3\left(x^{(i)}\right)+\cdots+\beta_K b_K\left(x^{(i)}\right)+\epsilon_i
 $$
 
-Note that the basis functions $b_1(\cdot), b_2(\cdot), \ldots, b_K(\cdot)$ are fixed and known. (In other words, we choose the functions ahead of time.) For polynomial regression, the basis functions are $b_j\left(x_i\right)=x_i^j$, and for piecewise constant functions they are $b_j\left(x_i\right)=I\left(c_j \leq x_i<c_{j+1}\right)$. 
+Note that the basis functions $b_1(\cdot), b_2(\cdot), \ldots, b_K(\cdot)$ are fixed and known. For polynomial regression, the basis functions are $b_j\left(x^{(i)}\right)=\left(x^{(i)}\right)^j$, and for piecewise constant functions they are $b_j\left(x^{(i)}\right)=I\left(c_j \leq x^{(i)}<c_{j+1}\right)$. 
 
 To fit two polynomial regressions on different pieces of the data, we consider basis functions:
 
@@ -82,7 +82,7 @@ For AIC/BIC, we need the number of parameters(1): if no constraints, there are $
 
 We can use something called smoothing splines to improve this process. 
 
-### Smoothing Splines
+## Smoothing Splines
 
 We will first start off with the optimization problem $\left(x, x^{(i)} \in \mathbb{R}\right)$ :
 
@@ -124,21 +124,21 @@ Since we are putting a knot at every single data point, one would think we would
 
 $$
 \begin{aligned}
-\hat{f}(x) & =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{j=1}^m \beta_j f_j^{\prime \prime}(x)\right)^2 d x \\
-& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\sum_{k=1}^m \sum_{j=1}^m \beta_j \beta_k f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x \\
-& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_i\left(\sum_j \beta_j f_j\left(x_i\right)-y_i\right)^2+\lambda \int\left(\beta_j \beta_k \sum_k \sum_j f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x. 
+\hat{f}(x) & =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int\left(\sum_{j=1}^m \beta_j f_j^{\prime \prime}(x)\right)^2 d x \\
+& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_{i=1}^n\left(\sum_{j=1}^m \beta_j f_j\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int\left(\sum_{k=1}^m \sum_{j=1}^m \beta_j \beta_k f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x \\
+& =\operatorname*{arg\, min} _{\beta_1, \ldots, \beta_m} \sum_i\left(\sum_j \beta_j f_j\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int\left(\beta_j \beta_k \sum_k \sum_j f_k^{\prime \prime}(x) f_j^{\prime \prime}(x)\right) d x. 
 \end{aligned}
 $$
 
-Define a $m\times m$ matrix $\Omega$ with $\Omega_{ij}=\int f^{\prime \prime}_i f^{\prime \prime}_j \,\mathrm{d}x$ and a design matrix
+Define a $m\times m$ matrix $\Omega$ with $\Omega_{ij}=\int f^{\prime \prime}_i f^{\prime \prime}_j \,\mathrm{d}x$, and a design matrix
 
 $$
-X_{i j}=\left(\begin{array}{cccc}
-f_1\left(x_1\right) & f_2\left(x_1\right) & \ldots & f_m\left(x_1\right) \\
-f_1\left(x_2\right) & f_2\left(x_2\right) & \ldots & f_m\left(x_2\right) \\
+X=\begin{bmatrix}
+f_1\left(x^{(1)}\right) & f_2\left(x^{(1)}\right) & \ldots & f_m\left(x^{(1)}\right) \\
+f_1\left(x^{(2)}\right) & f_2\left(x^{(2)}\right) & \ldots & f_m\left(x^{(2)}\right) \\
 \vdots & \vdots & \ddots & \vdots \\
-f_1\left(x_n\right) & f_2\left(x_n\right) & \ldots & f_m\left(x_n\right)
-\end{array}\right),
+f_1\left(x^{(n)}\right) & f_2\left(x^{(n)}\right) & \ldots & f_m\left(x^{(n)}\right)
+\end{bmatrix},
 $$
 
 and let $\boldsymbol{\beta}=\left(\beta_1, \ldots, \beta_m\right)^T$. Then the optimization problem becomes
@@ -150,7 +150,7 @@ $$
 and thus this implies that
 
 $$
-\hat{\beta}_{\rm smoothing spline }=\left(X^T X+\lambda \Omega\right)^{-1} X^T Y. 
+\hat{\boldsymbol{\beta}}_{\rm smoothing spline }=\left(X^T X+\lambda \Omega\right)^{-1} X^T Y. 
 $$
 
 ### Degrees of Freedom and Smoother Matrices
@@ -161,7 +161,7 @@ $$
 \hat{Y}=X \hat{\beta}=X \left(X^T X\right)^{-1} X^T Y. 
 $$
 
-We can interpret each $\hat{Y}_i$ as a linear combination of the $Y_i$ 's(1), i.e. $\hat{Y}_i=\sum_{j=1}^n H_{i j} Y_j$, where 
+We can interpret each $\hat{Y}_i$ as a linear combination of the $y^{(i)}$ 's(1), i.e. $\hat{Y}_i=\sum_{j=1}^n H_{i j} Y_j$, where 
 {.annotate}
 
 1. If $H_{i i} \approx 1, H_{i j: i \neq j} \approx 0$, we can interpolate the data points for a flexible fit.
@@ -189,6 +189,119 @@ $$
 
 We define the smoothing matrix, $S_\lambda=X\left(X^T X+\lambda \Omega\right)^{-1} X^T$, so that we have: $\hat{Y}=S_{\lambda} Y$. The effective number of parameters is $\operatorname{tr}\left(S_{\lambda}\right)$, which generalizes the result for linear regression. Also note that the effective degrees of freedom here may not be an integer. 
 
-The effective degrees of freedom is a heuristic parameter count, which helps us compare the smoothing splines with other regression models, like polynomial regression. 
+The effective degrees of freedom(1) is a heuristic parameter count, which helps us compare the smoothing splines with other regression models, like polynomial regression. 
+{.annotate}
+
+1. Although a natural cubic spline with $n$ knots has $n$ parameters, the penalty term in the [minimization problem](stat541_week8.md#smoothing-splines) regularizes the minimizer resulting in the smoothing spline has less than $n$ effective number of parameters. 
+
+### Summary
+
+Overall smoothing splines provide nice and flexible fits and the choice of $\lambda$ is straightforward as we don't have to choose knot locations. 
+
+The main drawback is that the design matrix $X=\in \mathbb{R}^{n\times n}$, so if $n$ is large then computing $\left(X^TX + \lambda\Omega\right)^{-1}$ is expensive. In polynomial regression, the number of features, $p$, does not depend on $n$, but for smoothing splines it does.  
+
+## Extensions
+
+**MARS:** Consider interaction effects for multivariate features. MARS use basis functions of the form of products of $\left(x_i-\theta_i\right)_{+}$. For example, we can form basis functions over $p=2$ of the form: 
+
+$$
+f\left(x_1, x_2\right)=\left(x_1-\theta_1\right)_{+}\cdot\left(x_2-\theta_2\right)_{+}. 
+$$
+
+**Logistic Regression:** Splines can also be used in logistic regression. All we need to do is change our basis functions:
+
+$$
+\ln \left(\frac{p(x)}{1-p(x)}\right)=\sum_{i=1}^l \beta_i f_i(x),
+$$
+
+where we choose a spline basis for $f_i$. 
+
+## Kernel Smoothing and Regression
+
+With smoothing splines we would try to fit a polynomial over each fixed window determined by the knots. For kernel method we will instead use a window that slides based on the point $x_*$ where we want to make a prediction. We can then predict $y_∗$ by averaging over all points in our window. Here we introduce the boxcar kernel function $K_\lambda:\mathbb{R}\times\mathbb{R}\rightarrow [0,\infty)$, given by 
+
+$$
+K_\lambda(x,y) = I(|x-y|\leq \lambda). 
+$$
+
+Then we make prediction at $x_*$ via
+
+$$
+\begin{aligned}
+\hat{f}\left(x_*\right) & =\text { Average of } y^{(i)} \text { for } x^{(i)} \in\left[x_*-\lambda, x_*+\lambda\right] \\
+& =\frac{\sum y^{(i)} I\left(-\lambda \leq x_*-x^{(i)} \leq \lambda\right)}{\sum I\left(-\lambda \leq x_*-x^{(i)} \leq \lambda\right)} \\
+& =\frac{\sum K_\lambda\left(x^{(i)}, x_*\right) y^{(i)}}{\sum K_\lambda\left(x^{(i)}, x_*\right)}. 
+\end{aligned}
+$$
+
+### General Kernel Smoothing
+
+With the boxcar kernel the whole fit can be jagged because of the discontinuity of the kernel. Rather than give all the points in the neighborhood equal weight, we can assign weights that die off smoothly with distance from the target point: 
+
+- Gaussian Kernel: $\displaystyle K_\lambda(x, y)=\exp \left(\frac{-(x-y)^2}{\lambda}\right)$. 
+- Epanechnikov kernel: $\displaystyle K_\lambda(x, y)=\left(1 - \left(\frac{x-y}{\lambda}\right)^2\right)_+$. 
 
 
+The following figure shows the images of boxcar kernel with $K_1(x,0)$, Gaussian kernel with $K_2(x,0)$, and Epanechnikov kernel $K_3(x,0)$. 
+![Kernel Graphs](stat541_week801.svg)
+
+The interpretation of kernel $K_\lambda(x, y)$ is that it measures how similar or close $x$ is to $y$. Generally, kernels have the form:
+
+$$
+K_\lambda(x, y)=f\left(\frac{|x-y|}{\lambda}\right),
+$$
+
+
+where $f$ is non-increasing and non-negative. $\lambda$ is called the bandwidth parameter and determines the spread of the kernel. 
+
+The general kernel smoothed prediciton is defined as:
+
+$$
+\hat{f}\left(x_*\right)=\frac{\sum_{i=1}^n y^{(i)} K_\lambda\left(x_*, x^{(i)}\right)}{\sum_{i=1}^n K_\lambda\left(x_*, x^{(i)}\right)}. 
+$$
+
+If we define a function $w_i\left(x_*\right)=\frac{K_\lambda\left(x_*, x^{(i)}\right)}{\sum_{i=1}^n K_\lambda\left(x_*, x^{(i)}\right)}$, we have a bunch of weights that sum to 1 , i.e., $\sum w_i\left(x_*\right)=1$, and $w_i \geq 0$. Thus, the kernel smoother is:
+
+$$
+\hat{f}\left(x_*\right)=\sum_{i=1}^n w_i\left(x_*\right) y^{(i)}. 
+$$
+
+### Effective Degrees of Freedom
+
+The choice of kernel function is actually not super important, but **the choice of the bandwidth parameter is important:** Large $\lambda$ implies lower variance (averages over more observations) but higher bias(1). Small $\lambda$ gives the opposite.
+{.annotate}
+
+1. we essentially assume the true function is constant within the window. 
+
+
+Note that the predictions at our observed data points, $x^{(i)}$ have the form
+
+$$
+\hat{y}_i=\hat{f}\left(x^{(i)}\right)=\sum_{j=1}^n w_j\left(x^{(i)}\right) y^{(i)}, 
+$$
+
+which holds for all $i=1, \ldots, n$. Thus,
+
+$$
+\hat{Y}=\begin{bmatrix}
+w_1\left(x_1\right) & w_2\left(x_1\right) & \cdots & w_n\left(x_1\right) \\
+w_1\left(x_2\right) & w_2\left(x_2\right) & \cdots & w_n\left(x_2\right) \\
+\vdots & \vdots & \ddots & \vdots \\
+w_1\left(x_n\right) & w_2\left(x_n\right) & \cdots & w_n\left(x_n\right)
+\end{bmatrix} \begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_n
+\end{bmatrix}
+$$
+
+
+Usually we can just call the weight matrix $W$. Thus, we have that $\hat{Y}=W Y$. We define a similar notion of the effective degrees of freedom for kernel smoothing as we did for splines:
+
+$$
+\operatorname{tr}(W)=\sum_{i=1}^n w_i\left(x^{(i)}\right). 
+$$
+
+
+This can be thought of as the approximation of how many parameters are in the model.
