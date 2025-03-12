@@ -77,14 +77,14 @@ If we have a lot of data, and we apply a kernel smoother to one region in the da
 ### KNN as a Smoothing Kernel
 1. Define the distance metric, $d\left(x^{(i)}, x_*\right)=\left|x^{(i)}-x_*\right|$.
 2. Assume $d\left(x^{(1)}, x_*\right) \leq d\left(x^{(2)}, x_*\right) \leq \ldots \leq d\left(x^{(n)}, x_*\right)$.
-3. Let $\lambda\left(x_*\right)=d\left(x^{(k)}, x_*\right)$.
+3. Let $\lambda\left(x_*\right)=d\left(x^{(K)}, x_*\right)$.
 4. Define the kernel function as:
 
 $$
 \begin{aligned}
 \hat{f}_{\mathrm{KNN}}\left(x_*\right)
-&=\frac{\sum_{i=1}^n I\left(d\left(x^{(i)}-x_*\right) \leq \lambda\left(x_*\right)\right) y^{(i)}}{\sum_{i=1}^n I\left(d\left(x^{(i)}-x_*\right) \leq \lambda\left(x_*\right)\right)} \\
-&=\frac{1}{K}\sum_i I\left(d\left(x^{(i)}-x_*\right) \leq \lambda\left(x_*\right)\right) y^{(i)}. 
+&=\frac{\sum_{i=1}^n I\left(d\left(x^{(i)},x_*\right) \leq \lambda\left(x_*\right)\right) y^{(i)}}{\sum_{i=1}^n I\left(d\left(x^{(i)},x_*\right) \leq \lambda\left(x_*\right)\right)} \\
+&=\frac{1}{K}\sum_i I\left(d\left(x^{(i)},x_*\right) \leq \lambda\left(x_*\right)\right) y^{(i)}. 
 \end{aligned}
 $$
 
@@ -104,14 +104,14 @@ y^{(2)} \\
 \vdots \\
 \vdots \\
 y^{(n)}
-\end{bmatrix}
+\end{bmatrix},
 $$
 
 
-Where this matrix has entries of 0 ($n-K$ in total) and $\frac{1}{K}$ ($K$ in total), and there are only $\frac{1}{K}$ on the diagonal. This is a very sparse matrix(1). The effective degrees of freedom is 
+where this matrix is symmetric and has entries of 0 and $\frac{1}{K}$(1), and there are only $\frac{1}{K}$ on the diagonal. This is a very sparse matrix. The effective degrees of freedom is 
 {.annotate}
 
-1. Note that the weighting matrix in general will not have strings of repeated $\frac{1}{K}$ in the rows, there may be intermittent 0's.
+1. Each row (or column) has $n-K$ entries of 0 and $K$ entries of $\frac{1}{K}$. In general, the weighting matrix will not have strings of repeated $\frac{1}{K}$ in the rows, there may be intermittent 0's.
 
 $$
 \operatorname{tr}(W)=\frac{n}{K}. 

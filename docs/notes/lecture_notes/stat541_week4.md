@@ -142,14 +142,16 @@ LASSO is another method of ERM + regularization, which is also given by two form
 **Constrain Formulation**
 
 $$
-\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\|\boldsymbol{\beta}\|\leq C} \|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2.
+\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\|\boldsymbol{\beta}\|_1\leq C} \|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2.
 $$
 
 **Constrain Formulation**
 
 $$
-\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|^2\right).
+\hat{\boldsymbol{\beta}}_{\rm LASSO} = \operatorname*{arg\, min}_{\boldsymbol{\beta}\in \mathbb{R}^p} \left(\|\boldsymbol{Y} - \boldsymbol{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|_1\right),
 $$
+
+where $\|\boldsymbol{\beta}\|_1 = \sum_{i=1}^p |\beta_i|$. 
 
 For $p=2$ and $C=1$, the constraints of ridge and LASSO are respectively $L^2$ and $L^1$ balls, and the (contour of) corresponding objective functions are shown as follows.
 
