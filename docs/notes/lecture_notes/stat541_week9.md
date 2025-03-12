@@ -196,4 +196,3 @@ Curse of dimensionality occurs when the features are too many. In high dimension
 1. For $p=1$, let $x$ be a uniform random variable on $[0,1]$ and we consider the distance between 0 and $x$. The probability of $x\in [0,\epsilon]$ is $\epsilon$. For higher dimension $p=k$, the probability of the uniform variable $x$ being in $[0,\epsilon]^k$ becomes $\epsilon^k$, which shows points that are within $\epsilon$-distance to 0 is getting less when the space dimension grows. 
 2. Conversely, if we increase the number of features without adding new data to training set, the predictions made by our model would likely be worse. 
  
-
