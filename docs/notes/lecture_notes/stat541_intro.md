@@ -32,7 +32,7 @@ References: For the bias-variance decomposition see *Introduction to Statistical
 
 ### [Week 3](stat541_week3.md#week3)
 
-Concepts: Manipulation of means and covariances of random vectors, orthogonal matrices, the singular value decomposition, the spectral decomposition, the linear regression model, ordinary least squares estimates of regression coefficients, bias and variance of the OLS beta along with the bias and variance of predictions, prediction interval based on the t-distribution, existence of the OLS estimator, feature transformations, regression with categorical predictors, interaction effects, overfitting and issues with including too many features, AIC and BIC as variable selection criteria, optimizing AIC and BIC via forward or backward selection.  
+Concepts: Means and covariances of random vectors, orthogonal matrices, the singular value decomposition, the spectral decomposition, the linear regression model, ordinary least squares estimates of regression coefficients, bias and variance of the OLS estimators, prediction interval based on the t-distribution, feature transformations, regression with categorical predictors, interaction effects, overfitting and issues with including too many features, variable selection (AIC and BIC), forward or backward selection.  
 
 References: Section 3.3.1 of Izenman's Modern Multivariate Statistical Techniques (MMST) discusses means and covariances of random vectors; equations (3.92) and (3.93) are very important. MMST also discusses the full SVD in 3.2.6 for a short and wide matrix (take a transpose to get the full SVD for a tall and narrow matrix). The full SVD is almost the same as the thin SVD discussed in class except that the full SVD includes extra, unnecessary rows/columns in the constituent matrix factors. For the rest, see ISLR: 3.1-3.3, 7.1-7.3, 6.1, ESL: 3.1-3.3. 
 
@@ -58,12 +58,12 @@ References: ISLR: 4.4-4.5.
 
 ### [Week 8](stat541_week8.md#week-8)
 
-Concepts: Basis functions. Regression splines as piecewise polynomials with smoothness and continuity constraints. Counting the number of basis functions for splines. Smoothing spline optimization problem. The smoothing matrix and effective degrees of freedom. Kernel smoothers. Boxcar, Gaussian, and Epanechnikov kernels. The effect of the bandwidth parameter.
+Concepts: Basis functions. Regression splines and counting the number of basis functions. Smoothing spline optimization problem. The smoothing matrix and effective degrees of freedom. Kernel smoothers. Boxcar, Gaussian, and Epanechnikov kernels. The effect of the bandwidth parameter.
 
 References: ISLR: 7.3-7.5, ESL: 5.2, 5.4, Have a look at equation (5.30) to see how smoothing splines can be applied to logistic regression. 6.1-6.2 (Note ISLR does not have any material on kernel smoothing). 
 
 ### [Week 9](stat541_week9.md#week-9)
 
-Concepts: Local polynomial regression. Bias of KNN and kernel smoothing near boundaries and near maxima or minima. How to use these smoothing methods for classification. Smoothing methods for higher dimensional features by changing the distance or kernel. The importance of standardizing features and choosing features that are relevant in KNN or kernel smoothing. The curse of dimensionality. Generalized additive models and the backfitting algorithm.  
+Concepts: Local polynomial regression. Bias of KNN and kernel smoothing near boundaries and near maxima or minima. Smoothing methods for classification. Smoothing methods for higher dimensional features. The importance of standardizing features. The curse of dimensionality. Generalized additive models and the backfitting algorithm.  
 
 References: ISLR: 7.6-7.7, ESL: 6.1.1-6.1.2, 6.3, 9.1.

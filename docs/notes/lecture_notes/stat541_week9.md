@@ -172,7 +172,9 @@ We will scale every feature, $x_i$ by its standard deviation.
 
 ###  Classification
 
-It turns out that all the methods mentioned can extend to classification settings.
+It turns out that splines, local regression, and KNN can extend to classification settings.
+
+- For splines and local regression, we can combine them with logistic regression to solve classification problems, i.e. fitting the [log-odds ratio](stat541_week5.md#motivation-and-interpretation) using splines and local regression. 
 
 - For KNN, just predict the class that appears most often when looking at the $K$-nearest neighbors. We can use this to define a decision boundary by computing the KNN at every point in the plane (assume $p=2$). 
 
@@ -196,3 +198,41 @@ Curse of dimensionality occurs when the features are too many. In high dimension
 1. For $p=1$, let $x$ be a uniform random variable on $[0,1]$ and we consider the distance between 0 and $x$. The probability of $x\in [0,\epsilon]$ is $\epsilon$. For higher dimension $p=k$, the probability of the uniform variable $x$ being in $[0,\epsilon]^k$ becomes $\epsilon^k$, which shows points that are within $\epsilon$-distance to 0 is getting less when the space dimension grows. 
 2. Conversely, if we increase the number of features without adding new data to training set, the predictions made by our model would likely be worse. 
  
+## Generalized Additive Models (GAMs)
+
+Additive models provide a useful extension of linear models, making them more flexible while still retaining much of their interpretability. These allow aus to model complex univariate relationships (with multivariates features). 
+
+Assume that there are no interaction effects and a GAM assumes 
+
+$$
+f(x_1,\dots,x_p) = \sum_{i=1}^p f_i(x_i), 
+$$
+
+where we allow for complicated non-parametric $f_i$, for instance, $f_i$ are smoothing splines or local regression. Note that 
+
+$$
+\frac{\partial}{\partial x_i} \frac{\partial}{\partial x_j} f(x_1,\dots,x_p) = 0, \quad, \text{ for } i\neq j. 
+$$
+
+### Backfitting
+
+The backfitting procedure for fitting these models is simple and modular, allowing one to choose a fitting method appropriate for each input variable.The procedure is given by following steps: 
+
+1. Start off with a simple fit for $f(x_1,\dots,x_p)$, for instance, set this equal to $\displaystyle \frac{1}{n}\sum_{i=1}^{n} y^{(i)}$ (constant). 
+2. Assume that we have fits for $\hat{f}_2(x_2),\dots,\hat{f}_p(x_p)$. To find the optimal $f_1$, define $\displaystyle \tilde{y}^{(i)} = y^{(i)} - \sum_{j=2}^{n} \hat{f}_j\left(x^{(i)}_j\right)$. 
+3. Fit our $\hat{f}_1$ using the training data $\left(x_1^{(1)},\tilde{y}^{(1)}\right),\dots,\left(x_1^{(n)},\tilde{y}^{(n)}\right)$. 
+4. To find $\hat{f}_2$ given $\hat{f}_1,\hat{f}_3,\dots,\hat{f}_p$, redefine $\displaystyle \tilde{y}^{(i)} = y^{(i)} - \hat{f}_1\left(x^{(i)}_1\right) - \sum_{j=3}^{n} \hat{f}_j\left(x^{(i)}_j\right)$. 
+5. Fit our $\hat{f}_1$ using the training data $\left(x_2^{(1)},\tilde{y}^{(1)}\right),\dots,\left(x_2^{(n)},\tilde{y}^{(n)}\right)$.
+6. Repeat this process for $\hat{f}_3,\hat{f}_4,\dots,\hat{f}_p$, and then come back to $\hat{f}_1$ and repeat the process. 
+
+**Example:** If we wanted the $f_k$ to be smoothing splines, then the step becomes 
+
+$$
+f_k(x) = \sum_{i=1}^m \beta_i g_i(x_k),
+$$
+
+where $g_i$ is the spline basis functions. Obtain $\beta_i$ by solving the smoothing spline minimization problem:
+
+$$
+\left(\hat{\beta}_1,\dots, \hat{\beta}_m\right) = \operatorname*{arg\, min}_{\beta_1,\dots,\beta_m} \left(\sum_{i=1}^n \left(\tilde{y}^{(i)} - \sum_{j=1}^m \beta_j g_j(x^{(i)}_k)\right)^2 + \lambda\int_{-\infty}^{+\infty} \left(\sum_{j=1}^m \beta_j g^{\prime\prime}(x)\right)^2\,\mathrm{d}x\right). 
+$$

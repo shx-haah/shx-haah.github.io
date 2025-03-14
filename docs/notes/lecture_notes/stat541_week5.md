@@ -35,12 +35,19 @@ For $p=2$, the logistic function is given by $\sigma(\beta_0 + \beta_1 x_1 + \be
 
 ### Motivation and Interpretation
 
-On one hand, $\sigma$ is differentiable and easy to compute with. On the other hand, logistic regression assumes log-odds ratio(1) is a linear function. 
-{.annotate}
+On one hand, $\sigma$ is differentiable and easy to compute with. On the other hand, logistic regression assumes the log odds is a linear function. To further explain this, we need to introduce the following definitions. 
 
-1. The log-odds ratio is the natural logarithm of the odds ratio. An odds ratio (OR) is a statistic that quantifies the strength of the association between two events, A and B. The odds ratio is defined as the ratio of the odds of event A taking place in the presence of B, and the odds of A in the absence of B. Two events are independent if and only if the OR equals 1, i.e., the odds of one event are the same in either the presence or absence of the other event. If the OR is greater than 1, then A and B are associated (correlated) in the sense that, compared to the absence of B, the presence of B raises the odds of A, and symmetrically the presence of A raises the odds of B. Conversely, if the OR is less than 1, then A and B are negatively correlated, and the presence of one event reduces the odds of the other event occurring.
+If $p$ is a probability, the quantity $p /(1-p)$ is called the (corresponding) **odds**, and can take on any value between 0 and $\infty$. Values of the odds close to 0 and $\infty$ indicate very low and very high probabilities of default, respectively. 
 
-A more insightful motivation is shown below: 
+The **log odds** (or **logit**) of the probability is the logarithm of the odds, i.e.
+
+$$
+\operatorname{logit}(p) = \log \frac{p}{1-p}\in (-\infty,+\infty).
+$$
+
+Hence, in logistic regression, we make an assumption that the log odds is linearly dependent on $x$. 
+
+Another more insightful motivation connects the logistic function to the exponential family from the prospective of [generative models](stat541_week6.md#generative-models-for-classification): 
 
 <embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_logistic_fnc_motivation.pdf" type="application/pdf" width="100%" height="750px"/>
 
