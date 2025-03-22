@@ -67,3 +67,9 @@ References: ISLR: 7.3-7.5, ESL: 5.2, 5.4, Have a look at equation (5.30) to see 
 Concepts: Local polynomial regression. Bias of KNN and kernel smoothing near boundaries and near maxima or minima. Smoothing methods for classification. Smoothing methods for higher dimensional features. The importance of standardizing features. The curse of dimensionality. Generalized additive models and the backfitting algorithm.  
 
 References: ISLR: 7.6-7.7, ESL: 6.1.1-6.1.2, 6.3, 9.1.
+
+### [Week 10](stat541_week10.md#week-10)
+
+Concepts: Classification and decision trees (CART). Impurity measures. How to choose how big of a tree to grow. Ensemble methods including model averaging, bagging, and random forests. 
+
+References: ISLR: 8.1, 8.2.1, 8.2.2. ESL: 8.7-8.8, 9.2
