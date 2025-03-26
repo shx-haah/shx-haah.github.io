@@ -167,4 +167,7 @@ Random forest is  almost the same as bagging except when we fit each bootstrap d
 
 For problems with a large number of features ($p\gg 2$), we may restrict the size of the random subsets. For example, for $p=50$, we can choose a random subsets of size 20 of the features to split at each step. 
 
-Due to the randomness, random forest avoids the greediness of the [tree optimization](stat541_week10.md#how-to-choose-how-big-of-a-tree-to-grow). Compared to directly using trees, random forest improves the predictive accuracy, but not so interpretable. 
+Due to the randomness(1), random forest avoids the greediness of the [tree optimization](stat541_week10.md#how-to-choose-how-big-of-a-tree-to-grow). Compared to directly using trees, random forest improves the predictive accuracy, but not so interpretable. 
+{.annotate}
+
+1. Recall that tree method usually suffer from [overfitting](stat541_week10.md#summary). Therefore, it should be favorable to slightly increase the bias of the model while reducing the variance, which is done by the randomness of splitting subsets. 
