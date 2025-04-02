@@ -29,7 +29,8 @@ $$
 \sigma(z) = \frac{e^z}{1+e^z} = \frac{1}{1+e^{-z}}. 
 $$
 
-![Logistic Function](stat541_week502.svg) This is called logistic regression model. 
+This is called logistic regression model. 
+![Logistic Function](stat541_week502.svg) 
 
 For $p=2$, the logistic function is given by $\sigma(\beta_0 + \beta_1 x_1 + \beta_2 x_2)$. The following figure shows an example of $\sigma(x+y)$. ![Logistic Function with $p=2$](stat541_week503.svg) 
 

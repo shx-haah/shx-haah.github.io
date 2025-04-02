@@ -73,3 +73,13 @@ References: ISLR: 7.6-7.7, ESL: 6.1.1-6.1.2, 6.3, 9.1.
 Concepts: Classification and decision trees (CART). Impurity measures. How to choose how big of a tree to grow. Ensemble methods including model averaging, bagging, and random forests. 
 
 References: ISLR: 8.1, 8.2.1, 8.2.2. ESL: 8.7-8.8, 9.2
+
+### [Week 11 - Guest Lecture](stat541_week11.md#week-11)
+
+Concepts: Projection Pursuit Regression model: ridge functions, showing PPR model as a a universal approximator, and how to fit the PPR model. The study of neural networks – deep learning – is a enormous field. If you are interested in learning more, one canonical reference is this [book](https://www.deeplearningbook.org/). See also the other sections in chapter 10 of ISLR and chapter 11 of ESL. 
+
+### [Week 12](stat541_week12.md#week-12)
+
+Concepts: The idea behind clustering. The k-means algorithm: derivation of the iterations, convergence of the algorithm, the importance of scaling your data, how to choose k. Hierarchical clustering:  types of dissimilarity measures between clusters including complete, average, and single linkage, the dendrogram and how to interpret it, brief discussion on divisive clustering and how clustering can be extended to more exotic objects like DNA sequences. A introductory discussion on Gaussian mixture models.
+
+References: ISLR 12.4, 14.4.1-14.3.6, 14.3.12

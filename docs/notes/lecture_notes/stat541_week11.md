@@ -55,3 +55,12 @@ There are a number of implementation details:
 - After each step the $g_m$ 's from previous steps can be readjusted using backfitting. (While this may lead ultimately to fewer terms, it is not clear whether it improves prediction performance.)
 - Usually the $\omega_m$ are not readjusted (partly to avoid excessive computation), although in principle they could be as well.
 - The number of terms $M$ is usually estimated as part of the forward stage-wise strategy. The model building stops when the next term does not appreciably improve the fit of the model. Cross-validation can also be used to determine $M$.
+
+## Neural Networks
+
+See Chapter 10, ISLR, for
+
+- 10.1 Single Layer Neural Networks
+- 10.2 Multilayer Neural Networks
+- 10.7 Fitting a Neural Network
+    - 10.7.1 Backpropagation
