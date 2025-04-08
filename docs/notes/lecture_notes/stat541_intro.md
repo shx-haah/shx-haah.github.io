@@ -83,3 +83,9 @@ Concepts: Projection Pursuit Regression model: ridge functions, showing PPR mode
 Concepts: The idea behind clustering. The k-means algorithm: derivation of the iterations, convergence of the algorithm, the importance of scaling your data, how to choose k. Hierarchical clustering:  types of dissimilarity measures between clusters including complete, average, and single linkage, the dendrogram and how to interpret it, brief discussion on divisive clustering and how clustering can be extended to more exotic objects like DNA sequences. A introductory discussion on Gaussian mixture models.
 
 References: ISLR 12.4, 14.4.1-14.3.6, 14.3.12
+
+### [Week 13](stat541_week13.md#week-13)
+
+Concepts: The EM algorithm updates for Gaussian mixture models (GMMs) and their interpretation. The (tautological) observation that generative models are able to generate, new, never before seen data. Brief mention on the flexibility of GMMs and the fact that they can fit any continuous probability distribution for large enough k. Two perspective on PCA as variance maximization or distance minimization of projections. The PCA solution for the optimal projection of points onto an affine subspace. The principal component directions of the affine subspace and the principal component scores of the projected points.  How to use the PC scores in compression, visualization, and as input for supervised learning algorithms.  A discussion of principal components regression that uses the PC scores as input features in a linear regression. The link between the eigenvectors of the sample covariance matrix and the PC directions as well as the eigenvalues and the reconstruction error of PCA. The choice of the dimension k of the affine subspace via scree/elbow plots of the eigenvalues of the sample covariance. 
+
+References: ISLR: 6.3.1, 12.2, ESL: 8.5.1, 14.3.7., 14.5.1. Neither ISLR or ESL has an extensive discussion on GMM. For this I recommend Section 9.2 of Bishop.   
