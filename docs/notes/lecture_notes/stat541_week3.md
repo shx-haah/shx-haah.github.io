@@ -41,6 +41,63 @@ The column vectors of $V$ and $U$ are respectively called the left and right sin
 
 **Remarkable results**: Every matrix $A\in \mathbb{R}^{p\times q}$ has an SVD.
 
+We now introduce the SVD more formally. Given a $m\times n$ matrix $A$, whose rank is $r$. The SVD factors $A$ into $U \Sigma V^{\mathrm{T}}$  ($U,V$ have normal orthogonal columns), with $r$ singular values $\sigma_1 \geq \dots \geq \sigma_r>0$, where $\sigma_i$ is the length of $A\boldsymbol{v}_i$. 
+
+We first consider the singular vectors: the $\boldsymbol{u}$'s and $\boldsymbol{v}$'s give bases for the four fundamental subspaces:
+
+- $\boldsymbol{u}_1, \dots, \boldsymbol{u}_r \quad$ is an orthonormal basis for the column space
+- $\boldsymbol{u}_{r+1}, \dots, \boldsymbol{u}_m$ is an orthonormal basis for the left nullspace $\boldsymbol{N}\left(A^T\right)$
+- $\boldsymbol{v}_1, \dots, \boldsymbol{v}_r \quad$ is an orthonormal basis for the row space
+- $\boldsymbol{v}_{r+1}, \dots, \boldsymbol{v}_n$ is an orthonormal basis for the nullspace $\boldsymbol{N}(A)$.
+
+More than just orthogonality, these basis vectors diagonalize the matrix $A$ :
+
+$$
+A \boldsymbol{v}_1=\sigma_1 \boldsymbol{u}_1,\quad A \boldsymbol{v}_2=\sigma_2 \boldsymbol{u}_2,\quad \dots,\quad A \boldsymbol{v}_r=\sigma_r \boldsymbol{u}_r
+$$
+
+Those singular values $\sigma_1$ to $\sigma_r$ will be positive numbers: $\sigma_i$ is the length of $A \boldsymbol{v}_i$. The $\sigma$'s go into a diagonal matrix that is otherwise zero. That matrix is $\Sigma$. 
+
+Then the equations $A \boldsymbol{v}_i=\sigma_i \boldsymbol{u}_i$ tell us column by column that $\boldsymbol{A} \boldsymbol{V}_{\boldsymbol{r}}=\boldsymbol{U}_{\boldsymbol{r}} \boldsymbol{\Sigma}_{\boldsymbol{r}}$ :
+
+$$
+A\begin{bmatrix}\boldsymbol{v}_1 \cdots \boldsymbol{v}_r\end{bmatrix}=\begin{bmatrix}
+\boldsymbol{u}_1, \dots, \boldsymbol{u}_r
+\end{bmatrix}\begin{bmatrix}
+\sigma_1 & & \\
+& \ddots & \\
+& & \sigma_r
+\end{bmatrix}.
+$$
+
+Those $\boldsymbol{v}$'s and $\boldsymbol{u}$'s account for the row space and column space of $A$. We have $n-r$ more $\boldsymbol{v}$'s and $m-r$ more $\boldsymbol{u}$'s, from the nullspace $\boldsymbol{N}(A)$ and the left nullspace $\boldsymbol{N}\left(A^T\right)$. They are automatically orthogonal to the first $\boldsymbol{v}$'s and $\boldsymbol{u}$'s. We now include all the $\boldsymbol{v}$'s and $\boldsymbol{u}$'s in $V$ and $U$, so these matrices become square. We still have $\boldsymbol{A} \boldsymbol{V}=\boldsymbol{U} \boldsymbol{\Sigma}$:
+
+$$
+A\begin{bmatrix}\boldsymbol{v}_1, \dots, \boldsymbol{v}_r, \dots, \boldsymbol{v}_n\end{bmatrix}=\begin{bmatrix}\boldsymbol{u}_1, \dots, \boldsymbol{u}_r, \dots, \boldsymbol{u}_m\end{bmatrix}
+\begin{bmatrix}
+\Sigma_r & & & \\
+& 0 & & \\
+& & \ddots & 
+\end{bmatrix}
+$$
+
+
+The new $\Sigma$ is $m\times n$. It is just the $r\times r$ matrix $\Sigma_r$ with $m-r$ extra zero rows and $n-r$ new zero columns. The real change is in the shapes of $U$ and $V$. Those are square orthogonal matrices. So $A V=U \Sigma$ can become $\boldsymbol{A}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\mathbf{T}}$. This is the Singular Value Decomposition. I can multiply columns $\boldsymbol{u}_i \sigma_i$ from $U \Sigma$ by rows of $V^{\mathrm{T}}$:
+
+$$
+A=U \Sigma V^{\mathrm{T}}=u_1 \sigma_1 v_1^{\mathrm{T}}+\cdots+u_r \sigma_r v_r^{\mathrm{T}}.
+$$
+
+Each $\sigma_i^2$ is an eigenvalue of $A^T A$(1) and also $A A^{T}$(2). When we put the singular values in descending order, $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r>0$, the above splitting gives the $r$ rank-one pieces of $A$ in order of importance. Then $\sigma_1$ is the maximum of the ratio: 
+{.annotate}
+
+1. with $\boldsymbol{v}$'s as orthonormal eigenvectors
+2. with $\boldsymbol{u}$'s as orthonormal eigenvectors
+
+$$
+\max_{\|x\| = 1}\frac{\|A \boldsymbol{x}\|}{\|\boldsymbol{x}\|}.
+$$
+
 ### Spectral Decomposition
 
 A spectral decomposition of a symmetric matrix $A\in \mathbb{R}^{p\times p}$ is a representation of $A$ as
