@@ -86,5 +86,68 @@ $$
 X_c = UD\tilde{V}^T, 
 $$
 
-where the singular values are ordered in decreasing order, i.e. $D = {\rm diag}\{d_{11},\dots,d_{pp}\}$ with $d_{11}\geq d_{22}\geq \dots\geq d_{pp}\geq 0$. And the optimal $V$ is the first $k$ columns of the SVD matrix $\tilde{V}$.
+where the singular values are ordered in decreasing order, i.e. $D = {\rm diag}\{d_{11},\dots,d_{pp}\}$ with $d_{11}\geq d_{22}\geq \dots\geq d_{pp}\geq 0$. And the optimal $V$ is the first $k$ columns of the SVD matrix $\tilde{V}$, denoted as $V_k$. 
 
+### PC Scores and Vectors
+
+The projections onto our space is
+
+$$
+\begin{aligned}
+\bar{x}+V_k V_k^T\left(x^{(i)}-\bar{x}\right) & =\bar{x}+V_k \hat{\beta}_i \\
+& \approx x^{(i)}
+\end{aligned}
+$$
+
+where, $V_k \hat{\beta}_i=\sum v_j \hat{\beta}_{i j}$. The $\hat{\beta}_i=V_k^T\left(x^{(i)}-\bar{x}\right) \in \mathbb{R}^k$ are called the principal component scores of each data point, $x^{(i)}$. The column vectors of $V_k$ are called the principal component directions. 
+
+We can then rewrite the $\hat{\beta}_i$ 's:
+
+$$
+\begin{aligned}
+\begin{bmatrix}\hat{\beta}_1, \dots, \hat{\beta}_n\end{bmatrix} 
+& =V_k^T X_c^T  =V_k^T\left(U D V^T\right)^T  =V_k^T V D U^T \\
+& =\begin{bmatrix}
+v_1^T \\
+\vdots \\
+v_k^T
+\end{bmatrix}\begin{bmatrix}
+v_1 & \cdots & v_p
+\end{bmatrix} D U^T \\
+& =\begin{bmatrix}I_k & \vdots & 0\end{bmatrix} D U^T \\
+& =D_k U_k^T,
+\end{aligned}
+$$
+
+where
+
+$$
+D_k=\begin{bmatrix}
+d_{11} & 0 & \dots & 0 \\
+0 & d_{22} & \dots & 0 \\
+\vdots & \vdots & \vdots & \vdots \\
+0 & 0 & \dots & d_{k k}
+\end{bmatrix}, \quad 
+U_k=\begin{bmatrix}
+u_1 & \dots & u_k
+\end{bmatrix}. 
+$$
+
+### Choosing K (Dimension of the Subspace)
+
+Consider the sample covariance matrix:
+
+$$
+S=\frac{1}{n} \sum_{i=1}^n\left(x^{(i)}-\bar{x}\right)\left(x^{(i)}-\bar{x}\right)^T.
+$$
+
+
+If we run an eigendecomposition on $S=V D^2 V^T$, we have the following:
+
+1. $V=\left[\begin{array}{lll}v_1 & \ldots & v_p\end{array}\right]$, where each $v_i$ is both a PC direction and an eigenvector of $S$.
+
+2. The reconstruction error upon using a $k$-dimensional PCA projection is $\displaystyle \sum_{i=k+1}^p d_{i i}^2$, where $d_{i i}$ are the eigenvalues of $S$.
+
+To find a reasonable dimension $k$, we can form an [elbow plot](stat541_week12.md#choosing-the-number-of-clusters) of the eigenvalues of $S$, and pick the $k$ corresponding with the sharpest elbow.
+
+We can also consider plotting the quantities $\frac{\lambda_i}{\sum \lambda_i}$, where $\lambda_i$ is an eigenvalue of $S$ and choosing $k$ where there is an elbow in the plot once again.

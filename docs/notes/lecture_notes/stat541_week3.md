@@ -27,23 +27,23 @@ For such $V$, we have $V^T V = I_k$. Note that it is often NOT the case that $V 
 
 A square matrix $V\in \mathbb{R}^{k\times k}$ with orthogonal columns is called an orthogonal matrix. Note that $V^{-1} = V^T$.
 
-### **Definition** Thin SVD
+### Thin SVD
 
-For a matrix $A\in \mathbb{R}^{p\times q}$ ($p\geq q$), the thin SVD of $A$ is a representation of the form
+For a matrix $A\in \mathbb{R}^{m\times n}$ ($m\geq n$), whose rank is $r$.The thin SVD of $A$ is a representation of the form
 
 $$
-A = VDU^T, \quad V\in \mathbb{R}^{p\times q}, D\in \mathbb{R}^{q\times q}, U\in \mathbb{R}^{q\times q},
+A = U \Sigma V^{T}, \quad U\in \mathbb{R}^{m\times n}, \Sigma\in \mathbb{R}^{n\times n}, V\in \mathbb{R}^{n\times n},
 $$
 
-whrere $V$ and $U$ have orthogonal columns and $D$ is diagonal.
+where $U,V$ have normal orthogonal columns, and $\Sigma$ is diagonal with the first $r$ values $\sigma_1 \geq \dots \geq \sigma_r>0$, where $\sigma_i$ is the length of $A\boldsymbol{v}_i$. 
 
-The column vectors of $V$ and $U$ are respectively called the left and right singular vectors. The singular values of $A$ are the diagonal elements of $D$.
+The column vectors of $U$ and $V$ are respectively called the left and right singular vectors. The singular values of $A$ are the diagonal elements of $\Sigma$.
 
-**Remarkable results**: Every matrix $A\in \mathbb{R}^{p\times q}$ has an SVD.
+**Remarkable results**: Every matrix $A\in \mathbb{R}^{m\times n}$ has an SVD.
 
-We now introduce the SVD more formally. Given a $m\times n$ matrix $A$, whose rank is $r$. The SVD factors $A$ into $U \Sigma V^{\mathrm{T}}$  ($U,V$ have normal orthogonal columns), with $r$ singular values $\sigma_1 \geq \dots \geq \sigma_r>0$, where $\sigma_i$ is the length of $A\boldsymbol{v}_i$. 
+### General SVD
 
-We first consider the singular vectors: the $\boldsymbol{u}$'s and $\boldsymbol{v}$'s give bases for the four fundamental subspaces:
+We consider the singular vectors: the $\boldsymbol{u}$'s and $\boldsymbol{v}$'s give bases for the four fundamental subspaces:
 
 - $\boldsymbol{u}_1, \dots, \boldsymbol{u}_r \quad$ is an orthonormal basis for the column space
 - $\boldsymbol{u}_{r+1}, \dots, \boldsymbol{u}_m$ is an orthonormal basis for the left nullspace $\boldsymbol{N}\left(A^T\right)$
@@ -53,7 +53,7 @@ We first consider the singular vectors: the $\boldsymbol{u}$'s and $\boldsymbol{
 More than just orthogonality, these basis vectors diagonalize the matrix $A$ :
 
 $$
-A \boldsymbol{v}_1=\sigma_1 \boldsymbol{u}_1,\quad A \boldsymbol{v}_2=\sigma_2 \boldsymbol{u}_2,\quad \dots,\quad A \boldsymbol{v}_r=\sigma_r \boldsymbol{u}_r
+A \boldsymbol{v}_1=\sigma_1 \boldsymbol{u}_1,\quad A \boldsymbol{v}_2=\sigma_2 \boldsymbol{u}_2,\quad \dots,\quad A \boldsymbol{v}_r=\sigma_r \boldsymbol{u}_r.
 $$
 
 Those singular values $\sigma_1$ to $\sigma_r$ will be positive numbers: $\sigma_i$ is the length of $A \boldsymbol{v}_i$. The $\sigma$'s go into a diagonal matrix that is otherwise zero. That matrix is $\Sigma$. 
@@ -78,21 +78,27 @@ A\begin{bmatrix}\boldsymbol{v}_1, \dots, \boldsymbol{v}_r, \dots, \boldsymbol{v}
 \Sigma_r & & & \\
 & 0 & & \\
 & & \ddots & 
-\end{bmatrix}
+\end{bmatrix}.
 $$
 
 
-The new $\Sigma$ is $m\times n$. It is just the $r\times r$ matrix $\Sigma_r$ with $m-r$ extra zero rows and $n-r$ new zero columns. The real change is in the shapes of $U$ and $V$. Those are square orthogonal matrices. So $A V=U \Sigma$ can become $\boldsymbol{A}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\mathbf{T}}$. This is the Singular Value Decomposition. I can multiply columns $\boldsymbol{u}_i \sigma_i$ from $U \Sigma$ by rows of $V^{\mathrm{T}}$:
+The new $\Sigma$ is $m\times n$. It is just the $r\times r$ matrix $\Sigma_r$ with $m-r$ extra zero rows and $n-r$ new zero columns. The real change is in the shapes of $U$ and $V$. Those are square orthogonal matrices. So $A V=U \Sigma$ can become $\boldsymbol{A}=\boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{\mathbf{T}}$. This is the Singular Value Decomposition. I can multiply columns $\boldsymbol{u}_i \sigma_i$ from $U \Sigma$ by rows of $V^{T}$:
 
 $$
-A=U \Sigma V^{\mathrm{T}}=u_1 \sigma_1 v_1^{\mathrm{T}}+\cdots+u_r \sigma_r v_r^{\mathrm{T}}.
+A=U \Sigma V^{T}=u_1 \sigma_1 v_1^{T}+\cdots+u_r \sigma_r v_r^{T}.
 $$
 
-Each $\sigma_i^2$ is an eigenvalue of $A^T A$(1) and also $A A^{T}$(2). When we put the singular values in descending order, $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r>0$, the above splitting gives the $r$ rank-one pieces of $A$ in order of importance. Then $\sigma_1$ is the maximum of the ratio: 
+Each $\sigma_i^2$ is an eigenvalue of $A^T A$(1) and also $A A^{T}$(2). When we put the singular values in descending order(3), $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r>0$, the above splitting gives the $r$ rank-one pieces of $A$ in order of importance. Then $\sigma_1$ is the maximum of the ratio: 
 {.annotate}
 
 1. with $\boldsymbol{v}$'s as orthonormal eigenvectors
 2. with $\boldsymbol{u}$'s as orthonormal eigenvectors
+3. For a matrix $A\in \mathbb{R}^{m\times n}$, we can define a column swapping matrix $P_{i,j}\in \mathbb{R}^{n\times n}$, which swaps the $i$-th column and $j$-th column of $A$ by right multiplication, i.e. $AP_{i,j}$. Using $P_{i,j}$, we can swap the positions of $i$-th singular value and $j$-th singular value of $\Sigma$: $U\Sigma V^T = \left(UP_{i,j}\right) \left(P_{i,j}^T \Sigma P_{i,j}\right) \left(V P_{i,j}\right)^T$. 
+The column swapping matrix $P_{i,j}$ has the following properties: (let $A$ have rows $v_i$, $i=1,\dots, m$ and columns $w_j$, $j=1,\dots,n$)
+    - $AP_{i,j}$: $v_i \leftrightarrow v_j$. 
+    - $P_{i,j}^T A = \left(A^TP_{i,j}\right)^T$: $w_i \leftrightarrow w_j$. 
+    - $P_{i,j}^T P_{i,j} = I$. 
+    - $P_{i,j} P_{i,j}^T = P_{i,j}^T P_{i,j} P_{i,j} P_{i,j}^T = I$. 
 
 $$
 \max_{\|x\| = 1}\frac{\|A \boldsymbol{x}\|}{\|\boldsymbol{x}\|}.
@@ -100,13 +106,13 @@ $$
 
 ### Spectral Decomposition
 
-A spectral decomposition of a symmetric matrix $A\in \mathbb{R}^{p\times p}$ is a representation of $A$ as
+A spectral decomposition of a symmetric matrix $A\in \mathbb{R}^{n\times n}$ is a representation of $A$ as
 
 $$
-A = VDV^T, \quad V\in \mathbb{R}^{p\times p}, D\in \mathbb{R}^{p\times p},
+A = VDV^T, \quad V\in \mathbb{R}^{n\times n}, D\in \mathbb{R}^{n\times n},
 $$
 
-where $V = \begin{bmatrix}v_1 & v_2 & \dots & v_p \end{bmatrix}$ is orthogonal and $D = diag\{d_1,d_2,\dots,d_p\}$ is diagonal.
+where $V = \begin{bmatrix}v_1, v_2, \dots, v_n \end{bmatrix}$ is orthogonal and $D = {\rm diag}\{d_1,d_2,\dots,d_n\}$ is diagonal.
 
 The columns of $V$ are the eigenvector of $A$ and $d_i$ is the associated eigenvalue:
 
@@ -114,7 +120,7 @@ $$
 Av_i = VDV^Tv_i = d_i v_i.
 $$
 
-**Remarkable results** (spectral theorem): Every symmetric matrix $A\in \mathbb{R}^{p\times p}$ has a spectral decomposition.
+**Remarkable results** (spectral theorem): Every symmetric matrix $A\in \mathbb{R}^{n\times n}$ has a spectral decomposition.
 
 ## Recap on Multivariate Statistics
 
