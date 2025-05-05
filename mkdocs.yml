@@ -76,9 +76,23 @@ markdown_extensions:
   - md_in_html
   - pymdownx.superfences
   - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   
+extra:
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discordapp.com/users/1329948280070869012
+    - icon: fontawesome/brands/github
+      link: https://github.com/shx-haah
+    # - icon: fontawesome/brands/google-scholar
+    #   link: https://scholar.google.com/citations?user=drR_WcAAAAAJ&hl=en&sortby=pubdate
+
 extra_javascript:
   - javascripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+
 
   

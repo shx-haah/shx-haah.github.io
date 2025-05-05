@@ -16,8 +16,5 @@ Here, you'll find insights into my research, experiences as an international stu
 
 1. My content is written in English and, occasionally, in Chinese. I'm happy to exchange ideas in either language.
 
-{==
 
-###### I’d love to hear your thoughts, suggestions, or just have a chat! Feel free to reach out to me at <haoxinsang@gmail.com> or connect with me on [Discord](https://discordapp.com/users/1329948280070869012).
-
-==}
+###### I’d love to hear your thoughts, suggestions, or just have a chat! Feel free to connect with me at [:material-email:](mailto:haoxinsang@gmail.com) or on [:simple-discord:](https://discordapp.com/users/1329948280070869012) .
