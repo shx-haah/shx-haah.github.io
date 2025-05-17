@@ -174,6 +174,11 @@ A dendrogram (generally depicted as an upside-down tree) is built starting from 
 
 **Choosing the Number of Clusters:** We can "cut" the dendrogram at the height where the largest vertical gap occurs, as this indicates a natural separation between clusters.
 
+**Example** (Hamming Distance on DNA Sequencing): Suppose we have DNA sequences from different organisms, and we want to cluster them based on their similarity. One way to measure similarity is the Hamming distance, which counts the number of positions at which the corresponding nucleotides differ between two sequences.(1) Using these distances, we can construct a dendrogram to visualize the evolutionary relationships between the organisms. The sequences with smaller Hamming distances will be clustered together first, reflecting their closer evolutionary relationship.
+{.annotate}
+
+1. For example, consider the following DNA sequences: $\displaystyle {\mathrm S1:}\ ACGTAC,\ {\mathrm S2:}\  ACGTTC,\ {\mathrm S3:}\ ACGGAC$. The Hamming distances are: $d(S1,S2) = 1$ (only the fifth nucleotide differs), $d(S1,S3) = 1$ (only the fourth nucleotide differs), and $d(S2,S3) = 2$ (the fourth and fifth nucleotides differ).
+
 We can also look at divisive clustering, which is the opposite to the agglomerative clustering techniques we have looked at so far. The idea is to start with one big cluster, then split it into two smaller clusters, then continue splitting until each point is in its own cluster.
 
 ## Gaussian Mixture Models (GMM)

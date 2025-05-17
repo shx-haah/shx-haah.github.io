@@ -4,7 +4,7 @@ Key Takeaways
 
 - Problem 1(b): A regression tree for a univariate feature space $\mathcal{X} = \mathbb{R}$ is simply a piecewise constant function. Suppose we have determined that the splits for our regression tree and get the disjoint regions $R_s$. We find that $\hat{\beta}_s$ is the average of all the response values for all observations that have features contained in $R_s$.
 
-- Problem 2(a): A bagged prediction function $\hat{f}$ is a linear function of $\mathbf{x}$ with a regression coefficient $\frac{1}{B} \sum_{i=1}^B \hat{\boldsymbol{\beta}}^{(i)}$ that is the average of the regression coefficients of the fits on $\mathcal{D}^{(i)}$.
+- Problem 2(a): A bagged prediction function $\hat{f}$ is a linear function of $\boldsymbol{x}$ with a regression coefficient $\frac{1}{B} \sum_{i=1}^B \hat{\boldsymbol{\beta}}^{(i)}$, i.e. the average of the regression coefficients of the fits on $\mathcal{D}^{(i)}$.
 
 - Problem 2(d): The model averaging (functions of different degrees) regularizes the coefficients of the higher order polynomial terms by shrinking them toward zero.
 

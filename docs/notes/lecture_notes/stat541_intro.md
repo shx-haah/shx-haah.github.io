@@ -80,12 +80,21 @@ Concepts: Projection Pursuit Regression model: ridge functions, showing PPR mode
 
 ### [Week 12](stat541_week12.md#week-12)
 
-Concepts: The idea behind clustering. The k-means algorithm: derivation of the iterations, convergence of the algorithm, the importance of scaling your data, how to choose k. Hierarchical clustering:  types of dissimilarity measures between clusters including complete, average, and single linkage, the dendrogram and how to interpret it, brief discussion on divisive clustering and how clustering can be extended to more exotic objects like DNA sequences. A introductory discussion on Gaussian mixture models.
+Concepts: The idea behind clustering. The k-means algorithm: derivation of the iterations, scaling features, convergence of the algorithm, how to choose k. Hierarchical clustering:  dissimilarity measures between clusters, including complete, average, and single linkage, the dendrogram and how to interpret it, brief discussion on divisive clustering and how clustering can be extended to more exotic objects like DNA sequences. Gaussian mixture models (GMMs). The EM algorithm updates for GMMs and their interpretation. The (tautological) observation that generative models are able to generate, new, never before seen data. Brief mention on the flexibility of GMMs. 
 
-References: ISLR 12.4, 14.4.1-14.3.6, 14.3.12
+References: ISLR 12.4, 14.4.1-14.3.6, 14.3.12. Neither ISLR or ESL has an extensive discussion on GMM. For this, see Section 9.2, *Pattern Recognition and Machine Learning*(1). 
+{.annotate}
+
+1. By Christopher M. Bishop (2006).   
 
 ### [Week 13](stat541_week13.md#week-13)
 
-Concepts: The EM algorithm updates for Gaussian mixture models (GMMs) and their interpretation. The (tautological) observation that generative models are able to generate, new, never before seen data. Brief mention on the flexibility of GMMs and the fact that they can fit any continuous probability distribution for large enough k. Two perspective on PCA as variance maximization or distance minimization of projections. The PCA solution for the optimal projection of points onto an affine subspace. The principal component directions of the affine subspace and the principal component scores of the projected points.  How to use the PC scores in compression, visualization, and as input for supervised learning algorithms.  A discussion of principal components regression that uses the PC scores as input features in a linear regression. The link between the eigenvectors of the sample covariance matrix and the PC directions as well as the eigenvalues and the reconstruction error of PCA. The choice of the dimension k of the affine subspace via scree/elbow plots of the eigenvalues of the sample covariance. 
+Concepts: Two perspective on PCA as variance maximization or distance minimization of projections. The PCA solution for the optimal projection of points onto an affine subspace. The principal component directions of the affine subspace and the principal component scores of the projected points.  How to use the PC scores in compression, visualization, and as input for supervised learning algorithms.  A discussion of principal components regression that uses the PC scores as input features in a linear regression. The link between the eigenvectors of the sample covariance matrix and the PC directions as well as the eigenvalues and the reconstruction error of PCA. The choice of the dimension k of the affine subspace via scree/elbow plots of the eigenvalues of the sample covariance. 
 
-References: ISLR: 6.3.1, 12.2, ESL: 8.5.1, 14.3.7., 14.5.1. Neither ISLR or ESL has an extensive discussion on GMM. For this I recommend Section 9.2 of Bishop.   
+References: ISLR: 6.3.1, 12.2, ESL: 8.5.1, 14.3.7., 14.5.1. 
+
+### Week 14 (Last partial week of class)
+
+Concepts: (Classical) Multidimensional scaling as a method for obtaining low dimensional embeddings of data into R^d using only a distance matrix. How to derive the embedding when the distance is assumed to be the standard Euclidean distance in R^p. Relationship between the MDS Gram matrix and the principal component scores. Scree plot of the eigenvalues of the Gram matrix for finding a reasonable dimension d of the embedding space. Curves, surfaces and higher-dimensional surfaces and the difference between intrinsic (shortest-path) and extrinsic distances on such manifolds. The k-NN graph as a way to approximate the manifold that a point cloud of data lies close to. Distances on the k-NN graph approximate the intrinsic distance of the underlying manifold. Effects of the choice of k in the k-NN graph, too large we lose the manifold structure, and too small we might end up with a disconnected graph. The isomap algorithm which first constructs a k-NN graph to obtain shortest-path distances within the graph and then subsequently runs MDS on these distances to get an embedding into R^d.       
+
+References: ESL has a little bit of material in Chapter 14 but it is not extensive. Instead, I recommend looking at Izenmann Section 13.6 for MDS. There are some nice illustrative examples in this section. For Isomap see Izenmann Section 16.6.3. 
