@@ -4,6 +4,9 @@ nav:
   - Academic Background: academic_profile.md
   - Notes: 
     - Lecture Notes: 
+      - MATH 515 Mathematical Finance I: 
+        - Introduction: notes/lecture_notes/math515_intro.md
+        - Week1: notes/lecture_notes/math515_week1.md
       - STAT 541 Statistics for Leaning: 
         - Introduction: notes/lecture_notes/stat541_intro.md
         - Week1: notes/lecture_notes/stat541_week1.md
