@@ -1,6 +1,6 @@
 # Lecture 1
 
-## Margin Notes
+<!-- ## Margin Notes -->
 
 
 

@@ -7,15 +7,15 @@ nav:
       - CMPUT 501 Advanced Algorithms: 
         - Introduction: notes/lecture_notes/cmput501/intro.md
         - Lecture1: notes/lecture_notes/cmput501/lecture1.md
-        # - Lecture2: notes/lecture_notes/cmput501/lecture2.md
-        # - Lecture3: notes/lecture_notes/cmput501/lecture3.md
-        # - Lecture4: notes/lecture_notes/cmput501/lecture4.md
-        # - Lecture5: notes/lecture_notes/cmput501/lecture5.md
-        # - Lecture6: notes/lecture_notes/cmput501/lecture6.md
-        # - Lecture7: notes/lecture_notes/cmput501/lecture7.md
-        # - Lecture8: notes/lecture_notes/cmput501/lecture8.md
-        # - Lecture9: notes/lecture_notes/cmput501/lecture9.md
-        # - Lecture10: notes/lecture_notes/cmput501/lecture10.md
+        - Lecture2: notes/lecture_notes/cmput501/lecture2.md
+        - Lecture3: notes/lecture_notes/cmput501/lecture3.md
+        - Lecture4: notes/lecture_notes/cmput501/lecture4.md
+        - Lecture5: notes/lecture_notes/cmput501/lecture5.md
+        - Lecture6: notes/lecture_notes/cmput501/lecture6.md
+        - Lecture7: notes/lecture_notes/cmput501/lecture7.md
+        - Lecture8: notes/lecture_notes/cmput501/lecture8.md
+        - Lecture9: notes/lecture_notes/cmput501/lecture9.md
+        - Lecture10: notes/lecture_notes/cmput501/lecture10.md
         # - Lecture11: notes/lecture_notes/cmput501/lecture11.md
         # - Lecture12: notes/lecture_notes/cmput501/lecture12.md
       - MATH 515 Mathematical Finance I: 
