@@ -1,6 +1,6 @@
 # Lecture 1
 
-## Notes to self
+## Margin Notes
 
 
 

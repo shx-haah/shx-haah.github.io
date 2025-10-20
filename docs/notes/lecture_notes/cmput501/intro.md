@@ -49,8 +49,6 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
 ### Greedy, Dynamic Programming
 
-Concepts: 
-
 - [Lecture 1](lecture1.md/#lecture-1): **Stable Matching, Interval Scheduling, Minimizing lateness, Weighted Interval Scheduling**
 
     Also see sections 1.1, 4.1, 4.2, 6.1 (KT), and slides for Chapter 1, 4 and 6 by (KW)
@@ -63,6 +61,41 @@ Concepts:
 
     Extra notes for Advanced algorithms by (JE), and this survey paper.
 
+### Minimum Spanning Tree, Minimum Arborescence:
+
+- Lecture 4: **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
+
+    Also see 1.1-1.3 from (AG) combined notes and Lec 6 by (SA).
+
+- Lecture 5: **MST in linear time, Minimum Arborescence**
+
+    Also 1.4-1.5 from (AG) and Lec 7 by (SA); and 4.9 from (KT).
+
+### Randomized Algrithms:
+
+- Lecture 6: **Introduction, simple deviation bounds, randomized min-cut**
+
+    Also, lecture 1-3 from (RA).
+
+- Lecture 7: **Chernoff bound, Hypercube routing**
+
+    Also Lecture 5 from (RA), and Chapter 10.3 and 10.5 by (AG), and 4.1-4.2 from (MR)
+
+- Lecture 8: **Balls and Bins, power of two choices**
+
+    Also Lecture 7 from (RA), Lec 5 from (SA), GuptaS21 Lec6
+
+- Lecture 9: **Randomized load balancing, Hashing**
+
+    Also lecture 16 from (RA), Lec 3 from (SA) and, notes 5 from (JE), and these notes.
+
+- Lecture 10: **Random Walks, resistence graph**
+
+    Also, Lecturse 12 and 13 from (RA), Chapter 6 from (MR), Lec 23 from (SA)
+
+- Lecture 11: **Finger printing, Polynomial identity testing**
+
+    Also Lecture 13 from (RA), Lecture 16 from (SA) and Chapter 7 from (MR), and Chapter 8 from (AG)
 
 ## Reference
 
