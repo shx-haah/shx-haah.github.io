@@ -10,4 +10,4 @@ Key Takeaways
 
 - Problem 3(e): We see that the function plot for pH versus potassium (K) shows a trend reversal. (For the observed data as we increase potassium it seems that the pH also increases. However, in our GAM fit the fitted partial function is mostly decreasing as K increases.) A trend reversal of this nature does not necessarily indicate that the GAM fit is poor, but it does suggest that there is dependence or collinearity between the different features.
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_assignment4.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541/stat541_assignment4.pdf" type="application/pdf" width="100%" height="750px"/>

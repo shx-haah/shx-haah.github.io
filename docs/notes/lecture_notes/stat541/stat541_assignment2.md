@@ -10,4 +10,4 @@ Key Takeaways
 
 - Problem 2(d): By minimizing over each $\beta_i$, we get: The coefficient $\hat{\beta}_{L A S S O, i}=0$ if and only if $\left|\left[\mathbf{X}^{\top} \mathbf{Y}\right]_i\right| \leq \frac{\lambda}{2}$, meaning that the signal from the data $\left[\mathbf{X}^{\top} \mathbf{Y}\right]_i$ is not large enough relative to the penalty $\lambda$ to justify keeping this feature around. (Of course, a judicious choice of $\lambda$ is needed in order for this estimator to)
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_assignment2.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541/stat541_assignment2.pdf" type="application/pdf" width="100%" height="750px"/>

@@ -6,4 +6,4 @@ Key Takeaways
 
 - Problem 4(d): LDA variant is like a nearest neighbour search except that it only requires searching over the 10 mean images rather than the 60,000 images in the training data set. Overall, this algorithm can make predictions much more quickly than the 1-NN algorithm since it does not have to search over the entire dataset. (Note that we are timing how long it takes to make predictions, not fit the given models.) Likewise, while logistic regression takes little while to actually fit the model, it makes predictions on new data points very fast.
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_assignment3.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541/stat541_assignment3.pdf" type="application/pdf" width="100%" height="750px"/>

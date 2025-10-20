@@ -6,4 +6,4 @@ Key Takeaways
 
 - Problem 2(a-d): PC directions can also be interpreted as directions where the variance of the data is maximized.
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_assignment5.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541/stat541_assignment5.pdf" type="application/pdf" width="100%" height="750px"/>

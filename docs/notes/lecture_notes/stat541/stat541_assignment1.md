@@ -14,4 +14,4 @@ squared error loss) is $E_x\left(Var(y\mid x)\right)$.
 - Problem 5(e): Overall, for small data samples, the lower degree fits do better than the higher degree fits. As the sample size increases the prediction errors across all three models get smaller.
 
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_assignment1.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541/stat541_assignment1.pdf" type="application/pdf" width="100%" height="750px"/>

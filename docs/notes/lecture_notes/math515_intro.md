@@ -17,7 +17,7 @@ Model specifications, Arbitrage, completeness and other economic considerations.
 - **American options, futures and forward contracts.**
 - **Transition to the continuous-time framework (if time allows it).**
 
-### Textbooks are NOT required, and might not be limited to:
+### Textbooks 
 
 - *Introduction to Mathematical Finance. Discrete Time Models* by Stanley Pliska, Black-well, 1997
 - *Stochastic Calculus for Finance I: The Binomial Asset Pricing Model* by Steven Shreve, Springer, 2004.
