@@ -59,7 +59,7 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
 - Lecture 3: **Advanced DP: Saving time using monotonicity, SMWAK**
 
-    Extra notes for Advanced algorithms by (JE), and this survey paper.
+    Extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
 ### Minimum Spanning Tree, Minimum Arborescence:
 
