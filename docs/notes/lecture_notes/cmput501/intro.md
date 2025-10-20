@@ -53,47 +53,47 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
     Also see sections 1.1, 4.1, 4.2, 6.1 (KT), and slides for Chapter 1, 4 and 6 by (KW)
 
-- Lecture 2: **Segmented Least Square, Sequence Alignments, BST**
+- [Lecture 2](lecture2.md/#lecture-2): **Segmented Least Square, Sequence Alignments, BST**
 
     Also see sections 6.3, 6.6, 6.6 in (KT), and slides for Chapter 6 by (KW), extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
-- Lecture 3: **Advanced DP: Saving time using monotonicity, SMWAK**
+- [Lecture 3](lecture3.md/#lecture-3): **Advanced DP: Saving time using monotonicity, SMWAK**
 
     Extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
 ### Minimum Spanning Tree, Minimum Arborescence:
 
-- Lecture 4: **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
+- [Lecture 4](lecture4.md/#lecture-4): **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
 
     Also see 1.1-1.3 from (AG) combined notes and Lec 6 by (SA).
 
-- Lecture 5: **MST in linear time, Minimum Arborescence**
+- [Lecture 5](lecture5.md/#lecture-5): **MST in linear time, Minimum Arborescence**
 
     Also 1.4-1.5 from (AG) and Lec 7 by (SA); and 4.9 from (KT).
 
 ### Randomized Algrithms:
 
-- Lecture 6: **Introduction, simple deviation bounds, randomized min-cut**
+- [Lecture 6](lecture6.md/#lecture-6): **Introduction, simple deviation bounds, randomized min-cut**
 
     Also, lecture 1-3 from (RA).
 
-- Lecture 7: **Chernoff bound, Hypercube routing**
+- [Lecture 7](lecture7.md/#lecture-7): **Chernoff bound, Hypercube routing**
 
     Also Lecture 5 from (RA), and Chapter 10.3 and 10.5 by (AG), and 4.1-4.2 from (MR)
 
-- Lecture 8: **Balls and Bins, power of two choices**
+- [Lecture 8](lecture8.md/#lecture-8): **Balls and Bins, power of two choices**
 
     Also Lecture 7 from (RA), Lec 5 from (SA), GuptaS21 Lec6
 
-- Lecture 9: **Randomized load balancing, Hashing**
+- [Lecture 9](lecture9.md/#lecture-9): **Randomized load balancing, Hashing**
 
     Also lecture 16 from (RA), Lec 3 from (SA) and, notes 5 from (JE), and these notes.
 
-- Lecture 10: **Random Walks, resistence graph**
+- [Lecture 10](lecture10.md/#lecture-10): **Random Walks, resistence graph**
 
     Also, Lecturse 12 and 13 from (RA), Chapter 6 from (MR), Lec 23 from (SA)
 
-- Lecture 11: **Finger printing, Polynomial identity testing**
+- [Lecture 11](lecture11.md/#lecture-11): **Finger printing, Polynomial identity testing**
 
     Also Lecture 13 from (RA), Lecture 16 from (SA) and Chapter 7 from (MR), and Chapter 8 from (AG)
 
