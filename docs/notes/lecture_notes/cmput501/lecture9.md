@@ -5,7 +5,7 @@
 
 > Notes below are meant to supplement the scribed notes.
 
-## Universal Hash Functions
+## Universal Hash Functions (Section 9.2)
 
 ### Introduction
 
@@ -41,3 +41,27 @@ The inequality in the definition of the $k$-wise independent property (Definitio
 
 2. That is, each $h(x_i)$ is uniformly distributed over $[n]$, and any subset of $\{h(x_1),h(x_2),\dots,h(x_k)\}$ are mutually independent random variables when $h$ is sampled uniformly from $\mathcal{H}$.
 
+## Perfect Hashing (Section 9.5)
+
+### Bound on the Sum of Squared Bucket Sizes
+
+Let $L_i$ be the length of a chain at index $i$, then by Markov's inequality, we have the total number of collisions is bounded by $N$ with probability at least $1/2$:
+
+$$
+\sum_{i=0}^{n-1} \binom{L_i}{2} \leq n.
+$$
+
+This implies, with probability at least $1/2$,
+
+$$
+\sum_{i=0}^{n-1} L_i^2 = \sum_{i=0}^{n-1} \left(2\binom{L_i}{2} + L_i\right) = 2\sum_{i=0}^{n-1} \binom{L_i}{2} + \sum_{i=0}^{n-1} L_i \leq 2n + n = 3n.
+$$
+
+## Bloom Filters (Section 9.6)
+
+Each time we add an item, we set $k$ bits to 1 using $k$ different hash functions, and the probability that **a specific bit** is set to 1 by **one hash function** for **one item** is $\frac{1}{n}$.
+Therefore, the probability that any individual bit is still 0 after adding $N$ items is
+
+$$
+\left(1 - \frac{1}{n}\right)^{kN} \approx e^{-\frac{kN}{n}}.
+$$
