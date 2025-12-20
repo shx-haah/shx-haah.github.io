@@ -4,7 +4,7 @@
 
 
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribed2.pdf" type="application/pdf" width="100%" height="750px"/>
+<embed src="https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribe2.pdf" type="application/pdf" width="100%" height="750px"/>
 
 > Notes below are meant to supplement the scribed notes.
 
