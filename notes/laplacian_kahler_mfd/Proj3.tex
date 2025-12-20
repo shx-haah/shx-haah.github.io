@@ -1,0 +1,240 @@
+%!TEX program = Xelatex
+\documentclass{ctexart}
+
+\usepackage{amsmath, amssymb, amsthm, titlesec}
+\usepackage[skins, breakable, theorems]{tcolorbox}
+\usepackage{xparse, ocgx2, hyperref}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+
+\def\Id{\,\mathrm{d}} % 积分中的正体d
+\newcommand{\norm}[1]{\left|#1\right|} % 范数
+
+% [number within=section/...]{}{<display name>}{<style>}{<lebal>(cite as "Thm:...")}
+\newtcbtheorem[]{tcbdefinition}{Definition}{fonttitle = \bfseries}{Def}
+\newtcbtheorem[]{tcbtheorem}{Theorem}{fonttitle = \bfseries}{Thm}
+\newtcbtheorem[]{tcbproposition}{Proposition}{fonttitle = \bfseries}{Pro}
+\newtcbtheorem[]{tcblemma}{Lemma}{fonttitle = \bfseries}{Lem}
+\newtcbtheorem[]{tcbcorollary}{Corollary}{fonttitle = \bfseries}{Cor}
+\NewDocumentEnvironment{definition}{ O{} O{} } % two optional arguments
+  {\tcbdefinition{#1}{#2}}
+  {\endtcbdefinition}
+\NewDocumentEnvironment{theorem}{ O{} O{} }
+  {\tcbtheorem{#1}{#2}}
+  {\endtcbtheorem}
+\NewDocumentEnvironment{proposition}{ O{} O{} }
+  {\tcbproposition{#1}{#2}}
+  {\endtcbproposition}
+\NewDocumentEnvironment{lemma}{ O{} O{} }
+  {\tcblemma{#1}{#2}}
+  {\endtcblemma}
+\NewDocumentEnvironment{corollary}{ O{} O{} }
+  {\tcbcorollary{#1}{#2}}
+  {\endtcbcorollary}
+\makeatletter
+\newcommand\tcb@cnt@tcbdefinitionautorefname{Definition}
+\newcommand\tcb@cnt@tcbtheoremautorefname{Theorem}
+\newcommand\tcb@cnt@tcbpropositionautorefname{Proposition}
+\newcommand\tcb@cnt@tcblemmaautorefname{Lemma}
+\newcommand\tcb@cnt@tcbcorollaryautorefname{Collory} 
+\makeatother
+
+% Sketch of proof & Remark
+\newtcolorbox{sop}{
+    blanker, breakable, left = 5mm,
+    before skip = 10pt, after skip = 10pt,
+    borderline west = {1mm}{0pt}{red},
+    coltitle = black, title = \emph{Sketch of Proof}
+}
+\newtcolorbox{remark}{
+    colback = white, fonttitle = \bfseries,
+    colbacktitle = white, coltitle = black, enhanced,
+    boxed title style = {sharp corners},
+    attach boxed title to top left={yshift = -2mm, xshift = 5mm},
+    title = Remark
+}
+
+\newcommand{\linktoprf}[1]{\hyperlink{#1}{To complete proof.}}
+\newcommand{\targetprf}[1]{\hypertarget{#1}{Proof of \autoref{#1}}}
+
+\title{Note 3: The Laplacian operator on Kahler manifolds}
+\date{} % 显示日期
+
+\renewcommand\refname{Reference}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+It is known that isothermal coordinates exist on an arbitrary surface with a Riemannian metric. Suppose the metric is given by 
+$F(u, v)(d u \otimes d u+d v \otimes d v)$ and let $x=x(u, v), y=y(u, v)$ be a coordinate transformation. Denoting 
+$(d u)^2=d u \otimes d u$, $d u d v=\frac{1}{2}(d u \otimes d v+d v \otimes d u)$ and $(d v)^2=d v \otimes d v$, then we have
+$$
+\begin{aligned}
+&F(u, v)(d u  d u+d v  d v) \\
+&=F(x, y)\big((x_u^2+y_u^2) d u^2+2(x_u x_v+y_u y_v) d u  d v +(x_v^2+y_v^2) d v^2\big).
+\end{aligned}
+$$
+This leads us to 
+$$
+\left\{\begin{array}{c}y_u=-x_v, \\ x_u=y_v. \end{array}\right.
+$$ 
+Notice that $x=x(u, v), y=y(u, v)$ are harmonic maps. Therefore we can get a holomorphic chart transformation by letting $z=x+i y$. 
+So that we obtain a complex structure on the surface and meanwhile, we have $F(u, v)(d u  d u+d v  d v) = F(u,v)dzd\bar{z}$.
+
+From the above discussion, we can choose a local coordinate chart $(U, z)(z(p)=0)$, such that metric $g$ can be written as: 
+$$
+g=e^{2 \varphi(z, \bar{z})}|d z|^2, \quad \forall z \in U.
+$$
+Here $z=x+i y$ and the differential operators are given by  
+\begin{equation*}
+  \frac{\partial}{\partial z}=\frac{1}{2}\left(\frac{\partial}{\partial x}-i \frac{\partial}{\partial y}\right), 
+  \quad \frac{\partial}{\partial \bar{z}}=\frac{1}{2}\left(\frac{\partial}{\partial x}+i \frac{\partial}{\partial y}\right).
+\end{equation*}
+
+First we calculate $K_{g, z z}$ in equation (2). To do so, we will first introduce complex connection, curvature and Laplacian operator 
+on K\"ahler manifolds (complex manifolds with closed fundamental form), which can be found in \cite{Szekelyhidi2014}. 
+
+Given a Kähler manifold $(M, g)$, we extend the Levi-Civita connection $\nabla$ by complex linearity and use it to differentiate tensor fields. 
+By definition this satisfies $\nabla g=0$. In holomorphic normal coordinates the complex structure $J$ is constant, so we obtain $\nabla J=$ 0 , 
+and since the fundamental form $\omega(X, Y)=g(J X, Y)$, we also have $\nabla \omega=0$. In terms of local holomorphic coordinates $z^1, \ldots, z^n$, 
+we will use the following notation for the different derivatives:
+$$
+\nabla_i=\nabla_{\partial / \partial z^i}, \quad \nabla_{\bar{i}}=\nabla_{\partial / \partial \bar{z}^i}, \quad \partial_i=\frac{\partial}{\partial z^i}, 
+\quad \partial_{\bar{i}}=\frac{\partial}{\partial \bar{z}^i} .
+$$
+Since
+$$
+J\left(\nabla_j \frac{\partial}{\partial z^k}\right)=\nabla_j J\left(\frac{\partial}{\partial z^k}\right)=\sqrt{-1} \nabla_j \frac{\partial}{\partial z^k},
+$$
+the vector field $\nabla_j \frac{\partial}{\partial z^k}$ has type $(1,0)$, and so we can define the Christoffel symbols $\Gamma_{j k}^i$ by
+$$
+\nabla_j \frac{\partial}{\partial z^k}=\sum_i \Gamma_{j k}^i \frac{\partial}{\partial z^i} .
+$$
+For the same reason $\nabla_{\bar{i}} \frac{\partial}{\partial z^k}$ also has type $(1,0)$, while $\nabla_k \frac{\partial}{\partial \bar{z}^i}$ has type $(0,1)$. 
+However, since the connection is torsion free,
+$$
+\nabla_{\bar{i}} \frac{\partial}{\partial z^k}=\nabla_k \frac{\partial}{\partial \bar{z}^i},
+$$
+so both vector fields have to vanish. In addition, by $\bar{\partial}f=\overline{\partial\bar{f}}$, $\nabla_{\bar{i}} T=\overline{\nabla_i \bar{T}}$ for any tensor $T$, 
+so the connection is determined completely by the coefficients $\Gamma_{j k}^i$. Note that
+$$
+\Gamma_{j k}^i=\Gamma_{k j}^i \quad \text { and } \quad \Gamma_{\bar{j} \bar{k}}^{\bar{i}}=\overline{\Gamma_{j k}^i} .
+$$
+
+Therefore, for a smooth function $f$, we have
+$$
+\begin{aligned}
+\nabla^2 f &=\nabla\left(\frac{\partial f}{\partial z^i} d z^i + \frac{\partial f}{\partial \bar{z}^i} d \bar{z}^i\right) \\
+&=\frac{\partial^2 f}{\partial z^i \partial z^j} d z^i d z^j + 2\frac{\partial^2 f}{\partial z^i \partial \bar{z}^j} d z^i d \bar{z}^j 
+  + \frac{\partial^2 f}{\partial \bar{z}^i \partial \bar{z}^j} d \bar{z}^i d \bar{z}^j \\
+&\quad  +\frac{\partial f}{\partial z^i} \nabla\left(d z^i\right)+\frac{\partial f}{\partial \bar{z}^i} \nabla\left(d \bar{z}^i\right) \\
+% &=\frac{\partial^2 f}{\partial z^i \partial z^j} d z^i \otimes d z^j-\frac{\partial f}{\partial z^i} \Gamma_{j k}^i d z^j \otimes d z^k \\
+&=\left(\frac{\partial^2 f}{\partial z^i \partial z^j}-\frac{\partial f}{\partial z^k} \Gamma_{i j}^k\right) d z^i d z^j 
+  + 2\frac{\partial^2 f}{\partial z^i \partial \bar{z}^j} d z^i d \bar{z}^j \\
+&\quad  + \left(\frac{\partial^2 f}{\partial \bar{z}^i \partial \bar{z}^j}-\frac{\partial f}{\partial \bar{z}^k} \overline{\Gamma_{i j}^k}\right) 
+  d \bar{z}^i d \bar{z}^j.
+\end{aligned}
+$$
+
+\begin{proposition}
+  In terms of the metric $g_{j \bar{k}}$ the Christoffel symbols are given by
+  $$
+  \Gamma_{j k}^i=g^{i \bar{l}} \partial_j g_{k \bar{l}},
+  $$
+  where $(g^{i \bar{l}})$ is the matrix inverse to $(g_{i \bar{l}})$.
+\end{proposition}
+\begin{proof}[Proof]
+  The Levi-Civita connection satisfies $\nabla g=0$. In coordinates this means
+  $$
+  0=\nabla_j g_{k \bar{l}}=\partial_j g_{k \bar{l}}-\Gamma_{j k}^p g_{p \bar{l}},
+  $$
+  thus
+  $$
+  g^{i \bar{l}} \partial_j g_{k \bar{l}}=\Gamma_{j k}^p g_{p \bar{l}} g^{i \bar{l}}=\Gamma_{j k}^p \delta_p^i=\Gamma_{j k}^i.
+  $$
+\end{proof}
+
+We are now able to calculate  $K_{g, z z}$. Since the metric is given by $g=e^{2 \varphi(z, \bar{z})}d z d \bar{z}$, one can obtain 
+$\Gamma_{1 1}^1= 2\frac{\partial \varphi}{\partial z}$ and $\Gamma_{1 1}^2=0$. So we have
+$$
+K_{g, z z}=\frac{\partial^2 K_g}{\partial z^2}-2 \frac{\partial K_g}{\partial z} \frac{\partial \varphi}{\partial z}.
+$$
+
+Covariant derivatives do not commute in general, and the failure to commute is measured by the curvature. The curvature is defined by
+$$
+\left(\nabla_k \nabla_{\bar{l}}-\nabla_{\bar{l}} \nabla_k\right) \frac{\partial}{\partial z^i}=R_{i k \bar{l}}^j \frac{\partial}{\partial z^j}, 
+$$
+while $\nabla_k$ commutes with $\nabla_l$ and $\nabla_{\bar{k}}$ commutes with $\nabla_{\bar{l}}$. 
+
+In terms of the Christoffel symbols we can compute
+$$
+R_{i k \bar{l}}^j=-\partial_l \Gamma_{k i}^j,
+$$
+from which we find that in terms of the metric
+$$
+R_{i \bar{j} k \bar{l}}=-\partial_k \partial_{\bar{l}} g_{i \bar{j}}+g^{p \bar{q}}\left(\partial_k g_{i \bar{q}}\right)\left(\partial_{\bar{l}} g_{p \bar{j}}\right). 
+$$
+
+The Ricci curvature is defined to be the contraction
+$$
+R_{i \bar{j}}=g^{k \bar{l}} R_{i \bar{j} k \bar{l}},
+$$
+and the scalar curvature is
+$$
+R=g^{i \bar{j}} R_{i \bar{j}}.
+$$
+\begin{lemma}
+  In local coordinates
+  $$
+  R_{i \bar{j}}=-\partial_i \partial_{\bar{j}} \ln \operatorname{det}\left(g_{p \bar{q}}\right) .
+  $$
+\end{lemma}
+\begin{proof}[Proof]
+  Using the formulas above, we have
+  $$
+  \begin{aligned}
+  -\partial_{\bar{j}} \partial_i \ln \operatorname{det}\left(g_{p \bar{q}}\right) &=-\partial_{\bar{j}}\left(g^{p \bar{q}} \partial_i g_{p \bar{q}}\right) \\
+  &=-\partial_{\bar{j}} \Gamma_{i p}^p \\
+  &=R_{p i \bar{j}}^p \\
+  &=R_{i \bar{j}}
+  \end{aligned}
+  $$
+\end{proof}
+
+From Lemma 1, one can calculate the scalar curvature, which is given by $-2\frac{\partial\bar{\partial}\varphi}{e^{2\varphi}}$. 
+It is one-half of the Gauss curvature, which coincides with “using one half of the usual Riemannian Laplacian” in the sequel.  
+
+Now we calculate the Gauss curvature. Let $\omega^1=e^{\varphi} d x, \omega^2=e^{\varphi} d y$, then $g=\omega^1 \omega^1+\omega^2 \omega^2$. 
+By the structure equations, we have 
+$$
+\omega^1_2=\frac{(e^{\varphi})_y}{e^{\varphi}} d x-\frac{(e^{\varphi})_x}{e^{\varphi}} d y= \varphi_y d x-\varphi_x d y.
+$$
+So that Gauss curvature is given by 
+$$
+\begin{aligned}
+K_g &=\frac{d \omega^1_2}{\omega^1 \wedge \omega^2} \\
+&=-\frac{1}{e^{2\varphi} d x \wedge d y}\left(\varphi_{x x}+\varphi_{y y}\right) d x \wedge d y \\
+&=-\frac{1}{e^{2\varphi}}\left(\varphi_{x x}+\varphi_{y y}\right).
+\end{aligned}
+$$
+We denote the curvature by
+$$
+K_g=-\frac{\triangle \varphi}{e^{2 \varphi}},
+$$
+where "$\triangle$" is the real Laplacian operator with respect to the local Euclidean metric. 
+
+Last before we give the proof, we define the Laplacian differential operator on K\"ahler manifolds, where we will use one-half of 
+the usual Riemannian Laplacian (to understand "one-half" here, see \cite{Szekelyhidi2014}, p.33, and \cite{Huybrechts2005}, pp.114-116), which can be written 
+in terms of local holomorphic coordinates as
+$$
+\triangle f=g^{k \bar{l}} \nabla_k \nabla_{\bar{l}} f=g^{k \bar{l}} \partial_k \partial_{\bar{l}} f. 
+$$
+Recall that $\nabla_k(\partial/\partial\bar{z}^l) = 0$, so the expression using partial derivatives holds even if we are not using normal coordinates, 
+in contrast to the Riemannian case.
+
+
+\bibliographystyle{unsrt}
+\bibliography{NoteRef}
+
+\end{document}

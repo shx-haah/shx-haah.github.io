@@ -1,0 +1,116 @@
+%!TEX program = Xelatex
+\documentclass{article}
+
+\usepackage[square, super, numbers, sort&compress]{natbib}
+% This ensures Chinese content to display normally while the article remains in English. 
+\usepackage{ctex}
+\renewcommand\refname{Reference}
+\renewcommand\proofname{Proof}
+\renewcommand\figurename{Figure}
+
+\usepackage{amsmath, amssymb, amsthm, titlesec}
+\usepackage[skins, breakable, theorems]{tcolorbox}
+\usepackage{xparse, ocgx2, hyperref, endnotes}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+
+\title{Credit Cards Comparison}
+\date{\today} % 显示日期
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage{tablefootnote}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\section{基础知识}
+
+\textbf{账户类型：}通常有两种基本类型的账户——储蓄账户（Savings Account）和支票账户（Chequing Account）。
+储蓄账户通常用于存款和获取利息，而支票账户用于日常交易，如支付账单、购物和取款。
+
+\textbf{申请信用卡不必开设账户：}在加拿大，办理某个银行的信用卡通常不要求在该银行先开立储蓄账户或支票账户。
+尽管不一定必须开户，但在同一家银行有储蓄或支票账户有时会有好处。例如，有些银行提供“多产品折扣”，
+如果你在同一家银行拥有多个产品（如信用卡、支票账户、贷款等），可能会享受更低的费用或者更高的信用额度。
+
+\textbf{支付信用卡账单的方式：}
+
+1. \emph{通过支票账户支付：}这是最常见的方式。如果你在任何银行开设了支票账户，你可以通过网上银行或手机银行应用程序进行支付。银行通常会提供一个选项让你设定自动付款，这样每月的信用卡账单可以自动从你的支票账户扣除。
+
+2. \emph{在分行或ATM付款：}你也可以直接到银行分行或使用ATM机支付信用卡账单。你可以选择存入现金或支票来支付。
+
+3. \emph{电子转账（e-Transfer）：}一些银行允许你使用电子转账服务支付信用卡账单。通常你需要知道信用卡的收款信息。
+
+4. \emph{邮寄支票：}你也可以通过邮寄支票的方式支付信用卡账单。
+
+\textbf{信用卡支付平台：}一些信用卡公司允许你使用第三方支付平台来支付各种（可能本不支持信用卡的）账单，如 Plastiq 或 Paytm。
+
+\textbf{MCC 5411--杂货店和商超：}
+MCC 是一个四位数代码，可划分商家所提供商品或服务的类型，也是识别信用卡交易的标准，其一般对应信用卡“杂货购物”的类别。MCC 5411被描述为
+``Merchants that sell a complete line of food merchandise for home consumption. ''
+
+有些商家可能会被误认为是MCC 5411类别，但实际上它们可能会被归入其他MCC类别。以下是一些常见的误分类商家：
+
+1. \emph{便利店}（如7-Eleven）
+
+2. \emph{大宗批发商}（批发和采购商店如Costco，大型零售商如Walmart\footnote{Walmart存疑，待验证。}）
+
+3. \emph{家居用品商店}（家居用品商店如Bed Bath \& Beyond）
+
+4. \emph{高端食品店}（如Pusateri's Fine Foods）
+
+5. \emph{酒类专卖店}（如LCBO）
+
+6. \emph{药店}（如Shoppers Drug Mart，营养补充剂商店如GNC）
+
+7. \emph{电子产品商店}（如Best Buy）
+
+\section{信用卡推荐（基础版）}
+以下信用卡均是0年费，前两张信用卡均有0.5\%基础返现（即除了提到的返现项目外的所有购物）。消费通常不包括现金预支、利息、费用（如年费）或余额转账。
+\begin{itemize}
+    \item \hyperref{https://www.bmo.com/main/personal/credit-cards/student-bmo-cashback-mastercard/}{}{}{\textcolor{blue}{\underline{BMO CashBack® Mastercard®}}}：3\% 返现于杂货购物，1\% 返现于定期付款（如话费、流媒体服务、订阅费等）。
+    \item \hyperref{https://www.cibc.com/en/personal-banking/credit-cards/all-credit-cards/dividend-visa-for-students.html}{}{}{\textcolor{blue}{\underline{BCIBC Dividend® Visa* Card for Students}}}：2\% 返现于杂货购物，1\% 返现于符合条件的加油、电动车充电、交通、餐饮和定期付款。
+    \item \hyperref{https://www.rogersbank.com/en/rogers_mastercard_details}{}{}{\textcolor{blue}{\underline{Rogers Red Mastercard®}}（Rogers、Fido 或 Shaw 客户）}：2\% 的无限制现金返还，适用于所有以美元或非美元计价的消费；当用于购买 Rogers、Fido 或 Shaw 服务时，已返还的现金额膨胀至 1.5 倍价值。
+\end{itemize}
+
+\begin{table}[htb]
+    \centering
+    \caption{细则对比}
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+         & 欢迎优惠 & 现金返现兑换 & 返现上限 \\
+        \hline
+        BMO CashBack® & 前3个月可获得消费 & 随时兑换，& 各类消费 \tablefootnote{杂货3\%和定期账单1\%的返现分别计算上限。}每月 \\
+        Mastercard® & 5\%的返现，最高\tablefootnote{食品购物、定期账单支付和所有其他购买的总金额中，5\%的现金返还的最高限额分别是\$25，\$75以及\$25。}\$125  & 金额自定 & 各\$500的消费上限 \\
+        \hline
+        BCIBC Dividend®  & 前4个月内可获得消费 & 随时兑换，& \multirow{2}{*}{没有总返现金额上限} \\
+        Visa* Card & 10\%的返现，最高\$100 & 最低兑换金额为\$25 & \\
+        \hline
+        Rogers Red & 满足适当条件（见表后）， & 随时兑换，& \multirow{2}{*}{没有总返现金额上限} \\
+        Mastercard® & 可获得 \$60 现金返还 & 最低兑换金额为\$10 & \\
+        \hline
+    \end{tabular}
+\end{table}
+{\small Rogers Red Mastercard® 欢迎优惠细则：\$60 现金返还需要满足下述条件
+
+\emph{条件 1. }在开卡后前 8 个月内，使用该信用卡进行 6 次自动账单支付，必须是用于 Rogers、Fido 或 Shaw 的后付费服务（不包括商业/企业计划）。这意味着你需要设置自动支付功能来支付这些服务的账单，例如月度的手机费或互联网费用。
+
+\emph{条件 2. }在开卡后的前 90 天内，至少通过你的移动钱包（如 Apple Pay、Google Pay 等）进行一次购买。这可以是任何商品或服务的购买，只要是通过移动钱包完成的。
+
+注意事项：若满足上述条件，可能需要最长 5 个月才能看到 \$60 现金返还金额被存入你的账户。}
+
+\section{信用卡推荐（进阶版）}
+以下信用卡会更适合（即更多返现或积分）用于某一类特定的消费场景，或是支付某一类特定的账单。
+
+\begin{itemize}
+    \item \hyperref{https://www.bmo.com/main/personal/credit-cards/bmo-cashback-world-elite-mastercard/}{}{}{\textcolor{blue}{\underline{BMO CashBack® World Elite® Mastercard®}}}：年费\$120。5\% 返现于杂货购物，4\%返现用于日常交通（公共交通、出租车或网约车），3\%用于汽车加油或充电，2\% 返现于定期付款（如话费、流媒体服务、订阅费等），1\%基础返现。同前一节的BMO Cashback信用卡，各类消费（除基础消费）分别记\$500/月的消费上限。
+    \item \hyperref{https://www.simplii.com/en/credit-cards/cash-back-visa.html}{}{}{\textcolor{blue}{\underline{Simplii Financial™ Cash Back Visa*}}}：4\% 返现于餐馆或酒吧就餐。4\% 返现记\$5000/年的消费上限。
+    \item \hyperref{https://www.scotiabank.com/ca/en/personal/credit-cards/visa/momentum-infinite-card.html}{}{}{\textcolor{blue}{\underline{Scotia Momentum® Visa Infinite* Card}}}：年费\$120\footnote{年费可以考虑结合\hyperref{https://www.scotiabank.com/ca/en/personal/bank-accounts/chequing-accounts/ultimate-package.html}{}{}{\textcolor{blue}{\underline{Scotiabank–Ultimate Package}}}来减免。}。4\% 返现于杂货购物以及定期付款（如话费、流媒体服务、订阅费等），2\% 返现于日常交通，1\%基础返现。4\% 和2\% 返现各自记\$25000/年的消费上限。
+    \item \hyperref{https://www.wealthsimple.com/en-ca}{}{}{\textcolor{blue}{\underline{Wealthsimple–Prepaid Card}}}：无Foreign exchange fees，适用于非CAD或RMB的消费；活期利率较高（2.25\%）。
+\end{itemize}
+
+% \bibliographystyle{unsrtnat}
+% \bibliography{ref}
+
+
+\end{document}
