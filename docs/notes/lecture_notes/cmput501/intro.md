@@ -51,11 +51,11 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
 - [Lecture 1](lecture1.md/#lecture-1): **Stable Matching, Interval Scheduling, Minimizing lateness, Weighted Interval Scheduling**
 
-    Also see sections 1.1, 4.1, 4.2, 6.1 (KT), and slides for Chapter 1, 4 and 6 by (KW)
+    Also see sections 1.1, 4.1, 4.2, 6.1 (KT)
 
 - [Lecture 2](lecture2.md/#lecture-2): **Segmented Least Square, Sequence Alignments, BST**
 
-    Also see sections 6.3, 6.6, 6.6 in (KT), and slides for Chapter 6 by (KW), extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
+    Also see sections 6.3, 6.6, 6.6 in (KT), extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
 - [Lecture 3](lecture3.md/#lecture-3): **Advanced DP: Saving time using monotonicity, SMWAK**
 
@@ -65,37 +65,79 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
 - [Lecture 4](lecture4.md/#lecture-4): **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
 
-    Also see 1.1-1.3 from (AG) combined notes and Lec 6 by (SA).
-
 - [Lecture 5](lecture5.md/#lecture-5): **MST in linear time, Minimum Arborescence**
 
-    Also 1.4-1.5 from (AG) and Lec 7 by (SA); and 4.9 from (KT).
+    Also 4.9 from (KT).
 
 ### Randomized Algrithms:
 
 - [Lecture 6](lecture6.md/#lecture-6): **Introduction, simple deviation bounds, randomized min-cut**
 
-    Also, lecture 1-3 from (RA).
 
 - [Lecture 7](lecture7.md/#lecture-7): **Chernoff bound, Hypercube routing**
 
-    Also Lecture 5 from (RA), and Chapter 10.3 and 10.5 by (AG), and 4.1-4.2 from (MR)
+    Also 4.1-4.2 from (MR)
 
 - [Lecture 8](lecture8.md/#lecture-8): **Balls and Bins, power of two choices**
 
-    Also Lecture 7 from (RA), Lec 5 from (SA), GuptaS21 Lec6
 
 - [Lecture 9](lecture9.md/#lecture-9): **Randomized load balancing, Hashing**
 
-    Also lecture 16 from (RA), Lec 3 from (SA) and, notes 5 from (JE), and these notes.
+    Also notes 5 from (JE), and these notes.
 
 - [Lecture 10](lecture10.md/#lecture-10): **Random Walks, resistence graph**
 
-    Also, Lecturse 12 and 13 from (RA), Chapter 6 from (MR), Lec 23 from (SA)
+    Also Chapter 6 from (MR)
 
 - [Lecture 11](lecture11.md/#lecture-11): **Finger printing, Polynomial identity testing**
 
-    Also Lecture 13 from (RA), Lecture 16 from (SA) and Chapter 7 from (MR), and Chapter 8 from (AG)
+    Also Chapter 7 from (MR)
+
+### Integer/Linear Programming and Combinatorial Optimization:
+
+- [Lecture 12](lecture12.md/#lecture-12): **Integer/Linear Programming, Duality**
+
+
+- [Lecture 13](lecture13.md/#lecture-13): **Bipartite Matching, Matching Polytope**
+
+- [Lecture 14](lecture14.md/#lecture-14): **Weighted Biparite Matching**
+
+- [Lecture 15](lecture15.md/#lecture-15): **Bipartite matching (vardinality and weighted) via priam dual methods**
+
+### Approximation Algorithms
+
+- [Lecture 16](lecture16.md/#lecture-16): **Introduction, Set cover/Max coverage, Set cover rounding**
+
+    Also see 1.2, 1.6, 1.7 from (WS)
+
+- [Lecture 17](lecture17.md/#lecture-17): **Approximation Schemes: knapsack, Bin Packing**
+
+    Also see 3.1-3.3 from (WS)
+
+- [Lecture 18](lecture18.md/#lecture-18): **Max-SAT**
+
+    Also see 5.1-5.6 from (WS)
+
+- [Lecture 19](lecture19.md/#lecture-19): **Semidefinite Programming, Max-Cut**
+
+    Also see 6.1-6.2 from (WS)
+
+- [Lecture 20](lecture20.md/#lecture-20): **Approximating metrics by tree metrics**
+
+    Also see 8.5 from (WS)
+
+### Online Algorithms, Learning From Experts
+
+- [Lecture 23](lecture23.md/#lecture-23): **Online algorithms, Paging, Secretary problem**
+
+    Also see (MR) Chapter 13.
+
+- [Lecture 24](lecture24.md/#lecture-24): **Prophet inequality**
+
+    Also see [these](https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15850-f20/www/notes/lec27.pdf) notes by Gupta, [these](https://faculty.cc.gatech.edu/%7Essingla7/courses/Spring22/lec13.pdf) by Singla
+
+- [Lecture 25](lecture25.md/#lecture-25): **Learning from experts, Multiplicative weight update**
+
 
 ## Reference
 
@@ -112,3 +154,5 @@ The following is a list of most commonly referred to references:
 - (WS) D. Willamson and D. Shmoys, [The Design of Approximation Algorithms](http://www.designofapproxalgs.com/), (free download), Cambridge University Press, 2011
 
 - A. Blum, J. Hopcroft, and R. Kannan, [Foundations of Data Science](https://www.cs.cornell.edu/jeh/book.pdf).
+
+- See similar courses ``Resources`` section on the [course website](https://webdocs.cs.ualberta.ca/~mreza/courses/AdvancedF25/index.html).
