@@ -1,0 +1,482 @@
+%!TEX program = Xelatex
+\documentclass{ctexart}
+
+\usepackage{amsmath, amssymb, amsthm, titlesec}
+\usepackage[skins, breakable, theorems]{tcolorbox}
+\usepackage{xparse, ocgx2, hyperref, endnotes}
+\usepackage[top=2.54cm, bottom=2.54cm, left=3.18cm, right=3.18cm]{geometry}
+
+\def\Id{\,\mathrm{d}} % 积分中的正体d
+\newcommand{\norm}[1]{\left|#1\right|} % 范数
+
+% [number within=section/...]{}{<display name>}{<style>}{<label>(cite as "Thm:...")}
+\newtcbtheorem[]{tcbdefinition}{Definition}{fonttitle = \bfseries}{Def}
+\newtcbtheorem[]{tcbtheorem}{Theorem}{fonttitle = \bfseries}{Thm}
+\newtcbtheorem[]{tcbproposition}{Proposition}{fonttitle = \bfseries}{Pro}
+\newtcbtheorem[]{tcblemma}{Lemma}{fonttitle = \bfseries}{Lem}
+\newtcbtheorem[]{tcbcorollary}{Corollary}{fonttitle = \bfseries}{Cor}
+\NewDocumentEnvironment{definition}{ O{} O{} } % two optional arguments
+  {\tcbdefinition{#1}{#2}}
+  {\endtcbdefinition}
+\NewDocumentEnvironment{theorem}{ O{} O{} }
+  {\tcbtheorem{#1}{#2}}
+  {\endtcbtheorem}
+\NewDocumentEnvironment{proposition}{ O{} O{} }
+  {\tcbproposition{#1}{#2}}
+  {\endtcbproposition}
+\NewDocumentEnvironment{lemma}{ O{} O{} }
+  {\tcblemma{#1}{#2}}
+  {\endtcblemma}
+\NewDocumentEnvironment{corollary}{ O{} O{} }
+  {\tcbcorollary{#1}{#2}}
+  {\endtcbcorollary}
+\makeatletter
+\newcommand\tcb@cnt@tcbdefinitionautorefname{Definition}
+\newcommand\tcb@cnt@tcbtheoremautorefname{Theorem}
+\newcommand\tcb@cnt@tcbpropositionautorefname{Proposition}
+\newcommand\tcb@cnt@tcblemmaautorefname{Lemma}
+\newcommand\tcb@cnt@tcbcorollaryautorefname{Corollary} 
+\makeatother
+
+% Sketch of proof & Remark
+\newtcolorbox{sop}{
+    blanker, breakable, left = 5mm,
+    before skip = 10pt, after skip = 10pt,
+    borderline west = {1mm}{0pt}{red},
+    coltitle = black, title = \emph{Sketch of Proof}
+}
+\newtcolorbox{remark}{
+    colback = white, fonttitle = \bfseries,
+    colbacktitle = white, coltitle = black, enhanced,
+    boxed title style = {sharp corners},
+    attach boxed title to top left={yshift = -2mm, xshift = 5mm},
+    title = Remark
+}
+
+\newcommand{\linktoprf}[1]{\hyperlink{#1}{To complete proof.}}
+\newcommand{\targetprf}[1]{\hypertarget{#1}{Proof of \autoref{#1}}}
+
+\title{Note 6: Preliminaries to Comparison Theorems}
+\date{} % 显示日期
+
+\renewcommand\refname{Reference}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+
+\subsection*{Notation}
+We will begin by fixing some notation and recalling some standard facts about connections. $M$ will denote a smooth (i.e. $C^\infty$) finite-dimensional
+manifold and $T(M)$ its tangent bundle. Sometimes we write $M^n$ to indicate that $M$ has dimension $n$. For $p \in M$, 
+$M_p$ denotes the tangent space to $M$ at $p$. $\mathcal{X}(M)$ or $\mathcal{X}$ is the linear space of smooth vector fields on $M$ and $F(M)$ the ring of 
+smooth functions on $M$. We will usually denote a tangent vector at a point by a lower case letter and its extension to a vector field by the corresponding capital.
+
+\begin{definition}[Curvature of a Riemannian manifold]
+    The curvature $R$ of a Riemannian manifold $M$ is a correspondence that associates to every pair $X, Y \in \mathcal{X}(M)$ a mapping $R(X, Y): \mathcal{X}(M) \rightarrow \mathcal{X}(M)$ given by
+    $$
+    R(X, Y) Z=\nabla_X \nabla_Y Z-\nabla_Y \nabla_X Z-\nabla_{[X, Y]} Z, \quad Z \in \mathcal{X}(M)
+    $$
+    where $\nabla$ is the Riemannian connection of $M$.
+\end{definition}
+Observe that if $M=R^n$, then $R(X, Y) Z=0$ for all $X, Y, Z \in$ $\mathcal{X}\left(R^n\right)$. In fact, if the vector field $Z$ is given by $Z=\left(z_1, \ldots, z_n\right)$, with the components of $Z$ coming from the natural coordinates of $R^n$, we obtain
+$$
+\nabla_Y Z=\left(Y z_1, \ldots, Y z_n\right)
+$$
+hence
+$$
+\nabla_X \nabla_Y Z=\left(X Y z_1, \ldots, X Y z_n\right)
+$$
+which implies that
+$$
+R(X, Y) Z=\nabla_X \nabla_Y Z-\nabla_Y \nabla_X Z-\nabla_{[X, Y]} Z=0
+$$
+as was stated. We are able, therefore, to think of $R$ as a way of measuring how much $M$ deviates from being Euclidean.
+
+Another way of viewing definition 1 is to consider a system of coordinates $\left\{x_i\right\}$ around $p \in M$. Since $\left[\frac{\partial}{\partial x_i}, \frac{\partial}{\partial x_j}\right]=0$, we obtain
+$$
+R\left(\frac{\partial}{\partial x_i}, \frac{\partial}{\partial x_j}\right) \frac{\partial}{\partial x_k}
+=\left(\nabla_{\partial / \partial x_i} \nabla_{\partial / \partial x_j}-\nabla_{\partial / \partial x_j} \nabla_{\partial / \partial x_i}\right) \frac{\partial}{\partial x_k}
+$$
+that is, the curvature measures the non-commutativity of the covariant derivative. 
+
+From now on, we shall write $R(X, Y, Z, T) = \langle R(X, Y)Z, T\rangle$. 
+\begin{proposition}
+    (a) $R(X, Y,Z,T)+R(Y,Z,X, T)+(Z,X, Y, T) = 0 $
+
+    (b) $R(X,Y,Z,T) = -R(Y,X,Z,T) $
+
+    (c) $R(X, Y, Z, T) = -R(X, Y, T, Z) $
+
+    (d) $R(X, Y, Z, T) = R(Z, T, X, Y). $
+\end{proposition}
+
+Closely related to the curvature operator is the sectional (or Riemannian) curvature.
+Given a vector space $V$, we denote by $\|x \wedge y\|$ the expression
+$$
+\sqrt{|x|^2|y|^2-\langle x, y\rangle^2}
+$$
+which represents the area of a two-dimensional parallelogram determined by the pair of vectors $x, y \in V$.
+Given $\sigma$ be a two-dimensional subspace of the tangent space $T_p M$, let $x, y \in \sigma$ be two linearly independent vectors. Then
+$$
+K(x, y)=-\frac{R(x, y, x, y)}{\|x \wedge y\|^2}
+$$
+does not depend on the choice of the vectors $x, y \in \sigma$.
+
+\begin{definition}[Sectional curvature]
+    Given $p \in M$ and a two-dimensional subspace $\sigma \subset T_p M$, the real number $K(x, y)=K(\sigma)$, where $\{x, y\}$ is any basis of $\sigma$, is called the sectional curvature of $\sigma$ at $p$.
+\end{definition}
+It can be defined geometrically as the Gaussian curvature of the surface which has $\sigma$ as a tangent plane at $p$, obtained from geodesics which start at $p$ in the directions of $\sigma$, 
+or in other words, the image of $\sigma$ under the exponential map at $p$ (definition will be soon given). 
+Furthermore, the curvature tensor $R$ is completely determined by the inner product together with the function $K: G_{2, n}\left(M\right) \rightarrow \mathbb{R}$, where $G_{2, n}\left(M\right)$ denotes the space of all $2$-dimensional
+subspaces of $M$, the Grassmannian manifold. In fact, a straightforward computation shows that
+$$
+\begin{aligned}
+\langle R(x, y) z, w\rangle= & \frac{1}{6}\left\{K(x+w, y+z)\|(x+w) \wedge(y+z)\|^2\right. \\
+& -K(y+w, x+z)\|(y+w) \wedge(x+z)\|^2 \\
+& -K(x, y+z)\|x \wedge(y+z)\|^2-K(y, x+w)\|y \wedge(x+w)\|^2 \\
+& -K(z, x+w)\|z \wedge(x+w)\|^2-K(w, y+z)\|w \wedge(y+z)\|^2 \\
+& +K(x, y+w)\|x \wedge(y+w)\|^2+K(y, z+w)\|y \wedge(z+w)\|^2 \\
+& +K(z, y+w)\|z \wedge(y+w)\|^2+K(w, x+z)\|w \wedge(x+z)\|^2 \\
+& +K(x, z)\|x \wedge z\|^2+K(y, w)\|y \wedge w\|^2 \\
+& -K(x, y)\|x \wedge w\|^2-K(y, z)\|y \wedge z\|^2
+\end{aligned}
+$$
+
+To define exponential map, we will need the following proposition (see \cite{Carmo1992}, Section 3.2 for details).
+\begin{proposition}
+    Given $p \in M$, there exist a neighborhood $V$ of $p$ in $M$, a number $\varepsilon>0$ and a $C^{\infty}$ mapping 
+    $\gamma:(-2,2) \times U \rightarrow$ $M, \quad \mathcal{U}=\left\{(q, w) \in T M ; q \in V, w \in T_q M,|w|<\varepsilon\right\}$ such that 
+    $$
+    t \mapsto \gamma(t, q, w), \quad t \in(-2,2), 
+    $$
+    is the unique geodesic of $M$ which, at the instant $t=0$, passes through $q$ with velocity $w$, for every $q \in V$ and for every $w \in T_q M$, with $|w|<\varepsilon$.
+\end{proposition}
+
+Proposition 2 permits us to introduce the concept of the exponential map in the following manner. Let $p \in M$ and let $\mathcal{U} \subset T M$ be an open set given by Proposition 2. Then the map exp: $\mathcal{U} \rightarrow M$ given by
+$$
+\exp (q, v)=\gamma(1, q, v)=\gamma\left(|v|, q, \frac{v}{|v|}\right), \quad(q, v) \in \mathcal{U}
+$$
+is called the exponential map on $\mathcal{U}$.
+It is clear that exp is differentiable by the dependence of solutions on initial conditions in ODE. In most of the applications, we shall utilize the restriction of exp to an open subset of the tangent space $T_q M$, that is, we define
+$$
+\exp _q: B_{\varepsilon}(0) \subset T_q M \rightarrow M
+$$
+by $\exp _q(v)=\exp (q, v)$. It is easy to verify that $\exp _q$ is differentiable and that $\exp _q(0)=q$.
+Geometrically, $\exp _q(v)$ is a point of $M$ obtained by going out the length equal to $|v|$, starting from $q$, along a geodesic which passes through $q$ with velocity equal to $\frac{v}{|v|}$. 
+% Here, and in what follows, we denote by $B_{\varepsilon}(0)$ an open ball with center at the origin 0 of $T_q M$ and of radius $\varepsilon$. 
+
+From now on, since we will always fix $p\in M$, there is no ambiguity to denote $\exp_p$ by $\exp$.
+One can verify that $\exp_{*0}$ is an identity map. Thus, by the implicit function theorem, we have the following proposition.
+\begin{proposition}
+    Given $p \in M$, there exists an $\varepsilon>0$ such that $\exp : B_{\varepsilon}(0) \subset T_p M \rightarrow M$ is a diffeomorphism of $B_{\varepsilon}(0)$ onto an open subset of $M$.
+\end{proposition}
+If we choose an orthonormal basis $\{e_i\}$ for $T_pM$, we can define a normal coordinate system in a neighborhood of $p$ by assigning to the point $\exp x^ie_i$ the
+coordinates $(x^1,...,x^n)$. 
+
+In what follows we identify the tangent space to $T_p M$ at $v \in T_p M$ with $T_p M$ itself, and write $T_p M \approx T_v\left(T_p M\right)$. 
+Specifically, taking $\{\frac{\partial}{\partial x^i}\}$ as a basis, any element in $T_pM$ can be written as $u^i\frac{\partial}{\partial x^i}$. Therefore, 
+the isomorphism between $T_pM$ and $T_v\left(T_pM\right)$ is given by 
+$$
+w^i\frac{\partial}{\partial x^i}\longleftrightarrow w^i\frac{\partial}{\partial u^i}, \quad w^i\in\mathbb{R}.
+$$
+This isomorphism is independent of the choice of the basis. Consider $\{\frac{\partial}{\partial y^j}\}$ an another basis, and any vector in $T_pM$ is written as 
+$v^i\frac{\partial}{\partial y^i}$. Suppose $\frac{\partial}{\partial y^j}=A_j^i\frac{\partial}{\partial x^i}$ and thus, we have $v^jA_j^i=u^i$.
+An arbitrary vector $w^i\frac{\partial}{\partial x^i}\in T_pM$ will also have the form
+$$
+w^i\frac{\partial}{\partial x^i}=\tilde{w}^j\frac{\partial}{\partial y^j},
+$$
+which satisfies $w^i=\tilde{w}^jA_j^i$.
+Since 
+\begin{align*}
+  \tilde{w}^j\frac{\partial}{\partial v^j}
+  &= \tilde{w}^j \frac{\partial}{\partial u^i} \frac{\partial u^i}{\partial v^j} \\
+  &= \tilde{w}^j A_j^i \frac{\partial}{\partial u^i} \\
+  &= w^i \frac{\partial}{\partial u^i},
+\end{align*}
+the isomorphism is independent of the choice of basis. However, one should notice that the isomorphism may depend on the choice of $v\in T_pM$, for 
+there may be no global frame on $M$.
+
+\begin{lemma}[Gauss Lemma]
+    Let $p \in M$ and let $v \in T_p M$ such that $\exp _p v$ is defined. Let $w \in T_p M \approx T_v\left(T_p M\right)$. Then
+    $$
+    \quad\left\langle\exp_{*v}(v),\exp_{*v}(w)\right\rangle=\langle v, w\rangle.
+    $$
+\end{lemma}
+From the Gauss Lemma: for a ray $\rho(t)=tv$ defined on $T_p M$, the tangent map of $\exp_p$ maps vectors (in $T_{\rho(t)}(T_p M)$) orthogonal to $\rho(t)$ 
+to tangent vectors (in $T_p M$) orthogonal to the geodesic $\gamma(t) = \exp_p(tv)$.
+In fact, using polar coordinates $r, \theta_1, \ldots, \theta_{n-1}$ (which are defined like normal coordinates above) the Gauss Lemma implies that 
+$\left\langle\frac{\partial}{\partial \theta_i}, \frac{\partial}{\partial r}\right\rangle=0$. Then if
+$$
+x=h \frac{\partial}{\partial r}+\sum g_i \frac{\partial}{\partial \theta_i},
+$$
+we have
+$$
+\left\langle\frac{\partial}{\partial r}, x\right\rangle=h=h \frac{\partial r}{\partial r}+\sum g_i \frac{\partial r}{\partial \theta_i}=x(r) .
+$$
+
+\subsection*{Induced covariant derivatives}
+
+For some preliminaries, a smooth mapping $\alpha(t,s):[a,b]\times(-\varepsilon,\varepsilon)\rightarrow M$ is called a variation of smooth path $\alpha(t,0)$.  
+Moreover, $\alpha$ is called geodesic variation if for each $s\in (-\varepsilon,\varepsilon)$, $\alpha(t,s)$ is a geodesic. 
+Let $T=\alpha_*\left(\frac{\partial}{\partial t}\right)$ and $V=\alpha_*\left(\frac{\partial}{\partial s}\right)$. 
+We often confront with covariant derivatives for vector field $T$ or $V$, such as $\nabla_{\frac{\partial}{\partial t}} T$, simply denoted by $\nabla_T T$. 
+However, as covariant derivatives are defined on $TM$ rather than tangent vector fields on $[a,b]\times(-\varepsilon,\varepsilon)$, it is necessary to clarify 
+the definition of induced covariant derivatives. In order to do so, we need to generalize the definition of covariant derivatives making it valid for smooth vector bundles. 
+
+First, we introduce (smooth) vector bundles.
+\begin{definition}
+  Let $M$ be a topological space. A (real) vector bundle of rank $k$ over $M$ is a topological space $E$ together with 
+  a surjective continuous map $\pi: E \rightarrow M$ satisfying the following conditions:
+
+  (i) For each $p \in M$, the fiber $E_p=\pi^{-1}(p)$ over $p$ is endowed with the structure of a $k$-dimensional real vector space.
+
+  (ii) For each $p \in M$, there exist a neighborhood $U$ of $p$ in $M$ and a homeomorphism $\Phi: \pi^{-1}(U) \rightarrow U \times \mathbb{R}^k$ 
+  (called a local trivialization of $E$ over $U$ ), satisfying the following conditions:
+  \begin{itemize}
+    \item $\pi_U \circ \Phi=\pi$ (where $\pi_U: U \times \mathbb{R}^k \rightarrow U$ is the projection);
+    \item for each $q \in U$, the restriction of $\Phi$ to $E_q$ is a vector space isomorphism from $E_q$ to $\{q\} \times \mathbb{R}^k \cong \mathbb{R}^k$
+  \end{itemize}
+\end{definition}
+If $M$ and $E$ are smooth manifolds with or without boundary, $\pi$ is a smooth map, and the local trivializations can be chosen to be diffeomorphisms, 
+then $E$ is called a smooth vector bundle. In this case, we call any local trivialization that is a diffeomorphism onto its image a smooth local trivialization. 
+And for $E$, a smooth vector bundle over $M$, we know that the projection map $\pi$ is a surjective smooth submersion (for any given local coordinate, 
+the rank of its Jacobi is constantly $m$).
+
+Like the tangent bundle, vector bundles are often most easily described by giving a collection of vector spaces, one for each point of the base manifold. 
+In order to make such a set into a smooth vector bundle, we would first have to construct a manifold topology and a smooth structure 
+on the disjoint union of all the vector spaces, and then construct the local trivializations and show that they have the requisite properties. 
+
+We are mostly interested in the induced bundle associated with a smooth map. Suppose $M, N$ are smooth manifolds and $f:M\rightarrow N$ is a smooth map. Let $f^*TN$ be
+a vector bundle over $M$ called the pull-back vector bundle of $TN$ via $f$, given by 
+$$
+f^*TN=\bigcup_{p\in M}\{p\}\times T_{f(p)}N.
+$$
+The following Lemma indicates that it is actually a smooth vector bundle.
+\begin{lemma}
+  $f^*TN$ is a smooth vector bundle over $M$.
+\end{lemma}
+\begin{proof}[Proof]
+  We first construct a manifold topology and a smooth structure on $f^*TN$. Let $F=\mathrm{id}_M\times \pi:M\times TN\rightarrow M\times N$, i.e.
+  $$
+  F(p,v)=(p,\pi(v)),\quad \forall p\in M, v\in T_{f(p)}N. 
+  $$
+  Since $\pi$ is a surjective smooth submersion, map $F$ is also a surjective smooth submersion. Then consider the graph of the given map $f$, 
+  denoted by $G:M\rightarrow M\times N$, i.e. 
+  $$
+  G(p)=(p,f(p)).
+  $$
+  By Example 6 in \cite{baizhengguoLiManJiHeChuBu1992}, pp.51-52, the graph of a smooth map is a regular submanifold, which leads to $G(M)$ is a $m$-dimension 
+  regular submanifold of $M\times N$ (the definition of a regular submanifold can be found in \cite{baizhengguoLiManJiHeChuBu1992}, Definition 2.1.10, p.51). 
+  Moreover, by Theorem 2.1.6 in \cite{baizhengguoLiManJiHeChuBu1992}, pp.54-55, as $F$ is a submersion, its preimage
+  $$
+  f^*TN=F^{-1}\left(G\left(M\right)\right)
+  $$
+  is a $(m+n)$-dimension regular submanifold of $M\times TN$. (If replacing $TN$ by another vector bundle over $N$, one can have a similar result.)
+  Therefore, a manifold topology and a smooth structure on $f^*TN$ are of course constructed. 
+
+  Now we construct the local trivialization. Since $f^*TN$ is a regular submanifold of $M\times N$, any given chart of $f^*TN$ must be in the form 
+  as $(U\times V, \phi\times\psi)$, where $(U,\phi)$ and $(V,\psi)$ are charts of $M$ and $TN$, respectively. 
+  Moreover, we have $f(U)\subset V$ and denote the chart of $\pi_{TN}(V)\subset N$ by $\psi_1$, i.e. $\psi_1: \pi_{TN}(V)\mathbb{R}^n$ is a homeomorphism.
+  Define $\Phi :\pi^{-1}(U)\rightarrow U\times \mathbb{R}^n$ as the following: 
+  $$
+  \Phi=\operatorname{Id}_M \times (\tilde{\pi}_n\circ \psi), 
+  $$
+  where $\tilde{\pi}_n: \mathbb{R}^{2n}\rightarrow\mathbb{R}^n$ is a projection which preserves the last $n$ items, 
+  i.e. $\tilde{\pi}_n(x^1,\ldots,x^{2n})=(x^{n+1},\ldots,x^{2n})$. 
+  On the other hand, for any $(p,x^1,\ldots,x^n)\in U\times \mathbb{R}^n$, one can verify that the following form defines an inverse map of $\Phi$: 
+  $$
+  \Phi^{-1}(p,x^1,\ldots,x^n)=\left(p,\psi^{-1}\left(\psi_1\circ f\left(p\right),x^1,\ldots,x^n\right)\right). 
+  $$
+  It is easy to verify that $\pi,\Phi$ and $\Phi^{-1}$ are smooth, so that $\Phi$ is a diffeomorphism, which satisfies the local trivialization conditions. 
+\end{proof}
+
+For general situations of constructing a smooth vector bundle, the next lemma (see \cite{leeIntroductionSmoothManifolds2013}, Lemma 10.6) provides a shortcut, 
+by showing that it is sufficient to construct the local trivializations, as long as they overlap with smooth transition functions. 
+(See also Problem 10-6, in \cite{leeIntroductionSmoothManifolds2013}, p.269, for a stronger form of this result.)
+\begin{lemma}[Vector Bundle Chart Lemma]
+  Let $M$ be a smooth manifold without boundary, and suppose that for each $p \in M$ we are given a real vector space $E_p$ of some fixed dimension $k$. 
+  Let $E=\coprod_{p \in M} E_p$, and let $\pi: E \rightarrow M$ be the map that takes each element of $E_p$ to the point $p$. 
+  Suppose furthermore that we are given the following data:
+
+  (i) an open cover $\left\{U_\alpha\right\}_{\alpha \in A}$ of $M$
+
+  (ii) for each $\alpha \in A$, a bijective map $\Phi_\alpha: \pi^{-1}\left(U_\alpha\right) \rightarrow U_\alpha \times \mathbb{R}^k$ 
+  whose restriction to each $E_p$ is a vector space isomorphism from $E_p$ to $\{p\} \times \mathbb{R}^k \cong \mathbb{R}^k$
+
+  (iii) for each $\alpha, \beta \in A$ with $U_\alpha \cap U_\beta \neq \varnothing$, a smooth map $\tau_{\alpha \beta}: U_\alpha \cap U_\beta \rightarrow\operatorname{GL}(k, \mathbb{R})$ 
+  such that the map $\Phi_\alpha \circ \Phi_\beta^{-1}$ from $\left(U_\alpha \cap U_\beta\right) \times \mathbb{R}^k$ to itself has the form
+  $$
+  \Phi_\alpha \circ \Phi_\beta^{-1}(p, v)=\left(p, \tau_{\alpha \beta}(p) v\right)
+  $$
+  Then $E$ has a unique topology and smooth structure making it into a smooth manifold and a smooth rank-$k$ vector bundle over $M$, 
+  with $\pi$ as projection and $\left\{\left(U_\alpha, \Phi_\alpha\right)\right\}$ as smooth local trivializations.
+\end{lemma}
+\begin{proof}[Proof]
+  For each point $p \in M$, choose some $U_\alpha$ containing $p$; choose a smooth chart $\left(V_p, \varphi_p\right)$ for $M$ 
+  such that $p \in V_p \subseteq U_\alpha$; and let $\widehat{V}_p=\varphi_p\left(V_p\right) \subseteq \mathbb{R}^n$
+  (where $n$ is the dimension of $M)$. Define a map $\widetilde{\varphi}_p: \pi^{-1}\left(V_p\right) \rightarrow \widehat{V}_p \times \mathbb{R}^k$ by 
+  $\widetilde{\varphi}_p=\left(\varphi_p \times \operatorname{Id}_{\mathbb{R}^k}\right) \circ\Phi_\alpha:$
+  $$
+  \pi^{-1}\left(V_p\right) \stackrel{\Phi_\alpha}{\longrightarrow} V_p \times \mathbb{R}^k \stackrel{\varphi_p \times \mathrm{Id}_{\mathbb{R}^k}}{\longrightarrow} 
+  \widehat{V}_p \times \mathbb{R}^k
+  $$
+  We will show that the collection of all such charts $\left\{\left(\pi^{-1}\left(V_p\right), \tilde{\varphi}_p\right): p \in M\right\}$ satisfies 
+  the conditions of the smooth manifold chart lemma, and therefore gives $E$ the structure of a smooth manifold with or without boundary.
+
+  As a composition of bijective maps, $\tilde{\varphi}_p$ is bijective onto an open subset of either $\mathbb{R}^n \times \mathbb{R}^k=\mathbb{R}^{n+k}$. 
+  For any $p, q \in M$, it is easy to check that
+  $$
+  \tilde{\varphi}_p\left(\pi^{-1}\left(V_p\right) \cap \pi^{-1}\left(V_q\right)\right)=\varphi_p\left(V_p \cap V_q\right) \times \mathbb{R}^k
+  $$
+  which is open because $\varphi_p$ is a homeomorphism onto an open subset of $\mathbb{R}^n$. Wherever two such charts overlap, we have
+  $$
+  \tilde{\varphi}_p \circ \widetilde{\varphi}_q^{-1}
+  =\left(\varphi_p \times \operatorname{Id}_{\mathbb{R}^k}\right) \circ \Phi_\alpha \circ \Phi_\beta^{-1} \circ\left(\varphi_q \times \operatorname{Id}_{\mathbb{R}^k}\right)^{-1}
+  $$
+  Since $\varphi_p \times \operatorname{Id}_{\mathbb{R}^k}, \varphi_q \times \operatorname{Id}_{\mathbb{R}^k}$, 
+  and $\Phi_\alpha \circ \Phi_\beta^{-1}$ are diffeomorphisms, the composition is a diffeomorphism. Thus, conditions of the smooth manifold chart are satisfied. 
+  Because the open cover $\left\{V_p: p \in M\right\}$ has a countable subcover, $T_2$ condition is satisfied as well.
+  Besides, to check the Hausdorff condition, just note that any two points in the same space $E_p$ lie in one of the charts we have constructed; 
+  while if $\xi \in E_p$ and $\eta \in E_q$ with $p \neq q$, we can choose $V_p$ and $V_q$ to be disjoint neighborhoods of $p$ and $q$, 
+  so that the sets $\pi^{-1}\left(V_p\right)$ and $\pi^{-1}\left(V_q\right)$ are disjoint coordinate neighborhoods containing $\xi$ and $\eta$, respectively. 
+  Thus we have given $E$ the structure of a smooth manifold.
+
+  With respect to this structure, each of the maps $\Phi_\alpha$ is a diffeomorphism, 
+  because in terms of the coordinate charts $\left(\pi^{-1}\left(V_p\right), \tilde{\varphi}_p\right)$ for $E$ and $\left(V_p \times \mathbb{R}^k, \varphi_p \times \operatorname{Id}_{\mathbb{R}^k}\right)$ 
+  for $V_p \times \mathbb{R}^k$, the coordinate representation of $\Phi_\alpha$ is the identity map. The coordinate representation of $\pi$, 
+  with respect to the same chart for $E$ and the chart $\left(V_p, \varphi_p\right)$ for $M$, is $\pi(x, v)=x$, so $\pi$ is smooth as well. 
+  Because each $\Phi_\alpha$ maps $E_p$ to $\{p\} \times \mathbb{R}^k$, it is immediate that $\pi_1 \circ \Phi_\alpha=\pi$, 
+  and $\Phi_\alpha$ is linear on fibers by hypothesis. Thus, $\Phi_\alpha$ satisfies all the conditions for a smooth local trivialization.
+
+  The fact that this is the unique such smooth structure follows easily from the requirement that the maps $\Phi_\alpha$ be diffeomorphisms onto their images: 
+  any smooth structure satisfying the same conditions must include all of the charts we constructed, so it is equal to this one.
+\end{proof}
+
+One can also prove Lemma 2 with Lemma 3. For any $p\in M$, there exist open subsets $W_p\subset M$ and $V_p\subset N$ such that $f(W_p)\subset V_p$. Take $\{W_p\}_{p\in M}$
+as an open cover of $M$. One can define the local trivialization on each $\pi^{-1}(W_p)$ in the exactly same way in the proof of Lemma 2, and easily check 
+condition (ii) is satisfied. Then one can find above local trivializations overlap with the Jacobians of the transition functions between charts over $N$, 
+which is definitely smooth. Therefore, by Lemma 3, $f^*TN$ is a smooth vector bundle.
+
+Let $\pi: E \rightarrow M$ be a vector bundle. A (smooth) section of $E$ is a section of the map $\pi$, that is, 
+a continuous (smooth) map $\sigma: M \rightarrow E$ satisfying $\pi \circ \sigma=\operatorname{Id}_M$. 
+This means that $\sigma(p)$ is an element of the fiber $E_p$ for each $p \in M$. 
+
+Now we can generalize covariant derivatives to arbitrary vector bundles. A connection on a vector bundle provides a means to take differentials of smooth sections 
+of the vector bundle, and the notion of parallel transport can also be extended to vector bundles.
+\begin{definition}
+  Let $\pi: E \rightarrow M$ be a vector bundle over a smooth manifold $M$, and $\Gamma(E)$ be the set of smooth sections of this vector bundle. A connection $D$ on the vector bundle $E$ is defined as a mapping
+  $$
+  D: \Gamma(E) \times \mathfrak{X}(M) \rightarrow \Gamma(E),
+  $$
+  $$
+  (\xi, X) \mapsto D(\xi, X) = D_X \xi,
+  $$
+  which satisfies the following conditions: for any $X, Y \in \mathfrak{X}(M)$, $\xi, \eta \in \Gamma(E)$, $\lambda \in \mathbb{R}$, and $f \in C^\infty(M)$,
+  \begin{align*}
+    &(1) D_{X+fY}\xi = D_X \xi + fD_Y \xi,\\
+    &(2) D_X (\xi + \lambda \eta) = D_X \xi + \lambda D_X \eta,\\
+    &(3) D_X (f \xi) = X(f)\xi + f D_X \xi.
+  \end{align*}
+\end{definition}
+Here, $D_X \xi$ is called the covariant derivative of the smooth section $\xi$ with respect to $X$. Condition (1) indicates that 
+$D_X \xi$ is a tensor with respect to $X$. Thus, the connection $D$ can be seen as 
+a mapping $D: \Gamma(E) \rightarrow \Gamma(E \otimes T^*M)$, such that
+$$
+(D\xi)(X) = D_X \xi, \quad \forall \xi \in \Gamma(E), X \in \mathfrak{X}(M).
+$$
+$D\xi$ is called the covariant differential of the smooth section $\xi$. More properties can be found in \cite{ChenWeiHuan2002}, Section 2.8.
+
+Let $(N, \overline{D})$ be an $n$-dimensional affine connection space, $M$ be an $m$-dimensional smooth manifold, and $f: M \rightarrow N$ be a smooth map. 
+We can construct the pullback bundle $\pi: f^* TN \rightarrow M$, which is an $n$-dimensional smooth vector bundle over $M$, and its smooth sections are called 
+(smooth) vector fields on $N$ defined along $f$. With the connection $\overline{D}$, we can introduce a connection $D$ on $f^* TN$, 
+constructed as follows:
+
+For any $\xi \in \Gamma(f^* TN)$ and $p \in M$, we choose an open neighborhood $V$ of $f(p)$ in $N$ and a neighborhood $U$ of $p$ in $M$ such that $f(U) \subset V$. 
+Choose a local frame $\{e_\alpha\}$ on $V$. Then, in the neighborhood $U$, $\xi$ can be represented as
+$$
+\left.\xi\right|_U = \xi^\alpha \cdot e_\alpha\circ f,
+$$
+where $\xi^\alpha \in C^\infty(U)$ for $1 \leq \alpha \leq n$. For any $X \in T_p M$, we define
+$$
+D_X \xi = X\left(\xi^\alpha\right) e_\alpha(f(p)) + \xi^\alpha(p) \overline{D}_{f_*(X(p))} e_\alpha \in \pi^{-1}(p).
+$$
+The right-hand side is independent of the choice of the local frame $\{e_\alpha\}$. If $X \in \mathfrak{X}(M)$, 
+then the $D_X \xi$ obtained from the above equation is a smooth section of the pullback bundle $\pi: f^* TN \rightarrow M$. 
+
+For the independence of the choice of the local frame, if $\left\{E_\beta\right\}$ is another local frame on $V$, which satisfies:
+$$
+\left.\xi\right|_u=\tilde{\xi}^\beta \cdot E_\beta \circ f=\tilde{\xi}^\beta \cdot\left(A_\beta^\alpha e_\alpha\right) \circ f,
+$$
+where $\tilde{\xi}^\beta \in C^\infty(U), A_\beta^\alpha \in C^\infty(V)$ for $1 \leq \alpha,\beta \leq n$.
+Then for any $X \in T_P M$, we have
+$$
+\begin{aligned}
+D_X \xi
+= & X\left(\tilde{\xi}^\beta\right) \cdot E_\beta(f(p))+\tilde{\xi}^\beta(p) \overline{D}_{f_*\left(x_p\right)} E_\beta \\
+= & X\left(\tilde{\xi}^\beta\right) \cdot A_\beta^\alpha(f(p)) \cdot e_\alpha(f(p))+\tilde{\xi}^\beta(p) \overline{D}_{f_*\left(x_p\right)}\left(A_\beta^\alpha e_\alpha\right) \\
+= & \left(X\left(\tilde{\xi}^\beta\right) \cdot A_\beta^\alpha(f(p))+f_*\left(x_p\right)\left(A_\beta^\alpha\right)\right) e_\alpha(f(p)) \\
+& \quad + \tilde{\xi}^\beta(p) A_\beta^\alpha(f(p)) \overline{D}_{f_*\left(x_p\right)} e_\alpha \\
+= & X\left(\xi^\alpha\right) \cdot e_\alpha(f(p))+\xi^\alpha(p) \overline{D}_{f_*}\left(x_p\right) e_\alpha,
+\end{aligned}
+$$
+which indicates the independence. 
+
+Thus, we obtain a mapping $D: \Gamma(f^* TN) \times \mathfrak{X}(M) \rightarrow \Gamma(f^* TN)$. It can be easily seen that 
+the mapping $D$ satisfies all the conditions in Definition 4, and therefore, it is a connection on the vector bundle $f^* TN$. 
+This connection is called the induced connection on the pullback bundle.
+
+Note that for any $X \in \mathfrak{X}(M)$, $f_*(X) \in \Gamma(f^* TN)$. Assume that $N$ is a Riemannian manifold and 
+$\overline{D}$ is the corresponding Riemannian connection. Based on the construction of the connection $D$ and 
+the properties of the Riemannian connection $\overline{D}$, we can prove the following two identities:
+\begin{align*}
+D_X f_*(Y) - D_Y f_*(X) = f_*([X, Y]), \quad \forall X, Y \in \mathfrak{X}(M), \\
+X\langle\xi, \eta\rangle = \left\langle D_X \xi, \eta\right\rangle + \left\langle\xi, D_X \eta\right\rangle, 
+\quad \forall X \in \mathfrak{X}(M), \xi, \eta \in \Gamma(f^* TN).
+\end{align*}
+For instance, here we verify the first equation. Take $p, u, v, \{e_\alpha\}$ as before and suppose on $U$, we have
+$$
+f_* X=\zeta^\alpha e_\alpha \circ f \text { and } f_* Y=\xi^\beta e_\beta \circ f. 
+$$
+Therefore,
+$$
+\begin{aligned}
+f_*(XY) 
+& =X f_* Y \\
+& =X\left(\xi^\beta e_\beta \circ f\right) \\
+& =X\left(\xi^\beta\right) e_\beta \circ f+\xi^\beta X\left(e_\beta \circ f\right) \\
+& =X\left(\xi^\beta\right) e_\beta \circ f+\xi^\beta f_* X e_\beta \\
+& =X\left(\xi^\beta\right) e_\beta \circ f+\zeta^\alpha \xi^\beta e_\alpha e_\beta .
+\end{aligned}
+$$
+Similarly, we have
+$$
+f_*(Y X)=Y\left(\zeta^\alpha\right) e_\alpha \circ f+\zeta^\alpha \xi^\beta e_\alpha e_\beta .
+$$
+Thus,
+$$
+\begin{aligned}
+D_X f_* Y-D_Y f_* X & =X\left(\xi^\beta\right) e_\beta \circ f+\xi^\beta \overline{D}_{f_*(X)} e_\beta - 
+Y\left(\zeta^\alpha\right) e_\alpha \circ f-\zeta^\alpha D_{f_*(Y)} e_\alpha \\
+& =X\left(\xi^\beta\right) e_\beta \circ f-Y\left(\zeta^\alpha\right) e_\alpha \circ f+\zeta^\alpha \xi^\beta\left(\overline{D}_{e_\alpha} e_\beta-\overline{D}_{e_\beta} e_\alpha\right) \\
+& =X\left(\xi^\beta\right) e_\beta \circ f-Y\left(\zeta^\alpha\right) e_\alpha \circ f+\zeta^\alpha \xi^\beta\left[e_\alpha, e_\beta\right] \\
+& =f_*([X, Y])
+\end{aligned}
+$$
+Let $\gamma: [a, b] \rightarrow M$ be a regular smooth curve on the affine connection space $(M, \overline{D})$, 
+meaning that the tangent vector $\gamma'$ is non-zero everywhere. Then $\gamma$ is locally embedded. Hence, 
+for any $X \in \Gamma(\gamma^* TM)$, $X$ is locally a tangent vector on $M$ restricted to the curve $\gamma$, and thus, 
+the covariant derivative $\overline{D}_{\gamma'(t)} X$ is meaningful everywhere. Based on the definitions of the induced connection $D$ and 
+$\overline{D}_{\gamma'(t)} X$, we have: $\forall X \in \Gamma(\gamma^* TM)$, 
+\begin{align*}
+  D_{\frac{\partial}{\partial t}} X 
+  &=\frac{d}{dt}\left(x^i(t)\right)e_i(t)+X^i(t)\overline{D}_{\gamma^\prime(t)}e_i \\
+  &=\overline{D}_{\gamma^\prime(t)}(X^ie_i) = \overline{D}_{\gamma'(t)} X.
+\end{align*}
+From this, it is convenient for us not to distinguish $D_{\frac{\partial}{\partial t}} X$ and $\overline{D}_{\gamma'(t)} X$. As a result, we will simply write
+$\nabla_T T$ to indicate either $\nabla_{\frac{\partial}{\partial t}}X$ on $[a,b]\times (-\varepsilon,\varepsilon)$ or $\nabla_T T$ on $M$. 
+
+\bibliographystyle{unsrt}
+\bibliography{NoteRef}
+
+\end{document}
