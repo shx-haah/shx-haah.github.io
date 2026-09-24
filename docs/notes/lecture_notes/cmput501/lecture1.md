@@ -4,17 +4,16 @@
 
 
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribe1.pdf" type="application/pdf" width="100%" height="750px"/>
+[Scribe1.pdf](https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribe1.pdf)
 
 
 > Notes below are meant to supplement the scribed notes.
 
 ## Stable Matching May Not Be Unique (Section 1.2)
 
-In the stable matching problem, there are instances of stable matching with $n$ doctors and $n$ hospitals where the number of stable matchings (solutions) can be exponential in $n$.(1)
-{.annotate}
+In the stable matching problem, there are instances of stable matching with $n$ doctors and $n$ hospitals where the number of stable matchings (solutions) can be exponential in $n$.[^1]
 
-1. Consider the following example with $n=2$. The preference lists are as follows: $d_1$: $h_1 \succ h_2$, $d_2$: $h_1 \succ h_2$; $h_1$: $d_1 \succ d_2$, $h_2$: $d_1 \succ d_2$. There are two stable matchings: $\{(d_1,h_1),(d_2,h_2)\}$ and $\{(d_1,h_2),(d_2,h_1)\}$. By combining multiple such instances, we can construct instances with $n$ doctors and $n$ hospitals that have $2^{n/2}$ stable matchings.
+[^1]: Consider the following example with $n=2$. The preference lists are as follows: $d_1$: $h_1 \succ h_2$, $d_2$: $h_1 \succ h_2$; $h_1$: $d_1 \succ d_2$, $h_2$: $d_1 \succ d_2$. There are two stable matchings: $\{(d_1,h_1),(d_2,h_2)\}$ and $\{(d_1,h_2),(d_2,h_1)\}$. By combining multiple such instances, we can construct instances with $n$ doctors and $n$ hospitals that have $2^{n/2}$ stable matchings.
 
 ## Minimize the Number of Machines (Section 1.3.1)
 

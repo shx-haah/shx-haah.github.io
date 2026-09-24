@@ -1,79 +1,80 @@
-site_name: Homepage
+site_name: Haoxin's Homepage
 nav:
   - Home: index.md
-  - Academic Background: academic_profile.md
-  - Notes: 
-    - Lecture Notes: 
-      # - CMPUT 658 Modelling Strategic Behavior: 
-      #   - Introduction: notes/lecture_notes/cmput658/intro.md
-      #   - Lecture1: notes/lecture_notes/cmput658/lecture1.md
-      #   - Lecture2: notes/lecture_notes/cmput658/lecture2.md
-      #   - Lecture3: notes/lecture_notes/cmput658/lecture3.md
-      #   - Lecture4: notes/lecture_notes/cmput658/lecture4.md
-      #   - Lecture5: notes/lecture_notes/cmput658/lecture5.md
-      #   - Lecture6: notes/lecture_notes/cmput658/lecture6.md
-      #   - Lecture7: notes/lecture_notes/cmput658/lecture7.md
-      #   - Lecture8: notes/lecture_notes/cmput658/lecture8.md
-      #   - Lecture9: notes/lecture_notes/cmput658/lecture9.md
-      #   - Lecture10: notes/lecture_notes/cmput658/lecture10.md
-      - CMPUT 501 Advanced Algorithms: 
-        - Introduction: notes/lecture_notes/cmput501/intro.md
-        - Lecture1: notes/lecture_notes/cmput501/lecture1.md
-        - Lecture2: notes/lecture_notes/cmput501/lecture2.md
-        - Lecture3: notes/lecture_notes/cmput501/lecture3.md
-        - Lecture4: notes/lecture_notes/cmput501/lecture4.md
-        - Lecture5: notes/lecture_notes/cmput501/lecture5.md
-        - Lecture6: notes/lecture_notes/cmput501/lecture6.md
-        - Lecture7: notes/lecture_notes/cmput501/lecture7.md
-        - Lecture8: notes/lecture_notes/cmput501/lecture8.md
-        - Lecture9: notes/lecture_notes/cmput501/lecture9.md
-        - Lecture10: notes/lecture_notes/cmput501/lecture10.md
-        - Lecture11: notes/lecture_notes/cmput501/lecture11.md
-        - Lecture12: notes/lecture_notes/cmput501/lecture12.md
-        - Lecture13: notes/lecture_notes/cmput501/lecture13.md
-        - Lecture14: notes/lecture_notes/cmput501/lecture14.md
-        - Lecture15: notes/lecture_notes/cmput501/lecture15.md
-        - Lecture16: notes/lecture_notes/cmput501/lecture16.md
-        - Lecture17: notes/lecture_notes/cmput501/lecture17.md
-        - Lecture18: notes/lecture_notes/cmput501/lecture18.md
-        - Lecture19: notes/lecture_notes/cmput501/lecture19.md
-        - Lecture20: notes/lecture_notes/cmput501/lecture20.md
-        - Lecture21: notes/lecture_notes/cmput501/lecture21.md
-        - Lecture22: notes/lecture_notes/cmput501/lecture22.md
-        - Lecture23: notes/lecture_notes/cmput501/lecture23.md
-        - Lecture24: notes/lecture_notes/cmput501/lecture24.md
-        - Lecture25: notes/lecture_notes/cmput501/lecture25.md
-      - STAT 541 Statistics for Leaning: 
-        - Introduction: notes/lecture_notes/stat541/stat541_intro.md
-        - Week1: notes/lecture_notes/stat541/stat541_week1.md
-        - Week2: notes/lecture_notes/stat541/stat541_week2.md
-        - Week3: notes/lecture_notes/stat541/stat541_week3.md
-        - Assignment 1: notes/lecture_notes/stat541/stat541_assignment1.md
-        - Week4: notes/lecture_notes/stat541/stat541_week4.md
-        - Week5: notes/lecture_notes/stat541/stat541_week5.md
-        - Assignment 2: notes/lecture_notes/stat541/stat541_assignment2.md
-        - Week6: notes/lecture_notes/stat541/stat541_week6.md
-        - Week8: notes/lecture_notes/stat541/stat541_week8.md
-        - Assignment 3: notes/lecture_notes/stat541/stat541_assignment3.md
-        - Week9: notes/lecture_notes/stat541/stat541_week9.md
-        - Week10: notes/lecture_notes/stat541/stat541_week10.md
-        - Week11: notes/lecture_notes/stat541/stat541_week11.md
-        - Assignment 4: notes/lecture_notes/stat541/stat541_assignment4.md
-        - Week12: notes/lecture_notes/stat541/stat541_week12.md
-        - Week13: notes/lecture_notes/stat541/stat541_week13.md
-        - Assignment 5: notes/lecture_notes/stat541/stat541_assignment5.md
-    - Python: notes/naming_conventions.md
-    - R: notes/r_objects.md
-    - Comparison Theorems in Riemann Geometry: 
-      - Preliminaries to Comparison Theorems: notes/comparison_thm/preliminaries.md
-      - Comparison Theorem: notes/comparison_thm/comp_thm.md
-      - Comparison Theorems and Application: notes/comparison_thm/comp_thm_app.md
-    - Hermitian Metric: 
-      - Hermitian Metric: notes/hermitian_metric/readme.md
-      - Laplacian Operator: notes/laplacian_kahler_mfd/readme.md
-  - Miscellaneous: 
-    - Compare Credit Cards: suggestions/creditcardcomp.md
-    - Acrobat 自动添加书签: suggestions/acrobatbookmark.md
+  - Research: academic_profile.md
+  - Background & Activities: CV.md
+  # - Notes: 
+  #   - Lecture Notes: 
+  #     # - CMPUT 658 Modelling Strategic Behavior: 
+  #     #   - Introduction: notes/lecture_notes/cmput658/intro.md
+  #     #   - Lecture1: notes/lecture_notes/cmput658/lecture1.md
+  #     #   - Lecture2: notes/lecture_notes/cmput658/lecture2.md
+  #     #   - Lecture3: notes/lecture_notes/cmput658/lecture3.md
+  #     #   - Lecture4: notes/lecture_notes/cmput658/lecture4.md
+  #     #   - Lecture5: notes/lecture_notes/cmput658/lecture5.md
+  #     #   - Lecture6: notes/lecture_notes/cmput658/lecture6.md
+  #     #   - Lecture7: notes/lecture_notes/cmput658/lecture7.md
+  #     #   - Lecture8: notes/lecture_notes/cmput658/lecture8.md
+  #     #   - Lecture9: notes/lecture_notes/cmput658/lecture9.md
+  #     #   - Lecture10: notes/lecture_notes/cmput658/lecture10.md
+  #     - CMPUT 501 Advanced Algorithms: 
+  #       - Introduction: notes/lecture_notes/cmput501/intro.md
+  #       - Lecture1: notes/lecture_notes/cmput501/lecture1.md
+  #       - Lecture2: notes/lecture_notes/cmput501/lecture2.md
+  #       - Lecture3: notes/lecture_notes/cmput501/lecture3.md
+  #       - Lecture4: notes/lecture_notes/cmput501/lecture4.md
+  #       - Lecture5: notes/lecture_notes/cmput501/lecture5.md
+  #       - Lecture6: notes/lecture_notes/cmput501/lecture6.md
+  #       - Lecture7: notes/lecture_notes/cmput501/lecture7.md
+  #       - Lecture8: notes/lecture_notes/cmput501/lecture8.md
+  #       - Lecture9: notes/lecture_notes/cmput501/lecture9.md
+  #       - Lecture10: notes/lecture_notes/cmput501/lecture10.md
+  #       - Lecture11: notes/lecture_notes/cmput501/lecture11.md
+  #       - Lecture12: notes/lecture_notes/cmput501/lecture12.md
+  #       - Lecture13: notes/lecture_notes/cmput501/lecture13.md
+  #       - Lecture14: notes/lecture_notes/cmput501/lecture14.md
+  #       - Lecture15: notes/lecture_notes/cmput501/lecture15.md
+  #       - Lecture16: notes/lecture_notes/cmput501/lecture16.md
+  #       - Lecture17: notes/lecture_notes/cmput501/lecture17.md
+  #       - Lecture18: notes/lecture_notes/cmput501/lecture18.md
+  #       - Lecture19: notes/lecture_notes/cmput501/lecture19.md
+  #       - Lecture20: notes/lecture_notes/cmput501/lecture20.md
+  #       - Lecture21: notes/lecture_notes/cmput501/lecture21.md
+  #       - Lecture22: notes/lecture_notes/cmput501/lecture22.md
+  #       - Lecture23: notes/lecture_notes/cmput501/lecture23.md
+  #       - Lecture24: notes/lecture_notes/cmput501/lecture24.md
+  #       - Lecture25: notes/lecture_notes/cmput501/lecture25.md
+  #     - STAT 541 Statistics for Leaning: 
+  #       - Introduction: notes/lecture_notes/stat541/stat541_intro.md
+  #       - Week1: notes/lecture_notes/stat541/stat541_week1.md
+  #       - Week2: notes/lecture_notes/stat541/stat541_week2.md
+  #       - Week3: notes/lecture_notes/stat541/stat541_week3.md
+  #       - Assignment 1: notes/lecture_notes/stat541/stat541_assignment1.md
+  #       - Week4: notes/lecture_notes/stat541/stat541_week4.md
+  #       - Week5: notes/lecture_notes/stat541/stat541_week5.md
+  #       - Assignment 2: notes/lecture_notes/stat541/stat541_assignment2.md
+  #       - Week6: notes/lecture_notes/stat541/stat541_week6.md
+  #       - Week8: notes/lecture_notes/stat541/stat541_week8.md
+  #       - Assignment 3: notes/lecture_notes/stat541/stat541_assignment3.md
+  #       - Week9: notes/lecture_notes/stat541/stat541_week9.md
+  #       - Week10: notes/lecture_notes/stat541/stat541_week10.md
+  #       - Week11: notes/lecture_notes/stat541/stat541_week11.md
+  #       - Assignment 4: notes/lecture_notes/stat541/stat541_assignment4.md
+  #       - Week12: notes/lecture_notes/stat541/stat541_week12.md
+  #       - Week13: notes/lecture_notes/stat541/stat541_week13.md
+  #       - Assignment 5: notes/lecture_notes/stat541/stat541_assignment5.md
+  #   - Python: notes/naming_conventions.md
+  #   - R: notes/r_objects.md
+  #   - Comparison Theorems in Riemann Geometry: 
+  #     - Preliminaries to Comparison Theorems: notes/comparison_thm/preliminaries.md
+  #     - Comparison Theorem: notes/comparison_thm/comp_thm.md
+  #     - Comparison Theorems and Application: notes/comparison_thm/comp_thm_app.md
+  #   - Hermitian Metric: 
+  #     - Hermitian Metric: notes/hermitian_metric/readme.md
+  #     - Laplacian Operator: notes/laplacian_kahler_mfd/readme.md
+  # - Miscellaneous: 
+  #   - Compare Credit Cards: suggestions/creditcardcomp.md
+  #   - Acrobat 自动添加书签: suggestions/acrobatbookmark.md
 
 theme: 
   name: material
@@ -107,6 +108,7 @@ theme:
         name: Switch to system preference
 
 markdown_extensions:
+  - tables
   - toc:
       permalink: true
   - pymdownx.arithmatex:

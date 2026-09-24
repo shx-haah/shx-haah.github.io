@@ -2,7 +2,7 @@
 
 ## Projection Pursuit Regression
 
-Projection pursuit regression (PPR) is a statistical model that extends [additive models](stat541_week9.md#generalized-additive-models-gams). This model adapts the additive models in that it first projects the design matrix of features in the optimal direction before applying smoothing functions.
+Projection pursuit regression (PPR) is a statistical model that extends [[stat541_week9#Generalized Additive Models (GAMs)|additive models]]. This model adapts the additive models in that it first projects the design matrix of features in the optimal direction before applying smoothing functions.
 
 Assume we have an input vector $X\in \mathbb{R}^p$, and a target $Y$. Let $\omega_m\in \in \mathbb{R}^p, m=1,2, \ldots, M$, be unit vectors of unknown parameters. The PPR model has the form
 
@@ -20,10 +20,9 @@ The function $g_m\left(\omega_m\cdot X\right)$ is called a ridge function in $\m
 
 The PPR model is very general, since forming nonlinear functions of linear combinations generates a surprisingly large class of models. For example, the product $X_1 \cdot X_2$ can be written as $\frac{1}{4}\left(\left(X_1+X_2\right)^2-\left(X_1-X_2\right)^2\right)$.
 
-**Remarkable fact:** If $M$ is taken arbitrarily large, for appropriate choice of $g_m$ the PPR model can approximate any continuous function in $\mathbb{R}^p$ arbitrarily well(1). 
-{.annotate}
+**Remarkable fact:** If $M$ is taken arbitrarily large, for appropriate choice of $g_m$ the PPR model can approximate any continuous function in $\mathbb{R}^p$ arbitrarily well[^1]. 
 
-1. Such a class of models is called a universal approximator. However this generality comes at a price. Interpretation of the fitted model is usually difficult, because each input enters into the model in a complex and multifaceted way. As a result, the PPR model is most useful for prediction, and not very useful for producing an understandable model for the data. 
+[^1]: Such a class of models is called a universal approximator. However this generality comes at a price. Interpretation of the fitted model is usually difficult, because each input enters into the model in a complex and multifaceted way. As a result, the PPR model is most useful for prediction, and not very useful for producing an understandable model for the data. 
 
 ### How to Fit the PPR Model
 
@@ -43,10 +42,9 @@ Consider just one term ( $M=1$, and drop the subscript):
 
 These two steps, estimation of $g$ and $\omega$, are iterated until convergence. 
 
-With more than one term in the PPR model, the model is built in a forward stage-wise manner(1), adding a pair $\left(\omega_m, g_m\right)$ at each stage.
-{.annotate}
+With more than one term in the PPR model, the model is built in a forward stage-wise manner[^2], adding a pair $\left(\omega_m, g_m\right)$ at each stage.
 
-1. Forward stagewise modeling approximates the solution to the minimization of the error function $\displaystyle \min_{g_m,\omega_m} \sum_{i=1}^n\left(y^{(i)}-\sum_{m=1}^K g_m\left(\omega_m\cdot x^{(i)}\right)\right)^2$, $1\leq K\leq M-1$, by sequentially adding new basis functions $g_{K+1}\left(\omega_{K+1}\cdot x^{(i)}\right)$ to the minimization without adjusting the parameters of those that have already been added. For more details see Section 10.3, ESL. 
+[^2]: Forward stagewise modeling approximates the solution to the minimization of the error function $\displaystyle \min_{g_m,\omega_m} \sum_{i=1}^n\left(y^{(i)}-\sum_{m=1}^K g_m\left(\omega_m\cdot x^{(i)}\right)\right)^2$, $1\leq K\leq M-1$, by sequentially adding new basis functions $g_{K+1}\left(\omega_{K+1}\cdot x^{(i)}\right)$ to the minimization without adjusting the parameters of those that have already been added. For more details see Section 10.3, ESL. 
 
 ### Implementation Details
 

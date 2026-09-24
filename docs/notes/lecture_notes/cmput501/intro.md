@@ -49,94 +49,94 @@ You should also learn some tools and tricks to tackle problems that might arise 
 
 ### Greedy, Dynamic Programming
 
-- [Lecture 1](lecture1.md/#lecture-1): **Stable Matching, Interval Scheduling, Minimizing lateness, Weighted Interval Scheduling**
+- [[lecture1#Lecture 1|Lecture 1]]: **Stable Matching, Interval Scheduling, Minimizing lateness, Weighted Interval Scheduling**
 
     Also see sections 1.1, 4.1, 4.2, 6.1 (KT)
 
-- [Lecture 2](lecture2.md/#lecture-2): **Segmented Least Square, Sequence Alignments, BST**
+- [[lecture2#Lecture 2|Lecture 2]]: **Segmented Least Square, Sequence Alignments, BST**
 
     Also see sections 6.3, 6.6, 6.6 in (KT), extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
-- [Lecture 3](lecture3.md/#lecture-3): **Advanced DP: Saving time using monotonicity, SMWAK**
+- [[lecture3#Lecture 3|Lecture 3]]: **Advanced DP: Saving time using monotonicity, SMWAK**
 
     Extra notes for Advanced algorithms by (JE), and this [survey paper](https://link.springer.com/content/pdf/10.1007/978-1-4419-7997-1_28.pdf).
 
 ### Minimum Spanning Tree, Minimum Arborescence:
 
-- [Lecture 4](lecture4.md/#lecture-4): **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
+- [[lecture4#Lecture 4|Lecture 4]]: **Minimum Spanning Tree (MST), Fredman-Tarjan Algorithm**
 
-- [Lecture 5](lecture5.md/#lecture-5): **MST in linear time, Minimum Arborescence**
+- [[lecture5#Lecture 5|Lecture 5]]: **MST in linear time, Minimum Arborescence**
 
     Also 4.9 from (KT).
 
 ### Randomized Algrithms:
 
-- [Lecture 6](lecture6.md/#lecture-6): **Introduction, simple deviation bounds, randomized min-cut**
+- [[lecture6#Lecture 6|Lecture 6]]: **Introduction, simple deviation bounds, randomized min-cut**
 
 
-- [Lecture 7](lecture7.md/#lecture-7): **Chernoff bound, Hypercube routing**
+- [[lecture7#Lecture 7|Lecture 7]]: **Chernoff bound, Hypercube routing**
 
     Also 4.1-4.2 from (MR)
 
-- [Lecture 8](lecture8.md/#lecture-8): **Balls and Bins, power of two choices**
+- [[lecture8#Lecture 8|Lecture 8]]: **Balls and Bins, power of two choices**
 
 
-- [Lecture 9](lecture9.md/#lecture-9): **Randomized load balancing, Hashing**
+- [[lecture9#Lecture 9|Lecture 9]]: **Randomized load balancing, Hashing**
 
     Also notes 5 from (JE), and these notes.
 
-- [Lecture 10](lecture10.md/#lecture-10): **Random Walks, resistence graph**
+- [[lecture10#Lecture 10|Lecture 10]]: **Random Walks, resistence graph**
 
     Also Chapter 6 from (MR)
 
-- [Lecture 11](lecture11.md/#lecture-11): **Finger printing, Polynomial identity testing**
+- [[lecture11#Lecture 11|Lecture 11]]: **Finger printing, Polynomial identity testing**
 
     Also Chapter 7 from (MR)
 
 ### Integer/Linear Programming and Combinatorial Optimization:
 
-- [Lecture 12](lecture12.md/#lecture-12): **Integer/Linear Programming, Duality**
+- [[lecture12#Lecture 12|Lecture 12]]: **Integer/Linear Programming, Duality**
 
 
-- [Lecture 13](lecture13.md/#lecture-13): **Bipartite Matching, Matching Polytope**
+- [[lecture13#Lecture 13|Lecture 13]]: **Bipartite Matching, Matching Polytope**
 
-- [Lecture 14](lecture14.md/#lecture-14): **Weighted Biparite Matching**
+- [[lecture14#Lecture 14|Lecture 14]]: **Weighted Biparite Matching**
 
-- [Lecture 15](lecture15.md/#lecture-15): **Bipartite matching (vardinality and weighted) via priam dual methods**
+- [[lecture15#Lecture 15|Lecture 15]]: **Bipartite matching (vardinality and weighted) via priam dual methods**
 
 ### Approximation Algorithms
 
-- [Lecture 16](lecture16.md/#lecture-16): **Introduction, Set cover/Max coverage, Set cover rounding**
+- [[lecture16#Lecture 16|Lecture 16]]: **Introduction, Set cover/Max coverage, Set cover rounding**
 
     Also see 1.2, 1.6, 1.7 from (WS)
 
-- [Lecture 17](lecture17.md/#lecture-17): **Approximation Schemes: knapsack, Bin Packing**
+- [[lecture17#Lecture 17|Lecture 17]]: **Approximation Schemes: knapsack, Bin Packing**
 
     Also see 3.1-3.3 from (WS)
 
-- [Lecture 18](lecture18.md/#lecture-18): **Max-SAT**
+- [[lecture18#Lecture 18|Lecture 18]]: **Max-SAT**
 
     Also see 5.1-5.6 from (WS)
 
-- [Lecture 19](lecture19.md/#lecture-19): **Semidefinite Programming, Max-Cut**
+- [[lecture19#Lecture 19|Lecture 19]]: **Semidefinite Programming, Max-Cut**
 
     Also see 6.1-6.2 from (WS)
 
-- [Lecture 20](lecture20.md/#lecture-20): **Approximating metrics by tree metrics**
+- [[lecture20#Lecture 20|Lecture 20]]: **Approximating metrics by tree metrics**
 
     Also see 8.5 from (WS)
 
 ### Online Algorithms, Learning From Experts
 
-- [Lecture 23](lecture23.md/#lecture-23): **Online algorithms, Paging, Secretary problem**
+- [[lecture23#Lecture 23|Lecture 23]]: **Online algorithms, Paging, Secretary problem**
 
     Also see (MR) Chapter 13.
 
-- [Lecture 24](lecture24.md/#lecture-24): **Prophet inequality**
+- [[lecture24#Lecture 24|Lecture 24]]: **Prophet inequality**
 
     Also see [these](https://www.cs.cmu.edu/afs/cs.cmu.edu/academic/class/15850-f20/www/notes/lec27.pdf) notes by Gupta, [these](https://faculty.cc.gatech.edu/%7Essingla7/courses/Spring22/lec13.pdf) by Singla
 
-- [Lecture 25](lecture25.md/#lecture-25): **Learning from experts, Multiplicative weight update**
+- [[lecture25#Lecture 25|Lecture 25]]: **Learning from experts, Multiplicative weight update**
 
 
 ## Reference

@@ -42,10 +42,9 @@ $$
 \hat{f} = \phi_n(x^{(1)},y^{(1)},\dots, x^{(n)},y^{(n)})
 $$
 
-is a random function(1) determined by the data and the learning algorithm $\phi_n$. 
-{.annotate}
+is a random function[^1] determined by the data and the learning algorithm $\phi_n$. 
 
-1.  Note that a random function is a deterministic function. More precisely, a function of an arbitrary argument $t$ (defined on the set $T$ of its values, and taking numerical values or, more generally, values in a vector space) whose values are defined in terms of a certain experiment and may vary with the outcome of this experiment according to a given probability distribution.
+[^1]: Note that a random function is a deterministic function. More precisely, a function of an arbitrary argument $t$ (defined on the set $T$ of its values, and taking numerical values or, more generally, values in a vector space) whose values are defined in terms of a certain experiment and may vary with the outcome of this experiment according to a given probability distribution.
 
 ### **Definition** Loss function
 
@@ -134,10 +133,9 @@ Additionally, our computation shows that making assumptions about the allowable 
 
 ### Making Assumptions
 
-Ideally we would like a $f$ such that $R(f,P)$ is small for all distribution $P$. However, this is not possible by the *No Free Lunch Theorem*. Roughly, this says that for any $f$, there exists a $P$ such that $R(f,P)$ is large. In classification, this says that there exists a $P$ such that $f$ is no better than random guessing(1). 
-{.annotate}
+Ideally we would like a $f$ such that $R(f,P)$ is small for all distribution $P$. However, this is not possible by the *No Free Lunch Theorem*. Roughly, this says that for any $f$, there exists a $P$ such that $R(f,P)$ is large. In classification, this says that there exists a $P$ such that $f$ is no better than random guessing[^2]. 
 
-1. Random guessing is that we flip a coin and predict $y$ based on the coin being heads or tails.
+[^2]: Random guessing is that we flip a coin and predict $y$ based on the coin being heads or tails.
 
 Our solution is to make assumptions about $P$:  
 
@@ -176,10 +174,9 @@ which is called the average loss or empirical risk. Note that
 
 ### Gauge Learning Algorithms
 
-Given a learning algorithm $\phi_n$, how can we gauge the performance of $\phi_n$? We can look at $R(\hat{f},P)$, that is, we view the training data $\mathcal{D}_n$ as random and then $R(\hat{f},P)$(1) is a random variable. The expected risk (a.k.a. expected prediction error) is given by
-{.annotate}
+Given a learning algorithm $\phi_n$, how can we gauge the performance of $\phi_n$? We can look at $R(\hat{f},P)$, that is, we view the training data $\mathcal{D}_n$ as random and then $R(\hat{f},P)$[^3] is a random variable. The expected risk (a.k.a. expected prediction error) is given by
 
-1. Here $\hat{f}$ is dependent on $\mathcal{D}_n$, which should be written as $\hat{f}_{\mathcal{D}_n}$, but for simplicity, we still denote it as $\hat{f}$. 
+[^3]: Here $\hat{f}$ is dependent on $\mathcal{D}_n$, which should be written as $\hat{f}_{\mathcal{D}_n}$, but for simplicity, we still denote it as $\hat{f}$. 
 
 $$
 R(\phi_n,P) = E_{\mathcal{D}_n}\left(R(\hat{f},P)\right) = E_{\mathcal{D}_n}\left(E_{(x,y)}\left(L(\hat{f},y)\right)\right). 

@@ -2,17 +2,15 @@
 
 ## Generative Models for Classification
 
-For classification(1), [logistic regression](stat541_week5.md#logistic-regression) involves directly modeling $g(x)$ (i.e.  $Pr(y=1\mid x)$) using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the feature in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$(2).
-{.annotate}
+For classification[^1], [[stat541_week5#Logistic Regression|logistic regression]] involves directly modeling $g(x)$ (i.e.  $Pr(y=1\mid x)$) using the logistic function. We now consider an alternative and less direct approach to estimating these probabilities -- we model the distribution of the feature in each of the response classes, i.e. $p(x\mid y)$ for each $y\in \mathcal{Y}$. We then use Bayes’ theorem to flip these around into estimates for $Pr(y = 1 \mid x)$[^2].
 
-1. For simplicity, we assume $\mathcal{Y}=\{0,1\}$ and $\mathcal{X}=\mathbb{R}$ in this paragraph. 
+[^1]: For simplicity, we assume $\mathcal{Y}=\{0,1\}$ and $\mathcal{X}=\mathbb{R}$ in this paragraph. 
 
-2. This requires the knowledge of $Pr(x)$ and $Pr(y)$ for each $x\in \mathcal{X}, y\in \mathcal{Y}$. We can either choose $Pr(y)$ to be the proportion of each class among the whole data set, or regard it as unknown parameters which we will estimate later. As for $Pr(x)$, since our goal is to give the best prediction for new data, this term will be canceled while comparing different predictions. 
+[^2]: This requires the knowledge of $Pr(x)$ and $Pr(y)$ for each $x\in \mathcal{X}, y\in \mathcal{Y}$. We can either choose $Pr(y)$ to be the proportion of each class among the whole data set, or regard it as unknown parameters which we will estimate later. As for $Pr(x)$, since our goal is to give the best prediction for new data, this term will be canceled while comparing different predictions. 
 
-Compared with discriminative models(1), where we model $p(y\mid x)$ and use it to predict, for generative models, we model $p(y,x)$ and then use it to compute $p(y\mid x)$ for predictions. 
-{.annotate}
+Compared with discriminative models[^3], where we model $p(y\mid x)$ and use it to predict, for generative models, we model $p(y,x)$ and then use it to compute $p(y\mid x)$ for predictions. 
 
-1. Discriminative models, also referred to as conditional models, studies the ${\displaystyle P(y|x)}$ or maps the given unobserved variable (target) $x$ to a class $y$ dependent on the observed variables (training samples). Types of discriminative models include logistic regression, conditional random fields, decision trees among many others. 
+[^3]: Discriminative models, also referred to as conditional models, studies the ${\displaystyle P(y|x)}$ or maps the given unobserved variable (target) $x$ to a class $y$ dependent on the observed variables (training samples). Types of discriminative models include logistic regression, conditional random fields, decision trees among many others. 
 
 Specifically, we model 
 
@@ -76,10 +74,9 @@ $$
 \end{aligned}
 $$
 
-where $\hat{\pi_j}$ is the proportion of $\{y^{(i)}\}$ in class $j$, and $\hat{\Sigma_j}$ is the sample covariance matrix(1) of all observations in class $j$. 
-{.annotate}
+where $\hat{\pi_j}$ is the proportion of $\{y^{(i)}\}$ in class $j$, and $\hat{\Sigma_j}$ is the sample covariance matrix[^4] of all observations in class $j$. 
 
-1. A sample of numbers is taken from a larger population of numbers, where "population" indicates not number of people but the entirety of relevant data, whether collected or not. The sample mean is the average value of the sample. **The sample covariance** is useful in judging the reliability of the sample means as estimators and is also useful as an estimate of the population covariance matrix. 
+[^4]: A sample of numbers is taken from a larger population of numbers, where "population" indicates not number of people but the entirety of relevant data, whether collected or not. The sample mean is the average value of the sample. **The sample covariance** is useful in judging the reliability of the sample means as estimators and is also useful as an estimate of the population covariance matrix. 
 
 ### Compute $p(y\mid x,\hat{\theta})$ and Prediction
 
@@ -96,7 +93,7 @@ $$
 $$
 
 
-Computing $p(y=j\mid x, \theta)$ is actually similar with the computation in the [motivation for the logistic function in logistic regression](stat541_week5.md#motivation-and-interpretation). 
+Computing $p(y=j\mid x, \theta)$ is actually similar with the computation in the [[stat541_week5#Motivation and Interpretation|motivation for the logistic function in logistic regression]]. 
 
 $$
 \begin{aligned}

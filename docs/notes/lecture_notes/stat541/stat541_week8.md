@@ -74,11 +74,10 @@ We may look at the plot and pick the points where the "behavior" of the points c
     - Compute the AIC of a model with and without a knot and compare the models to determine if we need it. 
 3. Use cross-validation to select between candidate knot choices. 
 
-For AIC/BIC, we need the number of parameters(1): if no constraints, there are $4(l+1)$; there are 3 constraints(2) at each knot; therefore, there are $l+4$ parameters. 
-{.annotate}
+For AIC/BIC, we need the number of parameters[^1]: if no constraints, there are $4(l+1)$; there are 3 constraints[^2] at each knot; therefore, there are $l+4$ parameters. 
 
-1. Here we consider cubic spline with $l$ knots.
-2. Three constraints: continuous, continuous first and second order derivatives. 
+[^1]: Here we consider cubic spline with $l$ knots.
+[^2]: Three constraints: continuous, continuous first and second order derivatives. 
 
 We can use something called smoothing splines to improve this process. 
 
@@ -90,10 +89,9 @@ $$
 \hat{f}(x)=\operatorname*{arg\, min} _f \left(\sum_{i=1}^n\left(f\left(x^{(i)}\right)-y^{(i)}\right)^2+\lambda \int_{-\infty}^{\infty}\left(f^{\prime \prime}(x)\right)^2 d x\right),
 $$
 
-where $\lambda$ is a fixed smoothing parameter. The first term measures closeness to the data, while the second term penalizes curvature in the function, and $\lambda$ establishes a tradeoff between the two(1). 
-{.annotate}
+where $\lambda$ is a fixed smoothing parameter. The first term measures closeness to the data, while the second term penalizes curvature in the function, and $\lambda$ establishes a tradeoff between the two[^3]. 
 
-1. The penalty is 0 for linear functions of $f$. If our function has curvature, the penalty applies, and the penalty will be larger for more 'wiggly' functions. 
+[^3]: The penalty is 0 for linear functions of $f$. If our function has curvature, the penalty applies, and the penalty will be larger for more 'wiggly' functions. 
 
 Two special cases are:
 
@@ -115,10 +113,9 @@ $$
 f(x)=\sum_{i=1}^m \beta_i f_i(x). 
 $$
 
-For natural cubic splines with $m$ knots, the number of parameters is $m$ -- recall a cubic spline with $m$ knots has $m+4$ parameters, and in a natural cubic spline, we have 4 boundary constraints (2(1) on each side), so it will have $m$ parameters.
-{.annotate}
+For natural cubic splines with $m$ knots, the number of parameters is $m$ -- recall a cubic spline with $m$ knots has $m+4$ parameters, and in a natural cubic spline, we have 4 boundary constraints (2[^4] on each side), so it will have $m$ parameters.
 
-1. Two constraints: second and third order derivative being 0 at the boundary. 
+[^4]: Two constraints: second and third order derivative being 0 at the boundary. 
 
 Since we are putting a knot at every single data point, one would think we would have a very wiggly curve. However, we use the idea of regularization to mitigate this. First we will plug the basis functions into the minimization problem, and we have a minimization problem over the $\beta_i$'s:
 
@@ -161,10 +158,9 @@ $$
 \hat{Y}=X \hat{\beta}=X \left(X^T X\right)^{-1} X^T Y. 
 $$
 
-We can interpret each $\hat{Y}_i$ as a linear combination of the $y^{(i)}$ 's(1), i.e. $\hat{Y}_i=\sum_{j=1}^n H_{i j} Y_j$, where 
-{.annotate}
+We can interpret each $\hat{Y}_i$ as a linear combination of the $y^{(i)}$ 's[^5], i.e. $\hat{Y}_i=\sum_{j=1}^n H_{i j} Y_j$, where 
 
-1. If $H_{i i} \approx 1, H_{i j: i \neq j} \approx 0$, we can interpolate the data points for a flexible fit.
+[^5]: If $H_{i i} \approx 1, H_{i j: i \neq j} \approx 0$, we can interpolate the data points for a flexible fit.
 
 $$
 H = X \left(X^T X\right)^{-1} X^T. 
@@ -176,10 +172,9 @@ $$
 \operatorname{tr}(H)=\operatorname{tr}\left(X\left(X^T X\right)^{-1} X^T\right)=\operatorname{tr}\left(\left(X^T X\right)^{-1} X^T X\right)=p,
 $$
 
-which is the number of parameters. We will call the $\operatorname{tr}(H)$ as the number of effective parameters(1).  By analogy we now define the number of effective parameters (a.k.a. the effective degrees of freedom) of a smoothing spline. 
-{.annotate}
+which is the number of parameters. We will call the $\operatorname{tr}(H)$ as the number of effective parameters[^6].  By analogy we now define the number of effective parameters (a.k.a. the effective degrees of freedom) of a smoothing spline. 
 
-1. The linear operator $H$ is a projection operator, also known as the hat matrix in statistics. The expression $\operatorname{trace}\left(H\right)$ gives the dimension of the projection space, which is also the number of basis functions, and hence the number of parameters involved in the fit. 
+[^6]: The linear operator $H$ is a projection operator, also known as the hat matrix in statistics. The expression $\operatorname{trace}\left(H\right)$ gives the dimension of the projection space, which is also the number of basis functions, and hence the number of parameters involved in the fit. 
 
 For smoothing splines, we have 
 
@@ -189,10 +184,9 @@ $$
 
 We define the smoothing matrix, $S_\lambda=X\left(X^T X+\lambda \Omega\right)^{-1} X^T$, so that we have: $\hat{Y}=S_{\lambda} Y$. The effective number of parameters is $\operatorname{tr}\left(S_{\lambda}\right)$, which generalizes the result for linear regression. Also note that the effective degrees of freedom here may not be an integer. 
 
-The effective degrees of freedom(1) is a heuristic parameter count, which helps us compare the smoothing splines with other regression models, like polynomial regression. 
-{.annotate}
+The effective degrees of freedom[^7] is a heuristic parameter count, which helps us compare the smoothing splines with other regression models, like polynomial regression. 
 
-1. Although a natural cubic spline with $n$ knots has $n$ parameters, the penalty term in the [minimization problem](stat541_week8.md#smoothing-splines) regularizes the minimizer resulting in the smoothing spline has less than $n$ effective number of parameters. 
+[^7]: Although a natural cubic spline with $n$ knots has $n$ parameters, the penalty term in the [[#Smoothing Splines|minimization problem]] regularizes the minimizer resulting in the smoothing spline has less than $n$ effective number of parameters. 
 
 ### Summary
 
@@ -268,10 +262,9 @@ $$
 
 ### Effective Degrees of Freedom
 
-The choice of kernel function is actually not super important, but **the choice of the bandwidth parameter is important:** Large $\lambda$ implies lower variance (averages over more observations) but higher bias(1). Small $\lambda$ gives the opposite.
-{.annotate}
+The choice of kernel function is actually not super important, but **the choice of the bandwidth parameter is important:** Large $\lambda$ implies lower variance (averages over more observations) but higher bias[^8]. Small $\lambda$ gives the opposite.
 
-1. we essentially assume the true function is constant within the window. 
+[^8]: we essentially assume the true function is constant within the window. 
 
 
 Note that the predictions at our observed data points, $x^{(i)}$ have the form

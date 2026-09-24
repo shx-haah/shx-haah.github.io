@@ -2,7 +2,7 @@
 
 ## Classification and Regression Trees
 
-Recall [GAMs](stat541_week9.md#generalized-additive-models-gams) is complex univariate modelling, but no interaction effects between features. Here we introduce trees, which are simple univariate models (piecewise constant) but models interactions in a flexible manner. It can be motivated by a sequential decision making process:
+Recall [[stat541_week9#Generalized Additive Models (GAMs)|GAMs]] is complex univariate modelling, but no interaction effects between features. Here we introduce trees, which are simple univariate models (piecewise constant) but models interactions in a flexible manner. It can be motivated by a sequential decision making process:
 
 $$
 \begin{matrix}
@@ -70,10 +70,9 @@ where $R_{ij}$ stands for the $j$-th part of the $i$-th split.
 
 ### Impurity Measure
 
-To specify each split, we need to tell whether a split is good(1) or not. Here we introduce an impurity measure that applies to the rectangles and our goal is to minimize the impurities. 
-{.annotate}
+To specify each split, we need to tell whether a split is good[^1] or not. Here we introduce an impurity measure that applies to the rectangles and our goal is to minimize the impurities. 
 
-1. Intuitively, a split is good when the data points within the rectangle have similar $y^{(i)}$ values. 
+[^1]: Intuitively, a split is good when the data points within the rectangle have similar $y^{(i)}$ values. 
 
 In regression, we just use MSE. Let $n_{ij}$ be the number of observations in rectangle $R_{ij}$. Then 
 
@@ -98,7 +97,7 @@ How do we decide the depth of our decision tree (i.e. how many splits will we do
 - Stop splitting once we have $m$ leaf nodes. 
 - Stop splitting once ever node has less than $\tilde{m}$ observations. 
 
-We choose $m$ or $\tilde{m}$ via [cross-validation](stat541_week4.md#data-splitting-and-cross-validation). Take the first rule as an example: Choose a grid of $m$, such as $5,10,15,20$. For each $m$, compute the CV error using first rule. Choose $m$ with the smallest CV error. 
+We choose $m$ or $\tilde{m}$ via [[stat541_week4#Data Splitting and Cross-Validation|cross-validation]]. Take the first rule as an example: Choose a grid of $m$, such as $5,10,15,20$. For each $m$, compute the CV error using first rule. Choose $m$ with the smallest CV error. 
 
 A more common stopping rule is cost-complexity pruning: 
 
@@ -142,19 +141,17 @@ The bootstrap is a widely applicable and extremely powerful statistical tool boo
 Assume the observations follow a model with a parameter $\alpha$. If we use certain method to get an estimated parameter $\hat{\alpha}$, we may want to know the accuracy of $\hat{\alpha}$. If we can obtain another samples and use the same method to estimate $\alpha$ using new samples and repeat this again and again, the accuracy of $\hat{\alpha}$ can then be evaluated by the standard deviation among all the rounds of estimations, denoted as $\mathrm{SE}_B(\hat{\alpha})$. Roughly speaking, for a random sample from the population, we would expect $\hat{\alpha}$ to differ from $\alpha$ by approximately $\mathrm{SE}_B(\hat{\alpha})$, on average.
 
 **Bootstrap Method:**
-We randomly select $n$ observations from the data set to produce a bootstrap data set, $Z^{∗1}$. The sampling is performed *with replacement*(1). We can use $Z^{* 1}$ to produce a new bootstrap estimate for $\alpha$, which we call $\hat{\alpha}^{* 1}$. This procedure is repeated $B$ times, in order to produce $B$ different bootstrap data sets, $Z^{* 1}, Z^{* 2}, \ldots, Z^{* B}$, and $B$ corresponding $\alpha$ estimates, $\hat{\alpha}^{* 1}, \hat{\alpha}^{* 2}, \ldots, \hat{\alpha}^{* B}$. We can compute the standard error of these bootstrap estimates using the formula
-{.annotate}
+We randomly select $n$ observations from the data set to produce a bootstrap data set, $Z^{∗1}$. The sampling is performed *with replacement*[^2]. We can use $Z^{* 1}$ to produce a new bootstrap estimate for $\alpha$, which we call $\hat{\alpha}^{* 1}$. This procedure is repeated $B$ times, in order to produce $B$ different bootstrap data sets, $Z^{* 1}, Z^{* 2}, \ldots, Z^{* B}$, and $B$ corresponding $\alpha$ estimates, $\hat{\alpha}^{* 1}, \hat{\alpha}^{* 2}, \ldots, \hat{\alpha}^{* B}$. We can compute the standard error of these bootstrap estimates using the formula
 
-1. This means that the same observation can occur more than once in the bootstrap data set. 
+[^2]: This means that the same observation can occur more than once in the bootstrap data set. 
 
 $$
 \mathrm{SE}_B(\hat{\alpha})=\sqrt{\frac{1}{B-1} \sum_{r=1}^B\left(\hat{\alpha}^{* r}-\frac{1}{B} \sum_{r^{\prime}=1}^B \hat{\alpha}^{* r^{\prime}}\right)^2}
 $$
 
-This serves as an estimate of the standard error of $\hat{\alpha}$ estimated from the original data set. This approach is illustrated in the following figure(1). 
-{.annotate}
+This serves as an estimate of the standard error of $\hat{\alpha}$ estimated from the original data set. This approach is illustrated in the following figure[^3]. 
 
-1. A graphical illustration of the bootstrap approach on a small sample containing $n = 3$ observations. Each bootstrap data set contains $n$ observations, sampled with replacement from the original data set. Each bootstrap data set is used to obtain an estimate of $\alpha$.
+[^3]: A graphical illustration of the bootstrap approach on a small sample containing $n = 3$ observations. Each bootstrap data set contains $n$ observations, sampled with replacement from the original data set. Each bootstrap data set is used to obtain an estimate of $\alpha$.
 
 ![Bootstrap Approach](stat541_week1003.svg)
 
@@ -167,7 +164,6 @@ Random forest is  almost the same as bagging except when we fit each bootstrap d
 
 For problems with a large number of features ($p\gg 2$), we may restrict the size of the random subsets. For example, for $p=50$, we can choose a random subsets of size 20 of the features to split at each step. 
 
-Due to the randomness(1), random forest avoids the greediness of the [tree optimization](stat541_week10.md#how-to-choose-how-big-of-a-tree-to-grow). Compared to directly using trees, random forest improves the predictive accuracy, but not so interpretable. 
-{.annotate}
+Due to the randomness[^4], random forest avoids the greediness of the [[#How to Choose How Big of a Tree to Grow|tree optimization]]. Compared to directly using trees, random forest improves the predictive accuracy, but not so interpretable. 
 
-1. Recall that tree method usually suffer from [overfitting](stat541_week10.md#summary). Therefore, it should be favorable to slightly increase the bias of the model while reducing the variance, which is done by the randomness of splitting subsets. 
+[^4]: Recall that tree method usually suffer from [[#Summary|overfitting]]. Therefore, it should be favorable to slightly increase the bias of the model while reducing the variance, which is done by the randomness of splitting subsets. 

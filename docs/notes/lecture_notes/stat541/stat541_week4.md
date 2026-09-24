@@ -8,10 +8,9 @@ For polynomial regression, if the degree $d$ is large, prediction can be highly 
 
 ### Ridge Regression 
 
-Suppose we have a $C>0$ (we assume a proper $C$ is given by an oracle), and we will constrain $\boldsymbol{\beta}$ (here $\boldsymbol{\beta}$ starts from $\beta_1$ rather than $\beta_0$(1)) so that 
-{.annotate}
+Suppose we have a $C>0$ (we assume a proper $C$ is given by an oracle), and we will constrain $\boldsymbol{\beta}$ (here $\boldsymbol{\beta}$ starts from $\beta_1$ rather than $\beta_0$[^1]) so that 
 
-1. In ridge, we don't want to penalize the $\beta_0$ but other $\beta$. 
+[^1]: In ridge, we don't want to penalize the $\beta_0$ but other $\beta$. 
 
 $$
 \|\boldsymbol{\beta}\|^2 = \sum_{i=1}^{p} \beta_i^2 \leq C. 
@@ -110,10 +109,9 @@ x_{1} - \bar{x}_1 & \cdots & x_{p} - \bar{x}_p \\
 \end{bmatrix},
 $$
 
-where $\bar{x}_i =  \frac{1}{n}\sum_{j=1}^{n}x_j^{(i)}$ is the average of the $i$-th column of $\boldsymbol{X}$(1). We center because we don't want to penalize $\beta_0$. 
-{.annotate}
+where $\bar{x}_i =  \frac{1}{n}\sum_{j=1}^{n}x_j^{(i)}$ is the average of the $i$-th column of $\boldsymbol{X}$[^2]. We center because we don't want to penalize $\beta_0$. 
 
-1. Note that there is no column of 1's added in $\boldsymbol{X}$. 
+[^2]: Note that there is no column of 1's added in $\boldsymbol{X}$. 
 
 Moreover, we also want to scale  $\tilde{\boldsymbol{X}}$,
 
@@ -157,10 +155,9 @@ For $p=2$ and $C=1$, the constraints of ridge and LASSO are respectively $L^2$ a
 
 ![Ridge and LASSO](stat541_week401.svg "Ridge and LASSO")
 
-The $L^1$ ball can usually impose sparsity (occurrence of zeros(1)) in the LASSO coefficient estimate, and thus LASSO does variable selection. 
-{.annotate}
+The $L^1$ ball can usually impose sparsity (occurrence of zeros[^3]) in the LASSO coefficient estimate, and thus LASSO does variable selection. 
 
-1. In practice, the contour of the objective function usually intersects with the $L^1$ ball at vertices. 
+[^3]: In practice, the contour of the objective function usually intersects with the $L^1$ ball at vertices. 
 
 ### LASSO with $p=1$
 
@@ -209,17 +206,15 @@ $$
 \end{aligned}
 $$
 
-The following figure illustrates the difference of the OLS estimator and LASSO estimator, where we can see $\hat{\beta}_{\rm LASSO}$ applies a soft threshold to $\pm\frac{\lambda}{2c}$(1).
-{.annotate}
+The following figure illustrates the difference of the OLS estimator and LASSO estimator, where we can see $\hat{\beta}_{\rm LASSO}$ applies a soft threshold to $\pm\frac{\lambda}{2c}$[^4].
 
-1. Compared to the soft threshold, a hard threshold would show "jumps" in figures, which indicates the function is not continuous. 
+[^4]: Compared to the soft threshold, a hard threshold would show "jumps" in figures, which indicates the function is not continuous. 
 
 ![OLS and LASSO](stat541_week402.svg "OLS and LASSO")
 
-For more features, we may use a coefficient plot with respect to $\lambda$, i.e. $\beta_i$-$\lambda$ plot(1). ![Coefficient Plot](stat541_week403.svg "Coefficient Plot") As $\lambda$ grows, the later a $\beta_i$ becomes 0, the more important this corresponding feature should be as it remains in our model even with large penalty. 
-{.annotate}
+For more features, we may use a coefficient plot with respect to $\lambda$, i.e. $\beta_i$-$\lambda$ plot[^5]. ![Coefficient Plot](stat541_week403.svg "Coefficient Plot") As $\lambda$ grows, the later a $\beta_i$ becomes 0, the more important this corresponding feature should be as it remains in our model even with large penalty. 
 
-1. For $p=1$, $\beta$ is linear with respect to $\lambda$. For $p>1$, we may choose a proper transformation (using parameters like $d$ and $c$) of $\lambda$ to make the coefficient plot piecewise linear as the figure below. 
+[^5]: For $p=1$, $\beta$ is linear with respect to $\lambda$. For $p>1$, we may choose a proper transformation (using parameters like $d$ and $c$) of $\lambda$ to make the coefficient plot piecewise linear as the figure below. 
 
 ### Group LASSO
 
@@ -243,10 +238,9 @@ where $\|\beta^{(i)}\| = \sqrt{\sum_{j=1}^{p_i}(\beta^{(i)}_j)^2}$.
 
 ## Data Splitting and Cross-Validation
 
-Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use the empirical risk, based on the whole data set, to evaluate these two classes. This is because we use the data set to fit our model under the guidance of [ERM](stat541_week1.md#empirical-risk-minimization-erm), and therefore, the model from a more complex class will achieve a lower empirical risk on this exactly same data set(1). 
-{.annotate}
+Suppose we have two classes of functions (or models or learning algorithms) $\mathcal{F}_1$ and $\mathcal{F_2}$. We may not want to use the empirical risk, based on the whole data set, to evaluate these two classes. This is because we use the data set to fit our model under the guidance of [[stat541_week1#Empirical Risk Minimization (ERM)|ERM]], and therefore, the model from a more complex class will achieve a lower empirical risk on this exactly same data set[^6]. 
 
-1. An extreme example: we fit the data set using a very high degree polynomial, and we will find a zero-ERM polynomial model. If we follow the standard of ERM, this should be THE BEST model, which is clearly not the case. 
+[^6]: An extreme example: we fit the data set using a very high degree polynomial, and we will find a zero-ERM polynomial model. If we follow the standard of ERM, this should be THE BEST model, which is clearly not the case. 
 
 Solution is to split the data into training set and a validation set: 
 
@@ -307,10 +301,9 @@ We estimate $R(\hat{f},P)$ by the following steps:
 
 3. Estimate $R(\hat{f},P)\approx \frac{1}{K}\sum_{i=1}^K CV^{(i)} = CV$.
 
-How many folds to choose? Usually $K$ is chosen from 5-10. To show that it may not always be beneficial to choose large $K$, we consider an example of $K=n$ (size of the data set), which is called leave-one-out cross-validation (LOOCV)(1). LOOCV may not always give better estimates of $R(\hat{f},P)$: 
-{.annotate}
+How many folds to choose? Usually $K$ is chosen from 5-10. To show that it may not always be beneficial to choose large $K$, we consider an example of $K=n$ (size of the data set), which is called leave-one-out cross-validation (LOOCV)[^7]. LOOCV may not always give better estimates of $R(\hat{f},P)$: 
 
-1. Specifically, for linear regression we can calculate the LOOCV error of $\hat{f}(x) = \boldsymbol{\hat{\beta}}^T x$ without fitting $\hat{f}_i$, which has a closed form expression: $\displaystyle R(\hat{f},P)= \frac{1}{n} \sum_{i=1}^n\left(\frac{y^{(i)} - \left(x^{(i)}\right)^T\hat{\boldsymbol{\beta}} }{1-\left(x^{(i)}\right)^T \left(X^T X\right)^{-1} x^{(i)}} \right)^2$. 
+[^7]: Specifically, for linear regression we can calculate the LOOCV error of $\hat{f}(x) = \boldsymbol{\hat{\beta}}^T x$ without fitting $\hat{f}_i$, which has a closed form expression: $\displaystyle R(\hat{f},P)= \frac{1}{n} \sum_{i=1}^n\left(\frac{y^{(i)} - \left(x^{(i)}\right)^T\hat{\boldsymbol{\beta}} }{1-\left(x^{(i)}\right)^T \left(X^T X\right)^{-1} x^{(i)}} \right)^2$. 
 
 $$
 \begin{aligned}

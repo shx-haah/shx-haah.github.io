@@ -88,12 +88,11 @@ $$
 A=U \Sigma V^{T}=u_1 \sigma_1 v_1^{T}+\cdots+u_r \sigma_r v_r^{T}.
 $$
 
-Each $\sigma_i^2$ is an eigenvalue of $A^T A$(1) and also $A A^{T}$(2). When we put the singular values in descending order(3), $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r>0$, the above splitting gives the $r$ rank-one pieces of $A$ in order of importance. Then $\sigma_1$ is the maximum of the ratio: 
-{.annotate}
+Each $\sigma_i^2$ is an eigenvalue of $A^T A$[^1] and also $A A^{T}$[^2]. When we put the singular values in descending order[^3], $\sigma_1 \geq \sigma_2 \geq \dots \sigma_r>0$, the above splitting gives the $r$ rank-one pieces of $A$ in order of importance. Then $\sigma_1$ is the maximum of the ratio: 
 
-1. with $\boldsymbol{v}$'s as orthonormal eigenvectors
-2. with $\boldsymbol{u}$'s as orthonormal eigenvectors
-3. For a matrix $A\in \mathbb{R}^{m\times n}$, we can define a column swapping matrix $P_{i,j}\in \mathbb{R}^{n\times n}$, which swaps the $i$-th column and $j$-th column of $A$ by right multiplication, i.e. $AP_{i,j}$. Using $P_{i,j}$, we can swap the positions of $i$-th singular value and $j$-th singular value of $\Sigma$: $U\Sigma V^T = \left(UP_{i,j}\right) \left(P_{i,j}^T \Sigma P_{i,j}\right) \left(V P_{i,j}\right)^T$. 
+[^1]: with $\boldsymbol{v}$'s as orthonormal eigenvectors
+[^2]: with $\boldsymbol{u}$'s as orthonormal eigenvectors
+[^3]: For a matrix $A\in \mathbb{R}^{m\times n}$, we can define a column swapping matrix $P_{i,j}\in \mathbb{R}^{n\times n}$, which swaps the $i$-th column and $j$-th column of $A$ by right multiplication, i.e. $AP_{i,j}$. Using $P_{i,j}$, we can swap the positions of $i$-th singular value and $j$-th singular value of $\Sigma$: $U\Sigma V^T = \left(UP_{i,j}\right) \left(P_{i,j}^T \Sigma P_{i,j}\right) \left(V P_{i,j}\right)^T$. 
 The column swapping matrix $P_{i,j}$ has the following properties: (let $A$ have rows $v_i$, $i=1,\dots, m$ and columns $w_j$, $j=1,\dots,n$)
     - $AP_{i,j}$: $v_i \leftrightarrow v_j$. 
     - $P_{i,j}^T A = \left(A^TP_{i,j}\right)^T$: $w_i \leftrightarrow w_j$. 
@@ -347,10 +346,9 @@ $$
 \hat{\boldsymbol{\beta}} = \left(\boldsymbol{X}^T \boldsymbol{X}\right)^{-1} \boldsymbol{X}^T\boldsymbol{Y},
 $$
 
-where we assume $\boldsymbol{X}$ is a full-rank matrix and thus $\boldsymbol{X}^T \boldsymbol{X}$ has an inverse(1).
-{.annotate}
+where we assume $\boldsymbol{X}$ is a full-rank matrix and thus $\boldsymbol{X}^T \boldsymbol{X}$ has an inverse[^4].
 
-1. Otherwise, if $\boldsymbol{X}^T \boldsymbol{X}$ is not invertible, there exists $v\neq \boldsymbol{0}\in \mathbb{R}^{p+1}$ such that $\boldsymbol{X}^T \boldsymbol{X} v = \boldsymbol{0}$, which indicates columns of $\boldsymbol{X}$ are linearly dependent. And columns of $\boldsymbol{X}$ are always linearly dependent when $p\geq n$.
+[^4]: Otherwise, if $\boldsymbol{X}^T \boldsymbol{X}$ is not invertible, there exists $v\neq \boldsymbol{0}\in \mathbb{R}^{p+1}$ such that $\boldsymbol{X}^T \boldsymbol{X} v = \boldsymbol{0}$, which indicates columns of $\boldsymbol{X}$ are linearly dependent. And columns of $\boldsymbol{X}$ are always linearly dependent when $p\geq n$.
 
 Furthermore, we can find the distribution of $\hat{\boldsymbol{\beta}}$ conditional on the training features $\boldsymbol{X}$:
 
@@ -393,10 +391,9 @@ $$
 E(\hat{f}(\boldsymbol{x_{*}}) \mid \boldsymbol{X},\boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T E(\hat{\boldsymbol{\beta}} \mid \boldsymbol{X},\boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \boldsymbol{\beta}.
 $$
 
-We know that $E(y_* \mid \boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \boldsymbol{\beta}$, and thus the OLS prediction is unbiased(1).
-{.annotate}
+We know that $E(y_* \mid \boldsymbol{x_{*}}) = \tilde{\boldsymbol{x}}^T \boldsymbol{\beta}$, and thus the OLS prediction is unbiased[^5].
 
-1. This conclusion relied on the assumption that the data has a linear relationship. In practice, our model is only an approximation to the true distribution. So we will have bias.
+[^5]: This conclusion relied on the assumption that the data has a linear relationship. In practice, our model is only an approximation to the true distribution. So we will have bias.
 
 Now, we consider the variance:
 
@@ -426,10 +423,9 @@ $$
 E(y_* - \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}) = 0,
 $$
 
-and $Cov\left(y_*, \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right)=0$(1) and thus
-{.annotate}
+and $Cov\left(y_*, \boldsymbol{\tilde{x}}^T\hat{\boldsymbol{\beta}} \mid \boldsymbol{X}, \boldsymbol{x_{*}}\right)=0$[^6] and thus
 
-1. This is because $\hat{\boldsymbol{\beta}}$ only depends on the training data and we assume newly received data pair is independent of training data.
+[^6]: This is because $\hat{\boldsymbol{\beta}}$ only depends on the training data and we assume newly received data pair is independent of training data.
 
 $$
 \begin{aligned}
@@ -626,7 +622,7 @@ $$
 x\mapsto \left(1,x_1,x_2,x_1x_2,x_1^2,x_2^2\right). 
 $$
 
-**Remark** Why don't we just use lots of features? I.e. in polynomial regression, why don't we take degree $d$ to be large? That is because problems owith overfitting! This is mentioned in the [variance-bias tradeoff](stat541_week2.md#illustrations-by-polynomial-fitting).
+**Remark** Why don't we just use lots of features? I.e. in polynomial regression, why don't we take degree $d$ to be large? That is because problems owith overfitting! This is mentioned in the [[stat541_week2#Illustrations by Polynomial Fitting|variance-bias tradeoff]].
 
 ### Variable Selection
 

@@ -14,10 +14,9 @@ We could try to just do linear regression: under squared error loss, $E(y\mid x)
 
 ### Logistic Regression
 
-Instead of modeling $y(x)=x^T\boldsymbol{\beta}$, we will assume that the probability $g(x)$(1) is given by
-{.annotate}
+Instead of modeling $y(x)=x^T\boldsymbol{\beta}$, we will assume that the probability $g(x)$[^1] is given by
 
-1. Here $\sigma(x^T\boldsymbol{\beta})$, the probability of $y\mid x$, should be in [0,1], which is easy to verify. 
+[^1]: Here $\sigma(x^T\boldsymbol{\beta})$, the probability of $y\mid x$, should be in [0,1], which is easy to verify. 
 
 $$
 g(x)=  \sigma(x^T\boldsymbol{\beta}),
@@ -48,9 +47,9 @@ $$
 
 Hence, in logistic regression, we make an assumption that the log odds is linearly dependent on $x$. 
 
-Another more insightful motivation connects the logistic function to the exponential family from the prospective of [generative models](stat541_week6.md#generative-models-for-classification): 
+Another more insightful motivation connects the logistic function to the exponential family from the prospective of [[stat541_week6#Generative Models for Classification|generative models]]: 
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/stat541_logistic_fnc_motivation.pdf" type="application/pdf" width="100%" height="750px"/>
+[stat541_logistic_fnc_motivation.pdf](https://shx-haah.github.io/notes/lecture_notes/stat541_logistic_fnc_motivation.pdf)
 
 ### Procedure of Logistic Regression
 
@@ -65,10 +64,9 @@ How to use logistic regression for prediction:
 
     - If $\sigma (\hat{\beta}^T x)<0.5$, predict that $y$ is in class $0$.  
 
-This procedure is designed to minimize the misclassification error. However, some errors are "worse" than others. For example, for a spam email filter, misclassifying spams as normal emails is unlikely to cause big issue, but it may be terrible in the opposite. To account for this we can modify the 0.5 threshold into a larger number (such as 0.95) when predicting a email to be a spam.(1)
-{.annotate}
+This procedure is designed to minimize the misclassification error. However, some errors are "worse" than others. For example, for a spam email filter, misclassifying spams as normal emails is unlikely to cause big issue, but it may be terrible in the opposite. To account for this we can modify the 0.5 threshold into a larger number (such as 0.95) when predicting a email to be a spam.[^2]
 
-1. This means the filter is surely confident when classify some email as spam.
+[^2]: This means the filter is surely confident when classify some email as spam.
 
 ### Multinomial Regression
 
@@ -89,14 +87,13 @@ $$
 \end{aligned}
 $$
 
-where we regard the $K$-th class as the baseline class. It is easy to see $p_1,\dots, p_K$ are valid probabilities(1). A function with a form of $p_1,\dots, p_{K-1}$ is called softmax function.   
-{.annotate}
+where we regard the $K$-th class as the baseline class. It is easy to see $p_1,\dots, p_K$ are valid probabilities[^3]. A function with a form of $p_1,\dots, p_{K-1}$ is called softmax function.   
 
-1. Non-negative and the sum is 1. 
+[^3]: Non-negative and the sum is 1. 
 
 ### Calculate the Estimator 
 
-We use [maximum likelihood](stat541_week3.md#recap-on-likelihood-function) to estimate $\beta$ to get $\hat{\beta}$. We take $K=2$ as an example.
+We use [[stat541_week3#Recap on Likelihood Function|maximum likelihood]] to estimate $\beta$ to get $\hat{\beta}$. We take $K=2$ as an example.
 
 Assume $y\mid x \sim {\rm Bernoulli}\left(\pi\right)$, i.e. $Pr(y) = \pi^y(1-\pi)^{1-y}$. To apply logistic regression, we assume $y^{(i)}\sim {\rm Bernoulli}\left(\sigma \left((x^{(i)})^T \beta\right)\right)$. Then the log-likelihood function is 
 
@@ -114,10 +111,9 @@ $$
 \hat{\beta}_{\rm MLE} = \operatorname*{arg\, max} L(\beta) = \operatorname*{arg\, min} (-L(\beta)). 
 $$
 
-Unfortunately, unlike linear regression, $\nabla L(\beta)$ here has no closed-form. Therefore, we may apply some other optimization method, such as gradient descent and Newton Raphson Algorithm(1). 
-{.annotate}
+Unfortunately, unlike linear regression, $\nabla L(\beta)$ here has no closed-form. Therefore, we may apply some other optimization method, such as gradient descent and Newton Raphson Algorithm[^4]. 
 
-1. Reference: 刘浩洋[等]编著, 最优化:建模,算法与理论 (Optimization: modeling, algorithm and theory), Di 1 ban. Beijing: 高等教育出版社, 2020.
+[^4]: Reference: 刘浩洋[等]编著, 最优化:建模,算法与理论 (Optimization: modeling, algorithm and theory), Di 1 ban. Beijing: 高等教育出版社, 2020.
  For GD see section 6.2, and for NR see section 6.4.
 
 Brief comparison of GD and NR: 

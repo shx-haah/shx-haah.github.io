@@ -1,6 +1,6 @@
 # Lecture 23
 
-<embed src="https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribe23.pdf" type="application/pdf" width="100%" height="750px"/>
+[Scribe23.pdf](https://shx-haah.github.io/notes/lecture_notes/cmput501/Scribe23.pdf)
 
 <!-- > Notes below are meant to supplement the scribed notes.
 

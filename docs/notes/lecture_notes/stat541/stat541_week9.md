@@ -108,10 +108,9 @@ y^{(n)}
 $$
 
 
-where this matrix is symmetric and has entries of 0 and $\frac{1}{K}$(1), and there are only $\frac{1}{K}$ on the diagonal. This is a very sparse matrix. The effective degrees of freedom is 
-{.annotate}
+where this matrix is symmetric and has entries of 0 and $\frac{1}{K}$[^1], and there are only $\frac{1}{K}$ on the diagonal. This is a very sparse matrix. The effective degrees of freedom is 
 
-1. Each row (or column) has $n-K$ entries of 0 and $K$ entries of $\frac{1}{K}$. In general, the weighting matrix will not have strings of repeated $\frac{1}{K}$ in the rows, there may be intermittent 0's.
+[^1]: Each row (or column) has $n-K$ entries of 0 and $K$ entries of $\frac{1}{K}$. In general, the weighting matrix will not have strings of repeated $\frac{1}{K}$ in the rows, there may be intermittent 0's.
 
 $$
 \operatorname{tr}(W)=\frac{n}{K}. 
@@ -174,17 +173,16 @@ We will scale every feature, $x_i$ by its standard deviation.
 
 It turns out that splines, local regression, and KNN can extend to classification settings.
 
-- For splines and local regression, we can combine them with logistic regression to solve classification problems, i.e. fitting the [log-odds ratio](stat541_week5.md#motivation-and-interpretation) using splines and local regression. 
+- For splines and local regression, we can combine them with logistic regression to solve classification problems, i.e. fitting the [[stat541_week5#Motivation and Interpretation|log-odds ratio]] using splines and local regression. 
 
 - For KNN, just predict the class that appears most often when looking at the $K$-nearest neighbors. We can use this to define a decision boundary by computing the KNN at every point in the plane (assume $p=2$). 
 
 ## Memory-Based Method
 
-The methods, KNN, smoothing splines, and local regression, are memory-based, which means the algorithm "memorize" the entire training data set when making predictions(1). The computational complexity of making a new prediction for memory-based methods is $O(n)$(2). 
-{.annotate}
+The methods, KNN, smoothing splines, and local regression, are memory-based, which means the algorithm "memorize" the entire training data set when making predictions[^2]. The computational complexity of making a new prediction for memory-based methods is $O(n)$[^3]. 
 
-1. For example, for KNN, we can't throw away any data point as it may the nearest neighbor. 
-2. KNN need to query $O(n)$ data points to find the nearest neighbors. 
+[^2]: For example, for KNN, we can't throw away any data point as it may the nearest neighbor. 
+[^3]: KNN need to query $O(n)$ data points to find the nearest neighbors. 
 
 On the other hand, linear regression only requires the coefficients $\hat{\beta}_0,\dots,\hat{\beta}_p$ to make predictions, which compresses the training data into $p+1$ parameters. Then the computational complexity is roughly $O(p)$. 
 
@@ -192,11 +190,10 @@ Therefore, in terms of making predictions on-the-fly, memory-based methods are n
 
 ### Curse of Dimensionality
 
-Curse of dimensionality occurs when the features are too many. In high dimensions, there are a few points that are close to each other(1). Thus, it is impossible to simultaneously maintain localness (i.e. low bias) and a sizable sample in the neighborhood (i.e. low variance) as the dimension increases, without **the total sample size increasing exponentially** in $p$(2).
-{.annotate}
+Curse of dimensionality occurs when the features are too many. In high dimensions, there are a few points that are close to each other[^4]. Thus, it is impossible to simultaneously maintain localness (i.e. low bias) and a sizable sample in the neighborhood (i.e. low variance) as the dimension increases, without **the total sample size increasing exponentially** in $p$[^5].
 
-1. For $p=1$, let $x$ be a uniform random variable on $[0,1]$ and we consider the distance between 0 and $x$. The probability of $x\in [0,\epsilon]$ is $\epsilon$. For higher dimension $p=k$, the probability of the uniform variable $x$ being in $[0,\epsilon]^k$ becomes $\epsilon^k$, which shows points that are within $\epsilon$-distance to 0 is getting less when the space dimension grows. 
-2. Conversely, if we increase the number of features without adding new data to training set, the predictions made by our model would likely be worse. 
+[^4]: For $p=1$, let $x$ be a uniform random variable on $[0,1]$ and we consider the distance between 0 and $x$. The probability of $x\in [0,\epsilon]$ is $\epsilon$. For higher dimension $p=k$, the probability of the uniform variable $x$ being in $[0,\epsilon]^k$ becomes $\epsilon^k$, which shows points that are within $\epsilon$-distance to 0 is getting less when the space dimension grows. 
+[^5]: Conversely, if we increase the number of features without adding new data to training set, the predictions made by our model would likely be worse. 
  
 ## Generalized Additive Models (GAMs)
 

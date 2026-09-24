@@ -18,11 +18,10 @@ $$
 E_{(x,y)}\left(g(x)\cdot E(y|x)\right) = E_{(x,y)}\left(g(x)\cdot y\right),
 $$
 
-which holds for all functions $g$ where $Var\left(g(x)\right)<+\infty$(1). Specifically, when taking $g(x)\equiv 1$, we obtain the *law of total expectation,* i.e. $E\left(y\right) = E\left(E(y|x)\right)$(2).
-{.annotate}
+which holds for all functions $g$ where $Var\left(g(x)\right)<+\infty$[^1]. Specifically, when taking $g(x)\equiv 1$, we obtain the *law of total expectation,* i.e. $E\left(y\right) = E\left(E(y|x)\right)$[^2].
 
-1. This a technical assumption which is usually satisfied in practical problems.
-2. One special case states that if $\left\{A_i\right\}$ is a finite or countable partition of the sample space, then $E(X)=\sum_i E\left(X | A_i\right) \cdot Pr\left(A_i\right)$.
+[^1]: This a technical assumption which is usually satisfied in practical problems.
+[^2]: One special case states that if $\left\{A_i\right\}$ is a finite or countable partition of the sample space, then $E(X)=\sum_i E\left(X | A_i\right) \cdot Pr\left(A_i\right)$.
 
 Obviously, it is equivalent to
 
@@ -69,10 +68,9 @@ Note that both the $\color{green}{\text{green}}$ and $\color{blue}{\text{blue}}$
 
 Pythagorean Decomposition of $R(f,P)$: $E(y|x)$ can be viewed as an orthogonal projection of $y$ on the space of random variables that are functions of $x$. 
 
-To illustrate this decomposition, consider the space of all r.v. with finite variance(1) and the set of all r.v. that are functions of $x$ becomes a hyperplane lying in this space. Assume $y$ cannot simply written as certain function of $x$. The Pythagorean decomposition of $R(f,P)$ is shown in the following figure. 
-{.annotate}
+To illustrate this decomposition, consider the space of all r.v. with finite variance[^3] and the set of all r.v. that are functions of $x$ becomes a hyperplane lying in this space. Assume $y$ cannot simply written as certain function of $x$. The Pythagorean decomposition of $R(f,P)$ is shown in the following figure. 
 
-1. This space is a $L^2$ space. 
+[^3]: This space is a $L^2$ space. 
 
 ![Pythagorean Decomposition](stat541_week201.svg "Pythagorean Decomposition")
 
@@ -93,10 +91,9 @@ The last equation is because $E\left(E(y|x)\right) = E(y)$, by [Key Property](#k
 
 ### Bias-Variance Decomposition
 
-Denote the data set as $\mathcal{D}_n$ and the model based on learning algorithm $\phi_n$ and this data set as $\hat{f}_{\mathcal{D}_n}(x)$ (1). Consider the expected risk of the learning algorithm $\phi_n$, denoted as $\mathcal{R}$, 
-{.annotate}
+Denote the data set as $\mathcal{D}_n$ and the model based on learning algorithm $\phi_n$ and this data set as $\hat{f}_{\mathcal{D}_n}(x)$ [^4]. Consider the expected risk of the learning algorithm $\phi_n$, denoted as $\mathcal{R}$, 
 
-1. The model is the function $f$ we are looking for, which uses features to predict outputs. For details, see [Learning Algorithm](stat541_week1.md#learning-algorithm). 
+[^4]: The model is the function $f$ we are looking for, which uses features to predict outputs. For details, see [[stat541_week1#Learning Algorithm|Learning Algorithm]]. 
 
 $$
 \begin{aligned}
@@ -138,12 +135,10 @@ To illustrate this, if the oracle predictor $E(y|x)$ is some 3-degree polynomial
 where the gray thick curve is $E(y|x)$, and  colored curves are different prediction functions based on different data sets, and dashed curve is $E_{\mathcal{D}_n}\left(\hat{f}_{\mathcal{D}_n}\right)$. Conversely, for 3-degree-polynomial learning algorithms, the ${\color{gray} \text{bias term}}$ is likely to be small and ${\color{blue} \text{variance term}}$ may be large. This 'large variance' is shown in the following figure. 
 ![Linear Model](stat541_week203.svg "Linear Model")
 
-To better understand this, we can consider an extreme example. If we use very high degree polynomials to fit data sets, we can make our prediction function exactly go through each training data point. In this case, the bias would be small(1). However, higher degree polynomials can oscillate more freely than lower degree polynomials, and this usually leads to our prediction function shaping drastically different to each other when coming from different data sets. 
-{.annotate}
+To better understand this, we can consider an extreme example. If we use very high degree polynomials to fit data sets, we can make our prediction function exactly go through each training data point. In this case, the bias would be small[^5]. However, higher degree polynomials can oscillate more freely than lower degree polynomials, and this usually leads to our prediction function shaping drastically different to each other when coming from different data sets. 
 
-1. The empirical risk is 0 in this case. 
+[^5]: The empirical risk is 0 in this case. 
 
-Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium(1) $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  
-{.annotate}
+Even if $E(y\mid x)$ is a degree $d$ polynomial. It can still be better (for small to medium[^6] $n$) to fit a lower degree polynomial. For lager $n$, we can consider more complex models.  
 
-1. Usually, we say $n\leq 50$ is small, $50<n\leq 100$ is medium, and $n>100$ is large, but there is actually no formal standard. The best way to select a model is to compare different models using the [cross-validation](stat541_week4.md#data-splitting-and-cross-validation) method. 
+[^6]: Usually, we say $n\leq 50$ is small, $50<n\leq 100$ is medium, and $n>100$ is large, but there is actually no formal standard. The best way to select a model is to compare different models using the [[stat541_week4#Data Splitting and Cross-Validation|cross-validation]] method. 

@@ -40,10 +40,9 @@ $$
 L\left(f, \mu_1, \dots, \mu_k\right)=\sum_{i=1}^n \left\|x^{(i)}-\mu_{f(i)}\right\|^2,
 $$
 
-where $\left\|x^{(i)}-\mu_j\right\|^2$ is the squared distance between the data point and the cluster center. We want to minimize this loss function over all possible assignments $f$ and all possible cluster centers $\mu_1,\dots,\mu_K$, usually iteratively (like backfitting)(1). 
-{.annotate}
+where $\left\|x^{(i)}-\mu_j\right\|^2$ is the squared distance between the data point and the cluster center. We want to minimize this loss function over all possible assignments $f$ and all possible cluster centers $\mu_1,\dots,\mu_K$, usually iteratively (like backfitting)[^1]. 
 
-1. We first fix $\mu_j$ and find the optimal $\hat{f}$, then fix $f=\hat{f}$ and find the optimal $\hat{\mu}_j$'s. Then, fix the $\mu_j=\hat{\mu}_j$ 's and find the optimal $\hat{f}$ again, and so on until convergence.
+[^1]: We first fix $\mu_j$ and find the optimal $\hat{f}$, then fix $f=\hat{f}$ and find the optimal $\hat{\mu}_j$'s. Then, fix the $\mu_j=\hat{\mu}_j$ 's and find the optimal $\hat{f}$ again, and so on until convergence.
 
 **Fix $\mu_1,\dots,\mu_K$, and find the optimal $f$:** We just find the optimal value of $f(i)\in \{1,\dots,K\}$ for every $i = 1,\dots,n$, that is to minimize 
 
@@ -128,19 +127,17 @@ Hierarchical clustering is to fit a sequence of cluster assignments, which allow
 
 The way to merge the clusters is to use a notion of dissimilarity between clusters. There are various choices for dissimilarity measures.
 
-**Average Linkage:** The dissimilarity between two clusters is defined as the average distance(1) between all pairs of points. More precisely,
-{.annotate}
+**Average Linkage:** The dissimilarity between two clusters is defined as the average distance[^2] between all pairs of points. More precisely,
 
-1. This is not necessary to be a distance, i.e. it may not satisfy the triangle inequality, such as $\|x-y\|^2$. In fact, any $f(|x-y|)$, $x,y\in\mathbb{R}^p$, where $f$ is a monotone increasing function of the Euclidean norm, can induce a dissimilarity measure between clusters by using the maximum, average or minimum values of this quantity between pairs of points in clusters.
+[^2]: This is not necessary to be a distance, i.e. it may not satisfy the triangle inequality, such as $\|x-y\|^2$. In fact, any $f(|x-y|)$, $x,y\in\mathbb{R}^p$, where $f$ is a monotone increasing function of the Euclidean norm, can induce a dissimilarity measure between clusters by using the maximum, average or minimum values of this quantity between pairs of points in clusters.
 
 $$
 d_{\mathrm{avg}}\left(C_1, C_2\right)=\frac{1}{\left|C_1\right| \cdot\left|C_2\right|} \sum_{x \in C_1} \sum_{y \in C_2} d(x, y)
 $$
 
-where $C_1$ and $C_2$ are the two clusters, $d(x, y)$ is the distance between points $x$ and $y$, and $\left|C_1\right|$ and $\left|C_2\right|$ are the sizes of the clusters. Usually we take $d(x, y)=\|x-y\|^2$.(1)
-{.annotate}
+where $C_1$ and $C_2$ are the two clusters, $d(x, y)$ is the distance between points $x$ and $y$, and $\left|C_1\right|$ and $\left|C_2\right|$ are the sizes of the clusters. Usually we take $d(x, y)=\|x-y\|^2$.[^3]
 
-1. Suppose we have DNA sequences from different organisms. We often use the Hamming distance (see [Problem 3,(b)](stat541_assignment3.md#assignment-3)) to cluster them based on their similarity. Using these distances, we can construct a dendrogram to visualize the evolutionary relationships between the organisms. The sequences with smaller Hamming distances will be clustered together first, reflecting their closer evolutionary relationship.
+[^3]: Suppose we have DNA sequences from different organisms. We often use the Hamming distance (see [[stat541_assignment3#Assignment 3|Problem 3,(b)]]) to cluster them based on their similarity. Using these distances, we can construct a dendrogram to visualize the evolutionary relationships between the organisms. The sequences with smaller Hamming distances will be clustered together first, reflecting their closer evolutionary relationship.
 
 **Complete Linkage:** The dissimilarity between two clusters is defined as the maximum distance between any pair of points. More precisely, 
 
@@ -161,10 +158,9 @@ Algorithm for Hierarchical Clustering: At every step we want to find two cluster
 
 ### Dendrograms 
 
-A dendrogram (generally depicted as an upside-down tree) is built starting from the leaves and combining clusters up to the trunk(1). In this, the horizontal axis represents the individual data points or clusters, and the vertical axis shows the dissimilarity at which clusters were merged. See the below example. 
-{.annotate}
+A dendrogram (generally depicted as an upside-down tree) is built starting from the leaves and combining clusters up to the trunk[^4]. In this, the horizontal axis represents the individual data points or clusters, and the vertical axis shows the dissimilarity at which clusters were merged. See the below example. 
 
-1.  There are many ways to display the same dendrogram (i.e. you can permute the leaves)
+[^4]: There are many ways to display the same dendrogram (i.e. you can permute the leaves)
 
 ![Dendrogram](stat541_week1202.svg)
 
@@ -174,10 +170,9 @@ A dendrogram (generally depicted as an upside-down tree) is built starting from 
 
 **Choosing the Number of Clusters:** We can "cut" the dendrogram at the height where the largest vertical gap occurs, as this indicates a natural separation between clusters.
 
-**Example** (Hamming Distance on DNA Sequencing): Suppose we have DNA sequences from different organisms, and we want to cluster them based on their similarity. One way to measure similarity is the Hamming distance, which counts the number of positions at which the corresponding nucleotides differ between two sequences.(1) Using these distances, we can construct a dendrogram to visualize the evolutionary relationships between the organisms. The sequences with smaller Hamming distances will be clustered together first, reflecting their closer evolutionary relationship.
-{.annotate}
+**Example** (Hamming Distance on DNA Sequencing): Suppose we have DNA sequences from different organisms, and we want to cluster them based on their similarity. One way to measure similarity is the Hamming distance, which counts the number of positions at which the corresponding nucleotides differ between two sequences.[^5] Using these distances, we can construct a dendrogram to visualize the evolutionary relationships between the organisms. The sequences with smaller Hamming distances will be clustered together first, reflecting their closer evolutionary relationship.
 
-1. For example, consider the following DNA sequences: $\displaystyle {\mathrm S1:}\ ACGTAC,\ {\mathrm S2:}\  ACGTTC,\ {\mathrm S3:}\ ACGGAC$. The Hamming distances are: $d(S1,S2) = 1$ (only the fifth nucleotide differs), $d(S1,S3) = 1$ (only the fourth nucleotide differs), and $d(S2,S3) = 2$ (the fourth and fifth nucleotides differ).
+[^5]: For example, consider the following DNA sequences: $\displaystyle {\mathrm S1:}\ ACGTAC,\ {\mathrm S2:}\  ACGTTC,\ {\mathrm S3:}\ ACGGAC$. The Hamming distances are: $d(S1,S2) = 1$ (only the fifth nucleotide differs), $d(S1,S3) = 1$ (only the fourth nucleotide differs), and $d(S2,S3) = 2$ (the fourth and fifth nucleotides differ).
 
 We can also look at divisive clustering, which is the opposite to the agglomerative clustering techniques we have looked at so far. The idea is to start with one big cluster, then split it into two smaller clusters, then continue splitting until each point is in its own cluster.
 
